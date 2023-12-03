@@ -1,5 +1,8 @@
 ﻿namespace amiscosa_hardware_and_sales_inventory_system.Models
 {
+    /// <summary>
+    /// Represents the User Entity
+    /// </summary>
     public class User : IUser
     {
         private string? _userID;
