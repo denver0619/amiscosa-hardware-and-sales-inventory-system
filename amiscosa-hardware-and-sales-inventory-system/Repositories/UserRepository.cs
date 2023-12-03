@@ -14,17 +14,17 @@ namespace amiscosa_hardware_and_sales_inventory_system.Repositories
             throw new NotImplementedException();
         }
 
-        public List<IUser> GetAllUser()
+        public List<User> GetAllUser()
         {
             throw new NotImplementedException();
         }
 
-        public IUser GetUserByID()
+        public User GetUserByID()
         {
             throw new NotImplementedException();
         }
 
-        public IUser GetUserByUserName(string username)
+        public User GetUserByUserName(string username)
         {
             throw new NotImplementedException();
         }
