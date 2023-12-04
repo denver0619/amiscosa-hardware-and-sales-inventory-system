@@ -1,24 +1,36 @@
-﻿using MySql.Data;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using amiscosa_hardware_and_sales_inventory_system.Configurations;
+using System.Data;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 {
     public class DatabaseConnectionManager : IDatabaseConnectionManager
     {
-        private String _connectionString;
-        private MySqlConnection _connection;
+        internal String? _connectionString;
+        internal MySqlConnection? _connection;
 
-        public string GetConnectionString { get { return _connectionString; } set { _connectionString = value; } }
-        public MySqlConnection GetConnection { get { return _connection; } set { _connection = value; } }
+        public DatabaseConnectionManager(String connectionString)
+        {
+            this.ConnectionString = connectionString;
+            this.Connection = new MySqlConnection(ConnectionString);
+        }
+        public String ConnectionString { get { return _connectionString!; } set { _connectionString = value; } }
+        public MySqlConnection Connection { get { return _connection!; } set { _connection = value; } }
 
         public void CloseConnection(IDatabaseConnectionManager dbManager)
         {
-            throw new NotImplementedException();
+            if (Connection.State != ConnectionState.Closed)
+            {
+                Connection.Close();
+            }
         }
 
         public void OpenConnection()
         {
-            throw new NotImplementedException();
+            if (Connection.State == ConnectionState.Closed)
+            {
+                Connection.Open();
+            }
         }
     }
 }
