@@ -1,0 +1,97 @@
+:root {
+    --light-orange: #fff5b5;
+    --dark-orange: #ff9400;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+}
+
+.outer {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--bg-gray);
+}
+
+.container {
+    background-color: #fff;
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*margin-bottom: 50px;*/
+    height: 50%;
+}
+
+    .logo img {
+        width: 375px;
+    }
+
+.choice-btn {
+    height: 50%;
+}
+
+.btn {
+    display: block;
+    height: 50px;
+    width: 300px;
+    margin-bottom: 25px;
+    border: 0;
+    cursor: pointer;
+    background-color: var(--dark-orange);
+    color: #fff;
+    border-radius: 50px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginForm label {
+    font-size: 20px;
+}
+
+.loginForm input[type='text']{
+    width: 300px;
+    outline: none;
+    height: 30px;
+    padding: 2px;
+    margin-bottom: 10px;
+    font-size: 18px
+}
+
+.loginForm input[type='submit']{
+    margin-top: 20px;
+}
+
+    /* .btn p {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+} */
+
+
+.btn:focus {
+    outline: none;
+}
+
+.btn:hover {
+    transform: scale(0.98);
+}
