@@ -18,7 +18,29 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Inventory()
+        {
+            return View();
+        }
+        public IActionResult Transaction()
+        {
+            return View();
+        }
+
+        public IActionResult TransactionHistory()
+        {
+            return View();
+        }
+
+        public IActionResult AlertHistory()
+        {
+            return View();
+        }
+        public IActionResult Analytics()
+        {
+            return View();
+        }
+        public IActionResult Logout()
         {
             return View();
         }
