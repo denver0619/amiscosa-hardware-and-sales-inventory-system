@@ -4,12 +4,12 @@ using System.Data;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 {
-    public class DatabaseHelper
+    public class DatabaseHelper : IDisposable
     {
         private IDatabaseConnectionManager _connectionManager;
         private MySqlConnection _connection;
 
-        DatabaseHelper()
+        public DatabaseHelper()
         {
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
@@ -73,6 +73,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             MySqlCommand command = new MySqlCommand(query, _connection);
             command.ExecuteNonQuery();
             _connection.Close();
+        }
+
+        public void Dispose ()
+        {
+            if (_connection != null)
+            {
+                _connection.Dispose();
+            }
         }
     }
 }

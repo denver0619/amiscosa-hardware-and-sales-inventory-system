@@ -4,7 +4,7 @@ using System.Data;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 {
-    public class DatabaseConnectionManager : IDatabaseConnectionManager
+    public class DatabaseConnectionManager : IDatabaseConnectionManager, IDisposable
     {
         internal String? _connectionString;
         internal MySqlConnection? _connection;
@@ -30,6 +30,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             if (Connection.State == ConnectionState.Closed)
             {
                 Connection.Open();
+            }
+        }
+        
+        public void Dispose()
+        {
+            if (Connection != null)
+            {
+                Connection.Dispose();
             }
         }
     }
