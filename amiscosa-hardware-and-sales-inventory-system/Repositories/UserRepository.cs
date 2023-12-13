@@ -1,15 +1,29 @@
 ﻿using amiscosa_hardware_and_sales_inventory_system.Models;
+using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository, IDisposable
     {
-        public void AddUser()
+        private DatabaseHelper databaseHelper;
+        private readonly String tableName = "Users";
+        private readonly String tableFields = "(user_id, user_fname, user_mname, user_lname, user_username, user_hash, user_role)";
+
+        public UserRepository()
         {
-            throw new NotImplementedException();
+            databaseHelper = new DatabaseHelper();
         }
 
-        public void DeleteUser()
+        public void AddUser(IUser user, String password)
+        {
+            //TODO: User hashing functions
+            String userHash = "";
+            String userValues = "(" +","+ user.UserID + "," + user.FirstName + "," + user.MiddleName + "," + user.LastName + "," + user.UserName + "," + userHash + "," + user.UserRole + ")";
+            List<String> values = [userValues];
+            databaseHelper.InsertRecord(tableName, tableFields, values);
+        }
+
+        public void DeleteUser(IUser user)
         {
             throw new NotImplementedException();
         }
@@ -29,9 +43,17 @@ namespace amiscosa_hardware_and_sales_inventory_system.Repositories
             throw new NotImplementedException();
         }
 
-        public void UpdateUser()
+        public void UpdateUser(IUser user)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            if (databaseHelper.Equals(null))
+            {
+                databaseHelper!.Dispose();
+            }
         }
     }
 }
