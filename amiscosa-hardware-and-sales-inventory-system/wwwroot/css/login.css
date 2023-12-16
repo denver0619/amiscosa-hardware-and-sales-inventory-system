@@ -20,7 +20,7 @@
 .container {
     background-color: #fff;
     width: 600px;
-    height: 600px;
+    /*height: 700px;*/
     margin: auto;
     padding: 50px;
     display: flex;
@@ -33,7 +33,7 @@
     align-items: center;
     justify-content: center;
     /*margin-bottom: 50px;*/
-    height: 50%;
+    height: 200px;
 }
 
 .logo img {
@@ -41,7 +41,7 @@
 }
 
 .choice-btn {
-    height: 50%;
+    flex: 1;
 }
 
 .btn {
