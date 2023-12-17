@@ -63,6 +63,10 @@ td {
     padding: 5px 10px;
 }
 
+input {
+    outline: none;
+}
+
 /* Navigation */
 
 nav {
@@ -195,6 +199,31 @@ nav {
 .content-title {
     margin-bottom: 10px;
 }
+
+.add-item {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 36px;
+    border: none;
+    margin-top: -60px;
+    border-radius: 10px;
+    background: var(--medium-orange);
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+    .add-btn svg {
+        margin-right: 10px;
+    }
 
 .content-wrapper {
     /* height: 78vh;
@@ -352,6 +381,138 @@ nav {
                 .content-container .content-search-and-filter .search-and-filter .filter .filter-btn p {
                     padding-left: 5px;
                 }
+
+/* Pop Up Add Button */
+#addItemPopupOverlay {
+    position: absolute;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 999; /* Ensure it's above other elements */
+}
+
+#addPopup {
+    position: relative;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    padding: 50px;
+    z-index: 1000;
+    background-color: var(--bg-white);
+    border: 0.5px solid var(--border-gray);
+    border-radius: 20px;
+}
+
+    #addPopup h1 {
+        font-size: 30px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+
+#exitAdd {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#addFormContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+    #addFormContainer .form-row {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+        #addFormContainer .form-row label {
+            font-size: 18px;
+            font-weight: 500;
+            /* margin-bottom: 5px; */
+        }
+
+        #addFormContainer .form-row input[type='text'] {
+            width: 498px;
+            height: 30px;
+            border-radius: 5px;
+            border: 1px solid var(--border-gray);
+            font-size: 16px;
+            font-weight: 400;
+            padding: 0 10px;
+            margin-bottom: 10px;
+        }
+
+        #addFormContainer .form-row:nth-child(1) label {
+            flex-basis: 100%;
+        }
+
+        #addFormContainer .form-row:nth-child(1) input[type='text'] {
+            width: 100%;
+        }
+
+        #addFormContainer .form-row:nth-child(2) label {
+            flex-basis: 30%;
+        }
+
+        #addFormContainer .form-row:nth-child(2) input[type='text'] {
+            width: 30%;
+        }
+
+        #addFormContainer .form-row:nth-child(3) label {
+            flex-basis: 48%;
+        }
+
+        #addFormContainer .form-row:nth-child(3) input[type='text'] {
+            width: 48%;
+        }
+
+        #addFormContainer .form-row:nth-child(4) {
+            width: 100%;
+            justify-content: flex-end;
+        }
+
+            #addFormContainer .form-row:nth-child(4) button {
+                margin-top: 40px;
+                width: 170px;
+                height: 36px;
+                border: none;
+                border-radius: 10px;
+                background: var(--medium-orange);
+                color: #FFF;
+                font-size: 18px;
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+.shake {
+    animation: shake 0.3s;
+}
+
+@keyframes shake {
+    25% {
+        transform: translateX(4px);
+    }
+
+    50% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
 
 
 /* Pop Up EDIT Button */

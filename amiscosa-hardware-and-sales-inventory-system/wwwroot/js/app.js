@@ -1,7 +1,150 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-    var editButtons = document.querySelectorAll('.edit-product');
-    //var editPopup = document.getElementById('editPopup');
 
+    var addItemButton = document.querySelector('.add-btn');
+    var editButtons = document.querySelectorAll('.edit-product');
+
+    addItemButton.addEventListener('click', function (e) {
+        var addItemPopupOverlay = document.createElement('div');
+
+        addItemPopupOverlay.id = 'addItemPopupOverlay';
+        addItemPopupOverlay.innerHTML = `
+            <div id="addPopup">
+                <button id="exitAdd">X</button>
+                <h1>Product Details</h1>
+                <form id="addFormContainer">
+                
+                    <div class="form-row">
+                        <label for="productName">Name:</label>
+                        <input type="text" id="productName" name="productName" value="" />
+                    </div>
+                
+                    <div class="form-row">
+                        <label for="productQuantity">Quantity:</label>
+                        <label for="productUnitCost">Unit Cost:</label>
+                        <label for="productUnitPrice">Unit Price:</label>
+                
+                        <input type="text" id="productQuantity" name="productQuantity" value="" />
+                        <input type="text" id="productUnitCost" name="productUnitCost" value="" />
+                        <input type="text" id="productUnitPrice" name="productUnitPrice" value="" />
+                    </div>
+                
+                    <div class="form-row">
+                        <label for="productMeasurement">Measurement:</label>
+                        <label for="productManufacturer">Manufacturer:</label>
+                
+                        <input type="text" id="productMeasurement" name="productMeasurement" value="" />
+                        <input type="text" id="productManufacturer" name="productManufacturer" value="" />
+                    </div>
+                
+                    <div class="form-row">
+                        <button id="submitAdd">Add Item</button>
+                    </div>
+                    
+                </form>
+            </div>
+        `
+
+        document.body.append(addItemPopupOverlay);
+
+        document.querySelector('#submitAdd').addEventListener('click', function (e) {
+
+            e.preventDefault();
+            console.log(1);
+            // Retrieve input values
+            var productName = document.getElementById('productName').value;
+            var productQuantity = parseFloat(document.getElementById('productQuantity').value);
+            var productUnitCost = parseFloat(document.getElementById('productUnitCost').value);
+            var productUnitPrice = parseFloat(document.getElementById('productUnitPrice').value);
+            var productMeasurement = document.getElementById('productMeasurement').value;
+            var productManufacturer = document.getElementById('productManufacturer').value;
+
+            // VALIDATION CHECKS
+            // TO BE CHANGED
+
+            var isError = false;
+            if (productName === '') {
+                applyErrorStyles('productName');
+                isError = true;
+            } else {
+                resetErrorStyles('productName');
+            }
+
+            if (isNaN(productQuantity)) {
+                applyErrorStyles('productQuantity');
+                isError = true;
+            } else {
+                resetErrorStyles('productQuantity');
+            }
+
+            if (isNaN(productUnitCost)) {
+                applyErrorStyles('productUnitCost');
+                isError = true;
+            } else {
+                resetErrorStyles('productUnitCost');
+            }
+
+            if (isNaN(productUnitPrice)) {
+                applyErrorStyles('productUnitPrice');
+                isError = true;
+            } else {
+                resetErrorStyles('productUnitPrice');
+            }
+
+            if (productMeasurement === '') {
+                applyErrorStyles('productMeasurement');
+                isError = true;
+            } else {
+                resetErrorStyles('productMeasurement');
+            }
+
+            if (productManufacturer === '') {
+                applyErrorStyles('productManufacturer');
+                isError = true;
+            } else {
+                resetErrorStyles('productManufacturer');
+            }
+
+            // Create an object with the added product data
+            var addedProductData = {
+                productName: productName,
+                productQuantity: productQuantity,
+                productUnitCost: productUnitCost,
+                productUnitPrice: productUnitPrice,
+                productMeasurement: productMeasurement,
+                productManufacturer: productManufacturer
+            };
+
+            console.log(addedProductData);
+
+            // If no error submit data to server
+            // TO BE CHANGED
+            if (isError == false) {
+                addItemPopupOverlay.remove();
+            }
+
+            // Handle exit from edit
+        });
+
+        document.getElementById('exitAdd').addEventListener('click', function () {
+            // Remove the edit pop-up without submitting
+            addItemPopupOverlay.remove();
+        });
+    });
+
+    // Function to apply error styles to input fields
+    function applyErrorStyles(elementId) {
+        var element = document.getElementById(elementId);
+        element.style.border = '1px solid red';
+        element.classList.add('shake'); // Adding a shake class for animation
+        setTimeout(function () {
+            element.classList.remove('shake'); // Remove the shake class after the animation ends
+        }, 500);
+    }
+
+    function resetErrorStyles(elementId) {
+        var element = document.getElementById(elementId);
+        element.style.border = '1px solid #ccc'; // Reset the border
+    }
 
     editButtons.forEach(function (editButtons) {
         editButtons.addEventListener('click', function (e) {
@@ -17,6 +160,8 @@
             var productMeasurement = row.querySelectorAll('td')[5].textContent;
             var productManufacturer = row.querySelectorAll('td')[6].textContent;
 
+
+            console.log(productID);
 
             // Create the edit pop-up elements
             var editPopupOverlay = document.createElement('div');
@@ -59,9 +204,7 @@
                 </div>
             `;
 
-
             document.body.append(editPopupOverlay);
-
 
             // Handle edit submission
             document.getElementById('submitEdit').addEventListener('click', function () {

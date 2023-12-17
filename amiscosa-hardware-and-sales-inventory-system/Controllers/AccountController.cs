@@ -5,10 +5,7 @@ using System.Data;
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 {
     public class AccountController : Controller
-
     {
-
-
         public IActionResult Login()
         {
             return View("Views/Account/Login.cshtml");
