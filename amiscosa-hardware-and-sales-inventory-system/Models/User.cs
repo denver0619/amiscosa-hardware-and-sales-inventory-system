@@ -7,7 +7,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Models
     /// </summary>
     public class User : IUser
     {
-        User(string userID, string firstName, string middleName, string lastName, string userName, string hash, string userRole)
+        public User(string userID, string firstName, string middleName, string lastName, string userName, string hash, string userRole)
         {
             UserID = userID;
             FirstName = firstName;
