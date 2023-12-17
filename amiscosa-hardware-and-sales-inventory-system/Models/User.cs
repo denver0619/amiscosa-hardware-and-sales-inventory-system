@@ -13,7 +13,7 @@
         private string? _hash;
         private string? _userRole;
 
-        User(string userID, string firstName, string middleName, string lastName, string userName, string hash, string userRole)
+        public User(string userID, string firstName, string middleName, string lastName, string userName, string hash, string userRole)
         {
             UserID = userID;
             FirstName = firstName;

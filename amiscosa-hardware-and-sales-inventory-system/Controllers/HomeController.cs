@@ -1,6 +1,8 @@
 using amiscosa_hardware_and_sales_inventory_system.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using amiscosa_hardware_and_sales_inventory_system.Models;
+using amiscosa_hardware_and_sales_inventory_system.Repositories;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 {

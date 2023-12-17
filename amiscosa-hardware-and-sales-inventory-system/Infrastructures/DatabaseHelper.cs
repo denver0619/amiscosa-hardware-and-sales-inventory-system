@@ -13,7 +13,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
         {
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
-
         }
 
         public void InsertRecord(String tableName, String fields, List<String> values)
@@ -45,6 +44,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             MySqlCommand command = new MySqlCommand( query, _connection);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             adapter.Fill(dataTable);
+            _connection.Close();
             return dataTable;
         }
         public DataTable SelectAllRecord(String tableName)
@@ -58,6 +58,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             MySqlCommand command = new MySqlCommand(query, _connection);
             MySqlDataAdapter adapter = new MySqlDataAdapter(command);
             adapter.Fill(dataTable);
+            _connection.Close();
             return dataTable;
         }
 
