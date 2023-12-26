@@ -11,11 +11,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         private readonly string tableFields = "(user_id, user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
         private readonly string tableUpdateFields = "(user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
 
+        public UserRepository()
+        {
+            databaseHelper = new DatabaseHelper();
+        }
 
         public void Initialize()
         {
-            DatabaseHelper dbHelper = new DatabaseHelper();
-            databaseHelper = dbHelper;
+            databaseHelper = new DatabaseHelper();
         }
 
         public void AddUser(IUser user, string password)
