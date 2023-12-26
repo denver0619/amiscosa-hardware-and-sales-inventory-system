@@ -2,7 +2,7 @@
 using amiscosa_hardware_and_sales_inventory_system.Configurations;
 using System.Data;
 
-namespace amiscosa_hardware_and_sales_inventory_system.Domain.Infrastructures
+namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 {
     public class DatabaseConnectionManager : IDatabaseConnectionManager, IDisposable
     {
