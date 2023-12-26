@@ -4,16 +4,18 @@ using System.Data;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
-    public class UserRepository : IUserRepository, IDisposable
+    public class UserRepository : IUserRepository, IDisposable, IInitializable
     {
         private DatabaseHelper databaseHelper;
         private readonly string tableName = "Users";
         private readonly string tableFields = "(user_id, user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
         private readonly string tableUpdateFields = "(user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
 
-        public UserRepository()
+
+        public void Initialize()
         {
-            databaseHelper = new DatabaseHelper();
+            DatabaseHelper dbHelper = new DatabaseHelper();
+            databaseHelper = dbHelper;
         }
 
         public void AddUser(IUser user, string password)
@@ -74,7 +76,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public void Dispose()
         {
-            if (databaseHelper.Equals(null))
+            if (!databaseHelper.Equals(null))
             {
                 databaseHelper!.Dispose();
             }
