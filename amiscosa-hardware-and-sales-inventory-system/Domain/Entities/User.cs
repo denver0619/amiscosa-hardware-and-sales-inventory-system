@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace amiscosa_hardware_and_sales_inventory_system.Models
+namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
 {
     /// <summary>
     /// Represents the User Entity
@@ -19,18 +19,18 @@ namespace amiscosa_hardware_and_sales_inventory_system.Models
         }
 
         [Required]
-        public String? UserID { get; set; }
+        public string? UserID { get; set; }
         [Required]
-        public String? FirstName { get; set; }
+        public string? FirstName { get; set; }
         [Required]
-        public String? MiddleName { get; set; }
+        public string? MiddleName { get; set; }
         [Required]
-        public String? LastName { get; set; }
+        public string? LastName { get; set; }
         [Required]
-        public String? UserName { get; set; }
+        public string? UserName { get; set; }
         [Required]
-        public String? Hash { get; set; }
+        public string? Hash { get; set; }
         [Required]
-        public String? UserRole { get; set; }
+        public string? UserRole { get; set; }
     }
 }

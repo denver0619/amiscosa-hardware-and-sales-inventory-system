@@ -1,4 +1,4 @@
-﻿namespace amiscosa_hardware_and_sales_inventory_system.Models
+﻿namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
 {
     public interface ICustomer
     {
@@ -7,7 +7,7 @@
         public string? MiddleName { get; set; }
         public string? LastName { get; set; }
         public string? Address { get; set; }
-        public string? Contact {  get; set; }
+        public string? Contact { get; set; }
 
     }
 }
