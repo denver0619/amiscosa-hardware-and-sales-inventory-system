@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace amiscosa_hardware_and_sales_inventory_system.Models
+namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
 {
 
     public class Transaction : ITransaction

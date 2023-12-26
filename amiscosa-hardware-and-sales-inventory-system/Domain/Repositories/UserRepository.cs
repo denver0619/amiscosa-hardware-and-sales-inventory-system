@@ -1,25 +1,25 @@
-﻿using amiscosa_hardware_and_sales_inventory_system.Models;
+﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
 
-namespace amiscosa_hardware_and_sales_inventory_system.Repositories
+namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
     public class UserRepository : IUserRepository, IDisposable
     {
         private DatabaseHelper databaseHelper;
-        private readonly String tableName = "Users";
-        private readonly String tableFields = "(user_id, user_fname, user_mname, user_lname, user_username, user_hash, user_role)";
+        private readonly string tableName = "Users";
+        private readonly string tableFields = "(user_id, user_fname, user_mname, user_lname, user_username, user_hash, user_role)";
 
         public UserRepository()
         {
             databaseHelper = new DatabaseHelper();
         }
 
-        public void AddUser(IUser user, String password)
+        public void AddUser(IUser user, string password)
         {
             //TODO: User hashing functions
-            String userHash = "";
-            String userValues = "(" +","+ user.UserID + "," + user.FirstName + "," + user.MiddleName + "," + user.LastName + "," + user.UserName + "," + userHash + "," + user.UserRole + ")";
-            List<String> values = [userValues];
+            string userHash = "";
+            string userValues = "(" + "," + user.UserID + "," + user.FirstName + "," + user.MiddleName + "," + user.LastName + "," + user.UserName + "," + userHash + "," + user.UserRole + ")";
+            List<string> values = [userValues];
             databaseHelper.InsertRecord(tableName, tableFields, values);
         }
 
