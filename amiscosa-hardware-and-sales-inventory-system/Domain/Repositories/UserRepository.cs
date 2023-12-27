@@ -47,6 +47,29 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             }
             return users;
         }
+        public List<User> GetAllActiveUser()
+        {
+            DataTable dataTable = databaseHelper.SelectAllRecord(tableName);
+            List<User> users = new List<User>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                User user = new User(row["user_id"].ToString()!, row["user_fname"].ToString()!, row["user_mname"].ToString()!, row["user_lname"].ToString()!, row["user_username"].ToString()!, row["user_hash"].ToString()!, row["user_role"].ToString()!, Convert.ToBoolean(Int32.Parse(row["is_active"].ToString()!)));
+                users.Add(user);
+            }
+            return users;
+        }
+
+        public List<User> GetAllInactiveUser()
+        {
+            DataTable dataTable = databaseHelper.SelectAllRecord(tableName);
+            List<User> users = new List<User>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                User user = new User(row["user_id"].ToString()!, row["user_fname"].ToString()!, row["user_mname"].ToString()!, row["user_lname"].ToString()!, row["user_username"].ToString()!, row["user_hash"].ToString()!, row["user_role"].ToString()!, Convert.ToBoolean(Int32.Parse(row["is_active"].ToString()!)));
+                users.Add(user);
+            }
+            return users;
+        }
 
         public User GetUserByID(string id)
         {
