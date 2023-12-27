@@ -1,51 +1,57 @@
 ﻿
+using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
+using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
+
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
-    public class ProductRepository : IProductRepository, IDisposable, IInitializable
+    public class ProductRepository : IProductRepository, IDisposable
     {
+        private DatabaseHelper databaseHelper;
+        private readonly string tableName = "Products";
+        private readonly string tableFields = "(product_id, product_name, product_description, unit_price, quantity, manufacturer_id, measurement, is_available, unit_cost)";
+        private readonly string tableUpdateFields = "(product_name, product_description, unit_price, quantity, manufacturer_id, measurement, is_available, unit_cost)";
 
         public ProductRepository()
         {
-
+            databaseHelper = new DatabaseHelper();
         }
-        public void Initialize()
+
+        public void AddProduct(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public void AddProduct(ProductRepository product)
+        public void DeleteProduct(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteProduct(ProductRepository product)
+        public void EditProduct(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public void EditProduct(ProductRepository product)
+        public Product GetProductByID(string id)
         {
             throw new NotImplementedException();
         }
 
-        public ProductRepository GetProductByID(string id)
+        public Product GetProductByName(string name)
         {
             throw new NotImplementedException();
         }
 
-        public ProductRepository GetProductByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<ProductRepository> GetProducts()
+        public List<Product> GetProducts()
         {
             throw new NotImplementedException();
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (!databaseHelper.Equals(null))
+            {
+                databaseHelper!.Dispose();
+            }
         }
     }
 }

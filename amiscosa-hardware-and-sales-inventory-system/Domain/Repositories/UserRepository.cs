@@ -4,7 +4,7 @@ using System.Data;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
-    public class UserRepository : IUserRepository, IDisposable, IInitializable
+    public class UserRepository : IUserRepository, IDisposable
     {
         private DatabaseHelper databaseHelper;
         private readonly string tableName = "Users";
@@ -12,11 +12,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         private readonly string tableUpdateFields = "(user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
 
         public UserRepository()
-        {
-            databaseHelper = new DatabaseHelper();
-        }
-
-        public void Initialize()
         {
             databaseHelper = new DatabaseHelper();
         }

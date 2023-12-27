@@ -4,11 +4,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
     public interface IProductRepository
     {
-        void AddProduct(ProductRepository product);
-        void DeleteProduct(ProductRepository product);
-        void EditProduct(ProductRepository product);
-        ProductRepository GetProductByID(string id);
-        ProductRepository GetProductByName(string name);
-        List<ProductRepository> GetProducts();
+        void AddProduct(Product product);
+        void DeleteProduct(Product product);
+        void EditProduct(Product product);
+        Product GetProductByID(string id);
+        Product GetProductByName(string name);
+        List<Product> GetProducts();
     }
 }
