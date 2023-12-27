@@ -6,38 +6,50 @@
     addItemButton.addEventListener('click', function (e) {
         var addItemPopupOverlay = document.createElement('div');
 
-        addItemPopupOverlay.id = 'addItemPopupOverlay';
+        addItemPopupOverlay.id = 'PopupOverlay';
         addItemPopupOverlay.innerHTML = `
-            <div id="addPopup">
-                <button id="exitAdd">X</button>
+            <div class="popupCard"  id="addPopup">
+                <button id="exitPopupCard">X</button>
                 <h1>Product Details</h1>
-                <form id="addFormContainer">
+                <form class="popupCardFormContainer">
                 
                     <div class="form-row">
-                        <label for="productName">Name:</label>
-                        <input type="text" id="productName" name="productName" value="" />
+                        <div>
+                            <label for="productName">Name:</label>
+                            <input type="text" id="productName" name="productName" value="" />
+                        </div>
+                        
                     </div>
                 
                     <div class="form-row">
-                        <label for="productQuantity">Quantity:</label>
-                        <label for="productUnitCost">Unit Cost:</label>
-                        <label for="productUnitPrice">Unit Price:</label>
-                
-                        <input type="text" id="productQuantity" name="productQuantity" value="" />
-                        <input type="text" id="productUnitCost" name="productUnitCost" value="" />
-                        <input type="text" id="productUnitPrice" name="productUnitPrice" value="" />
+                        <div>
+                            <label for="productQuantity">Quantity:</label>
+                            <input type="text" id="productQuantity" name="productQuantity" value="" />
+                        </div>
+                        <div>
+                            <label for="productUnitCost">Unit Cost:</label>
+                            <input type="text" id="productUnitCost" name="productUnitCost" value="" />
+
+                        </div>
+                        <div>
+                            <label for="productUnitPrice">Unit Price:</label>                                                         
+                            <input type="text" id="productUnitPrice" name="productUnitPrice" value="" />
+                        </div>                                             
                     </div>
                 
                     <div class="form-row">
-                        <label for="productMeasurement">Measurement:</label>
-                        <label for="productManufacturer">Manufacturer:</label>
-                
-                        <input type="text" id="productMeasurement" name="productMeasurement" value="" />
-                        <input type="text" id="productManufacturer" name="productManufacturer" value="" />
+                        <div>
+                            <label for="productMeasurement">Measurement:</label>
+                            <input type="text" id="productMeasurement" name="productMeasurement" value="" />
+                        </div>
+                        <div>
+                            <label for="productManufacturer">Manufacturer:</label>                         
+                            <input type="text" id="productManufacturer" name="productManufacturer" value="" />
+                        </div>
                     </div>
                 
                     <div class="form-row">
-                        <button id="submitAdd">Add Item</button>
+                        <button id="submitAdd" class="orange-btn medium">Add Item</button>
                     </div>
                     
                 </form>
@@ -125,7 +137,7 @@
             // Handle exit from edit
         });
 
-        document.getElementById('exitAdd').addEventListener('click', function () {
+        document.getElementById('exitPopupCard').addEventListener('click', function () {
             // Remove the edit pop-up without submitting
             addItemPopupOverlay.remove();
         });
@@ -166,39 +178,53 @@
             // Create the edit pop-up elements
             var editPopupOverlay = document.createElement('div');
             // editPopupOverlay.classList.add('editFormContainer');
-            editPopupOverlay.id = 'editPopupOverlay';
+            editPopupOverlay.id = 'PopupOverlay';
             editPopupOverlay.innerHTML = `
-                <div id="editPopup">
-                    <button id="exitEdit">X</button>
+                <div class="popupCard" id="editPopup">
+                    <button id="exitPopupCard">X</button>
                     <h1>Product Details</h1>
                     <p>ID: ${productID}</p>
-                    <form id="editFormContainer">
+                    <form class="popupCardFormContainer" >
                     
                         <div class="form-row">
-                            <label for="productName">Name:</label>
-                            <input type="text" id="productName" name="productName" value="${productName}" />
+                            <div>
+                                <label for="productName">Name:</label>
+                                <input type="text" id="productName" name="productName" value="${productName}" />
+                            </div>
+                            
                         </div>
                     
                         <div class="form-row">
-                            <label for="productQuantity">Quantity:</label>
-                            <label for="productUnitCost">Unit Cost:</label>
-                            <label for="productUnitPrice">Unit Price:</label>
-                    
-                            <input type="text" id="productQuantity" name="productQuantity" value="${productQuantity}" />
-                            <input type="text" id="productUnitCost" name="productUnitCost" value="${productUnitCost}" />
-                            <input type="text" id="productUnitPrice" name="productUnitPrice" value="${productUnitPrice}" />
+                            <div>
+                                <label for="productQuantity">Quantity:</label>
+                                <input type="text" id="productQuantity" name="productQuantity" value="${productQuantity}" />
+                            </div>
+                          
+                            <div>
+                                <label for="productUnitCost">Unit Cost:</label>
+                                <input type="text" id="productUnitCost" name="productUnitCost" value="${productUnitCost}" />
+                            </div>
+
+                            <div>
+                                <label for="productUnitPrice">Unit Price:</label>
+                                <input type="text" id="productUnitPrice" name="productUnitPrice" value="${productUnitPrice}" />
+                            </div>                                                                                                                              
                         </div>
                     
                         <div class="form-row">
-                            <label for="productMeasurement">Measurement:</label>
-                            <label for="productManufacturer">Manufacturer:</label>
-                    
-                            <input type="text" id="productMeasurement" name="productMeasurement" value="${productMeasurement}" />
-                            <input type="text" id="productManufacturer" name="productManufacturer" value="${productManufacturer}" />
+                            <div>
+                                <label for="productMeasurement">Measurement:</label>
+                                <input type="text" id="productMeasurement" name="productMeasurement" value="${productMeasurement}" />
+                            </div>
+
+                            <div>
+                                <label for="productManufacturer">Manufacturer:</label>
+                                <input type="text" id="productManufacturer" name="productManufacturer" value="${productManufacturer}" />
+                            </div>                          
                         </div>
                     
                         <div class="form-row">
-                            <button id="submitEdit">Submit</button>
+                            <button id="submitEdit" class="orange-btn medium">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -228,7 +254,7 @@
             });
 
             // Handle exit from edit
-            document.getElementById('exitEdit').addEventListener('click', function () {
+            document.getElementById('exitPopupCard').addEventListener('click', function () {
                 // Remove the edit pop-up without submitting
                 editPopupOverlay.remove();
             });
