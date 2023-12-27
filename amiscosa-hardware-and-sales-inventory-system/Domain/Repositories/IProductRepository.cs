@@ -6,7 +6,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
     {
         void AddProduct(Product product);
         void DeleteProduct(Product product);
-        void EditProduct(Product product);
+        void UpdateProduct(Product product);
         Product GetProductByID(string id);
         Product GetProductByName(string name);
         List<Product> GetAllProducts();

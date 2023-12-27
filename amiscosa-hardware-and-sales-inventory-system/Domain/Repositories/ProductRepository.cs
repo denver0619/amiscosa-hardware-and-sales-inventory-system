@@ -26,28 +26,37 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public void DeleteProduct(Product product)
         {
-            Product userData = new Product(product)
+            Product productData = new Product(product)
             {
                 IsAvailable = false
             };
             string values = "(" + product.ProductName + "," + product.ProductDescription + "," + product.UnitPrice + "," + product.Quantity + "," + product.ManufacturerID + "," + product.Measurement + "," + product.IsAvailable + "," + product.UnitCost + ")";
-            string constraints = "user_id = " + userData.UserID;
+            string constraints = "product_id = " + productData.ProductID;
             databaseHelper.UpdateRecord(this.tableName, values, constraints);
         }
 
-        public void EditProduct(Product product)
+        public void UpdateProduct(Product product)
         {
-            throw new NotImplementedException();
+            Product productData = new Product(product);
+            string values = "(" + product.ProductName + "," + product.ProductDescription + "," + product.UnitPrice + "," + product.Quantity + "," + product.ManufacturerID + "," + product.Measurement + "," + product.IsAvailable + "," + product.UnitCost + ")";
+            string constraints = "product_id = " + productData.ProductID;
+            databaseHelper.UpdateRecord(this.tableName, values, constraints);
         }
 
         public Product GetProductByID(string id)
         {
-            throw new NotImplementedException();
+            string constraints = "product_id = " + id;
+            DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
+            DataRow row = dataTable.Rows[0];
+            return new Product(row["product_id"].ToString()!, row["product_name"].ToString()!, row["product_description"].ToString()!, Int32.Parse(row["unit_price"].ToString()!), Int32.Parse(row["quantity"].ToString()!), row["manufacturer_id"].ToString()!, row["measurement"].ToString()!, Convert.ToBoolean(Int32.Parse(row["is_available"].ToString()!)), Int32.Parse(row["unit_cost"].ToString()!));
         }
 
         public Product GetProductByName(string name)
         {
-            throw new NotImplementedException();
+            string constraints = "product_name = " + name;
+            DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
+            DataRow row = dataTable.Rows[0];
+            return new Product(row["product_id"].ToString()!, row["product_name"].ToString()!, row["product_description"].ToString()!, Int32.Parse(row["unit_price"].ToString()!), Int32.Parse(row["quantity"].ToString()!), row["manufacturer_id"].ToString()!, row["measurement"].ToString()!, Convert.ToBoolean(Int32.Parse(row["is_available"].ToString()!)), Int32.Parse(row["unit_cost"].ToString()!));
         }
 
         public List<Product> GetAllProducts()
