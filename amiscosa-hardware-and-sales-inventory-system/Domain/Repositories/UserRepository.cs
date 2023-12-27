@@ -9,7 +9,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         private DatabaseHelper databaseHelper;
         private readonly string tableName = "Users";
         private readonly string tableFields = "(user_id, user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
-        private readonly string tableUpdateFields = "(user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
+        private readonly string tableAddFields = "(user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
 
         public UserRepository()
         {
@@ -20,9 +20,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         {
             //TODO: User hashing functions
             string userHash = "";
-            string userValues = "(" + "," + user.UserID + "," + user.FirstName + "," + user.MiddleName + "," + user.LastName + "," + user.UserName + "," + userHash + "," + user.UserRole + "," + user.IsActive +")";
+            string userValues = "(" + user.FirstName + "," + user.MiddleName + "," + user.LastName + "," + user.UserName + "," + userHash + "," + user.UserRole + "," + user.IsActive +")";
             List<string> values = [userValues];
-            databaseHelper.InsertRecord(tableName, tableFields, values);
+            databaseHelper.InsertRecord(tableName, tableAddFields, values);
         }
 
         public void DeleteUser(IUser user)
@@ -49,8 +49,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         }
         public List<User> GetAllActiveUser()
         {
-            DataTable dataTable = databaseHelper.SelectAllRecord(tableName);
-            List<User> users = new List<User>();
+            string constraints = "is_active = 1";
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
+            List <User> users = new List<User>();
             foreach (DataRow row in dataTable.Rows)
             {
                 User user = new User(row["user_id"].ToString()!, row["user_fname"].ToString()!, row["user_mname"].ToString()!, row["user_lname"].ToString()!, row["user_username"].ToString()!, row["user_hash"].ToString()!, row["user_role"].ToString()!, Convert.ToBoolean(Int32.Parse(row["is_active"].ToString()!)));
@@ -61,7 +62,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public List<User> GetAllInactiveUser()
         {
-            DataTable dataTable = databaseHelper.SelectAllRecord(tableName);
+            string constraints = "is_active = 0";
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
             List<User> users = new List<User>();
             foreach (DataRow row in dataTable.Rows)
             {

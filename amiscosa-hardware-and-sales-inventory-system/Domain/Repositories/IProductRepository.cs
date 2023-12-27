@@ -9,6 +9,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         void EditProduct(Product product);
         Product GetProductByID(string id);
         Product GetProductByName(string name);
-        List<Product> GetProducts();
+        List<Product> GetAllProducts();
+        List<Product> GetAllActiveProducts();
+        List<Product> GetAllInactiveProducts();
     }
 }
