@@ -12,5 +12,6 @@
         public string? UserName { get; set; }
         public string? Hash { get; set; }
         public string? UserRole { get; set; }
+        public bool IsActive { get; set; }
     }
 }

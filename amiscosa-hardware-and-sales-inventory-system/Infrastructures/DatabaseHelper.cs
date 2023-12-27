@@ -61,6 +61,20 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             _connection.Close();
             return dataTable;
         }
+        public DataTable SelectAllRecordWith(string tableName, string constraints)
+        {
+            _connection.Open();
+            DataTable dataTable = new DataTable();
+            string queryType = "SELECT * FROM ";
+            string whereClause = " WHERE ";
+            string terminator = ";";
+            string query = queryType + tableName + whereClause + constraints + terminator;
+            MySqlCommand command = new MySqlCommand(query, _connection);
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            adapter.Fill(dataTable);
+            _connection.Close();
+            return dataTable;
+        }
 
         public void UpdateRecord(string tableName, string values, string constraints)
         {
