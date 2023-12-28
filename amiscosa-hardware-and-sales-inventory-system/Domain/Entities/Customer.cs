@@ -13,6 +13,15 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
             Address = address;
             Contact = contact;
         }
+        public Customer(ICustomer customer)
+        {
+            CustomerID = customer.CustomerID;
+            FirstName = customer.FirstName;
+            MiddleName = customer.MiddleName;
+            LastName = customer.LastName;
+            Address = customer.Address;
+            Contact = customer.Contact;
+        }
         [Required]
         public string? CustomerID { get; set; }
         [Required]

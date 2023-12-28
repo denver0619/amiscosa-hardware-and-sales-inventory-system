@@ -12,6 +12,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
             Address = address;
         }
 
+        public Manufacturer(IManufacturer manufacturer)
+        {
+            ManufacturerID = manufacturer.ManufacturerID;
+            Name = manufacturer.Name;
+            Contact = manufacturer.Contact;
+            Address = manufacturer.Address;
+        }
+
         [Required]
         public string? ManufacturerID { get; set; }
         [Required]

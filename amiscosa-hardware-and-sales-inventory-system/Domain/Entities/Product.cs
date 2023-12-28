@@ -17,7 +17,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
             IsAvailable = isAvailable;
             UnitCost = unitCost;
         }
-        public Product(Product product)
+        public Product(IProduct product)
         {
             ProductID = product.ProductID;
             ProductName = product.ProductName;
