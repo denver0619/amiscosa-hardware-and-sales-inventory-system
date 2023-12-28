@@ -9,7 +9,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
     {
         private DatabaseHelper databaseHelper;
         private readonly string tableName = "Products";
-        private readonly string tableFields = "(product_id, product_name, product_description, unit_price, quantity, manufacturer_id, measurement, is_available, unit_cost)";
+        private readonly List<string> tableFields = ["product_id", "product_name", "product_description", "unit_price", "quantity", "manufacturer_id", "measurement", "is_available", "unit_cost"];
         private readonly string tableAddFields = "(product_name, product_description, unit_price, quantity, manufacturer_id, measurement, is_available, unit_cost)";
 
         public ProductRepository()
@@ -17,30 +17,30 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             databaseHelper = new DatabaseHelper();
         }
 
-        public void AddProduct(Product product)
+        public void AddProduct(IProduct product)
         {
             string productValues = "(" + product.ProductName + "," + product.ProductDescription + "," + product.UnitPrice + "," + product.Quantity + "," + product.ManufacturerID + "," + product.Measurement + "," + product.IsAvailable + "," + product.UnitCost +")";
             List<string> values = [productValues];
             databaseHelper.InsertRecord(tableName, tableAddFields, values);
         }
 
-        public void DeleteProduct(Product product)
+        public void DeleteProduct(IProduct product)
         {
             Product productData = new Product(product)
             {
                 IsAvailable = false
             };
-            string values = "(" + product.ProductName + "," + product.ProductDescription + "," + product.UnitPrice + "," + product.Quantity + "," + product.ManufacturerID + "," + product.Measurement + "," + product.IsAvailable + "," + product.UnitCost + ")";
+            List<string> values = [product.ProductName!,product.ProductDescription!,product.UnitPrice.ToString(),product.Quantity.ToString(), product.ManufacturerID!,product.Measurement!,(product.IsAvailable?1:0).ToString(), product.UnitCost.ToString()];
             string constraints = "product_id = " + productData.ProductID;
-            databaseHelper.UpdateRecord(this.tableName, values, constraints);
+            databaseHelper.UpdateRecord(this.tableName, databaseHelper.ConvertUpdateValuesToString(tableFields, values), constraints);
         }
 
-        public void UpdateProduct(Product product)
+        public void UpdateProduct(IProduct product)
         {
             Product productData = new Product(product);
-            string values = "(" + product.ProductName + "," + product.ProductDescription + "," + product.UnitPrice + "," + product.Quantity + "," + product.ManufacturerID + "," + product.Measurement + "," + product.IsAvailable + "," + product.UnitCost + ")";
+            List<string> values = [product.ProductName!, product.ProductDescription!, product.UnitPrice.ToString(), product.Quantity.ToString(), product.ManufacturerID!, product.Measurement!, (product.IsAvailable ? 1 : 0).ToString(), product.UnitCost.ToString()];
             string constraints = "product_id = " + productData.ProductID;
-            databaseHelper.UpdateRecord(this.tableName, values, constraints);
+            databaseHelper.UpdateRecord(this.tableName, databaseHelper.ConvertUpdateValuesToString(tableFields, values), constraints);
         }
 
         public Product GetProductByID(string id)

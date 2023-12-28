@@ -20,7 +20,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         {
             //TODO: User hashing functions
             string userHash = "";
-            string userValues = "(" + user.FirstName + "," + user.MiddleName + "," + user.LastName + "," + user.UserName + "," + userHash + "," + user.UserRole + "," + user.IsActive +")";
+            string userValues = "(" + user.UserFName + "," + user.UserMName + "," + user.UserLName + "," + user.UserUserame + "," + userHash + "," + user.UserRole + "," + user.IsActive +")";
             List<string> values = [userValues];
             databaseHelper.InsertRecord(tableName, tableAddFields, values);
         }
@@ -31,7 +31,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             {
                 IsActive = false
             };
-            string values = "(" + userData.FirstName + "," + userData.MiddleName + "," + userData.LastName + "," + userData.UserName + "," + userData.Hash + "," + userData.UserRole + "," + userData.IsActive + ")";
+            string values = "(" + userData.UserID + "," + user.UserFName + "," + user.UserMName + "," + user.UserLName + "," + user.UserUserame + "," + userHash + "," + user.UserRole + "," + user.IsActive + ")";
             string constraints = "user_id = " + userData.UserID;
             databaseHelper.UpdateRecord(this.tableName, values, constraints);
         }
@@ -92,7 +92,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         public void UpdateUser(IUser user)
         {
             User userData = new User(user);
-            string values = "(" + userData.FirstName + "," + userData.MiddleName + "," + userData.LastName + "," + userData.UserName + "," + userData.Hash + "," + userData.UserRole + "," + userData.IsActive + ")";
+            string values = "(" + userData.UserID + "," + user.UserFName + "," + user.UserMName + "," + user.UserLName + "," + user.UserUserame + "," + userHash + "," + user.UserRole + "," + user.IsActive + ")";
             string constraints = "user_id = " + userData.UserID;
             databaseHelper.UpdateRecord(this.tableName, values, constraints);
         }

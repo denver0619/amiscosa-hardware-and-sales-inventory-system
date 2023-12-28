@@ -3,8 +3,8 @@
     public interface IManufacturer
     {
         public string? ManufacturerID { get; set; }
-        public string? Name { get; set; }
-        public string? Contact { get; set; }
-        public string? Address { get; set; }
+        public string? ManufacturerName { get; set; }
+        public string? ManufacturerContact { get; set; }
+        public string? ManufacturerAddress { get; set; }
     }
 }

@@ -10,22 +10,22 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
         public User(string userID, string firstName, string middleName, string lastName, string userName, string hash, string userRole, bool isActive = true)
         {
             UserID = userID;
-            FirstName = firstName;
-            MiddleName = middleName;
-            LastName = lastName;
-            UserName = userName;
-            Hash = hash;
+            UserFName = firstName;
+            UserMName = middleName;
+            UserLName = lastName;
+            UserUserame = userName;
+            UserHash = hash;
             UserRole = userRole;
             IsActive = isActive;
         }
         public User(IUser user)
         {
             UserID = user.UserID;
-            FirstName = user.FirstName;
-            MiddleName = user.MiddleName;
-            LastName = user.LastName;
-            UserName = user.UserName;
-            Hash = user.Hash;
+            UserFName = user.UserFName;
+            UserMName = user.UserMName;
+            UserLName = user.UserLName;
+            UserUserame = user.UserUserame;
+            UserHash = user.UserHash;
             UserRole = user.UserRole;
             IsActive = user.IsActive;
         }
@@ -33,15 +33,15 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
         [Required]
         public string? UserID { get; set; }
         [Required]
-        public string? FirstName { get; set; }
+        public string? UserFName { get; set; }
         [Required]
-        public string? MiddleName { get; set; }
+        public string? UserMName { get; set; }
         [Required]
-        public string? LastName { get; set; }
+        public string? UserLName { get; set; }
         [Required]
-        public string? UserName { get; set; }
+        public string? UserUserame { get; set; }
         [Required]
-        public string? Hash { get; set; }
+        public string? UserHash { get; set; }
         [Required]
         public string? UserRole { get; set; }
         [Required]

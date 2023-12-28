@@ -3,11 +3,11 @@
     public interface ICustomer
     {
         public string? CustomerID { get; set; }
-        public string? FirstName { get; set; }
-        public string? MiddleName { get; set; }
-        public string? LastName { get; set; }
-        public string? Address { get; set; }
-        public string? Contact { get; set; }
+        public string? CustomerFirstName { get; set; }
+        public string? CustomerMiddleName { get; set; }
+        public string? CustomerLastName { get; set; }
+        public string? CustomerAddress { get; set; }
+        public string? CustomerContact { get; set; }
 
     }
 }

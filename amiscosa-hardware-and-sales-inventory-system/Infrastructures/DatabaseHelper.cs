@@ -1,10 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
 using amiscosa_hardware_and_sales_inventory_system.Configurations;
 using System.Data;
+using System.Reflection;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 {
-    public class DatabaseHelper : IDisposable
+    public class DatabaseHelper<Entity> : IDisposable
     {
         private IDatabaseConnectionManager _connectionManager;
         private MySqlConnection _connection;
@@ -88,6 +89,18 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             MySqlCommand command = new MySqlCommand(query, _connection);
             command.ExecuteNonQuery();
             _connection.Close();
+        }
+
+        public string ConvertUpdateValuesToString(Entity entity)
+        {
+            Type type = entity!.GetType();
+            List<string> output = new List<string>();
+            List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
+            foreach (PropertyInfo property in properties)
+            {
+                output.Add(property.Name + " = " + property.GetValue(entity));
+            }
+            return String.Join(",", output);
         }
 
         public void Dispose()
