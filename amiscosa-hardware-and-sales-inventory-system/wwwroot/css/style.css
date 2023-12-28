@@ -67,6 +67,10 @@ input {
     outline: none;
 }
 
+fieldset {
+    border: none;
+}
+
 /* Navigation */
 
 nav {
@@ -205,14 +209,11 @@ nav {
     justify-content: flex-end;
 }
 
-.add-btn {
-    width: 150px;
+.add-product {
     margin-top: -60px;
 }
 
-    .add-btn svg {
-        margin-right: 10px;
-    }
+
 
 .content-wrapper {
     border-radius: 20px;
@@ -241,6 +242,54 @@ nav {
     }
 
     /* Handle */
+    .content-container .content-search-and-filter {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background-color: #fff;
+        padding-top: 30px;
+    }
+
+        .content-container .content-search-and-filter .search-and-filter {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 20px;
+        }
+
+            .content-container .content-search-and-filter .search-and-filter form {
+                justify-content: flex-end;
+            }
+
+            .content-container .content-search-and-filter .search-and-filter .search-bar {
+                display: flex;
+                align-items: center;
+                padding: 5px 15px;
+                width: 320px;
+                margin-right: 20px;
+            }
+
+                .content-container .content-search-and-filter .search-and-filter .search-bar input[type='text'] {
+                    padding-left: 10px;
+                    width: 100%;
+                }
+
+            .content-container .content-search-and-filter .search-and-filter .filter .filter-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100px;
+                padding: 5px 10px;
+                border-radius: 5px;
+                border: 1px solid var(--border-gray);
+                background: #FFF;
+                cursor: pointer;
+            }
+
+                .content-container .content-search-and-filter .search-and-filter .filter .filter-btn p {
+                    padding-left: 5px;
+                }
+
     .content-container::-webkit-scrollbar-thumb {
         background: #888;
     }
@@ -252,42 +301,43 @@ nav {
         background-color: white;
     }
 
-    .content-container table {
+    .content-container #inventory-table {
         width: 100%;
+        position: relative;
     }
 
-        .content-container table thead {
+        .content-container #inventory-table thead {
             height: 60px;
             position: sticky;
-            top: 0;
+            top: 65px;
             z-index: 1;
             background-color: var(--bg-white);
         }
 
-            .content-container table thead th {
+            .content-container #inventory-table thead th {
                 text-align: left;
-                padding: 30px 10px;
+                padding: 20px 10px;
             }
 
-                .content-container table thead th:last-child {
+                .content-container #inventory-table thead th:last-child {
                     text-align: center;
                 }
 
-        .content-container table tr {
+        .content-container #inventory-table tr {
             height: 60px;
             border-bottom: 0.5px solid var(--border-gray);
         }
 
-            .content-container table tr td:nth-child(2) {
+            .content-container #inventory-table tr td:nth-child(2) {
                 width: 260px;
             }
 
-            .content-container table tr td:last-child {
+            .content-container #inventory-table tr td:last-child {
                 text-align: center;
             }
 
 
-            .content-container table tr td button.edit-product {
+            .content-container #inventory-table tr td button.edit-product {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -299,7 +349,7 @@ nav {
                 cursor: pointer;
             }
 
-            .content-container table tr td button.del-product {
+            .content-container #inventory-table tr td button.del-product {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
@@ -310,45 +360,7 @@ nav {
                 cursor: pointer;
             }
 
-    .content-container .content-search-and-filter {
-        padding-top: 30px;
-    }
 
-        .content-container .content-search-and-filter .search-and-filter form {
-            justify-content: flex-end;
-        }
-
-        .content-container .content-search-and-filter .search-and-filter .search-bar {
-            display: flex;
-            align-items: center;
-            padding: 5px 15px;
-            width: 320px;
-            border: 1px solid var(--text-gray);
-            color: var(--text-gray);
-            margin-right: 20px;
-        }
-
-            .content-container .content-search-and-filter .search-and-filter .search-bar input[type='text'] {
-                padding-left: 10px;
-                width: 100%;
-            }
-
-        .content-container .content-search-and-filter .search-and-filter .filter .filter-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            border: 1px solid var(--text-gray);
-            color: var(--text-gray);
-            background: #FFF;
-            cursor: pointer;
-        }
-
-            .content-container .content-search-and-filter .search-and-filter .filter .filter-btn p {
-                padding-left: 5px;
-            }
 
 /* Pop Up Add Form */
 #addPopup h1 {
@@ -359,6 +371,7 @@ nav {
     margin-top: 30px;
     width: 120px;
 }
+
 
 /* Pop Up EDIT Form */
 
@@ -376,25 +389,244 @@ nav {
     width: 120px;
 }
 
+
 /* Transaction */
 .search-customer-container {
     margin-top: 30px;
 }
 
-    .search-customer-container form {
+    .search-customer-container .search-customer-form fieldset {
         display: flex;
+        width: 80%;
+        padding: 5px 15px;
+        background-color: var(--bg-gray);
     }
 
-.search-customer {
-    width: 75%;
-    padding-left: 20px
-}
+    .search-customer-container .search-customer-form svg {
+        margin-right: 10px;
+    }
+
+    .search-customer-container .search-customer-form fieldset #search-customer {
+        padding-left: 10px;
+        width: 100%;
+        background-color: transparent;
+    }
 
 .search-customer-btn {
     margin-left: 10px;
     flex: 1;
     height: 30px;
 }
+
+.select-product-container {
+    margin-top: 15px;
+}
+
+    .select-product-container .select-product-form fieldset {
+        display: flex;
+        width: 80%;
+        padding: 5px 15px;
+        background-color: var(--bg-gray);
+    }
+
+    .select-product-container .select-product-form svg {
+        margin-right: 10px;
+    }
+
+    .select-product-container .select-product-form fieldset #select-product {
+        padding-left: 10px;
+        width: 100%;
+        background-color: transparent;
+    }
+
+.select-product-btn {
+    margin-left: 10px;
+    flex: 1;
+    height: 30px;
+}
+
+.product-listing-wrapper {
+    border-radius: 20px;
+    border: 0.5px solid var(--border-gray);
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.product-listing-content-container {
+    border-radius: 20px;
+    height: 50vh;
+    width: 100%;
+    padding: 0 20px;
+}
+
+#product-listing {
+    width: 100%;
+}
+
+    #product-listing thead {
+        height: 60px;
+        position: sticky;
+        z-index: 1;
+        background-color: var(--bg-white);
+    }
+
+        #product-listing thead th {
+            text-align: left;
+            padding: 20px 10px;
+        }
+
+    #product-listing tr {
+        height: 60px;
+        border-bottom: 0.5px solid var(--border-gray);
+    }
+
+        #product-listing tr td:nth-child(2) {
+            width: 260px;
+        }
+
+        #product-listing tr td:nth-child(3) form input[type="number"] {
+            display: block;
+            width: 100px;
+            height: 36px;
+            background-color: var(--bg-gray);
+            border: 0.5px solid var(--border-gray);
+            border-radius: 2px;
+            padding-left: 10px;
+        }
+
+        #product-listing tr td button.del-listing {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #E60B2F;
+            cursor: pointer;
+        }
+
+.confirm-transaction {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.confirm-btn {
+    width: 250px;
+    height: 40px;
+}
+
+/* Customer */
+.add-customer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -60px;
+}
+
+.content-container #customer-table {
+    width: 100%;
+    position: relative;
+}
+
+    .content-container #customer-table thead {
+        height: 60px;
+        position: sticky;
+        top: 65px;
+        z-index: 1;
+        background-color: var(--bg-white);
+    }
+
+        .content-container #customer-table thead th {
+            text-align: left;
+            padding: 20px 10px;
+        }
+
+            .content-container #customer-table thead th:last-child {
+                text-align: center;
+            }
+
+    .content-container #customer-table tr {
+        height: 60px;
+        border-bottom: 0.5px solid var(--border-gray);
+    }
+
+        /* .content-container #customer-table th td:nth-child(1){
+    width: 50px;
+} */
+
+        .content-container #customer-table tr td:nth-child(1) {
+            width: 200px;
+        }
+
+        .content-container #customer-table tr td:nth-child(2) {
+            width: 260px;
+        }
+
+        .content-container #customer-table tr td:last-child {
+            text-align: center;
+        }
+
+
+        .content-container #customer-table tr td button.edit-product {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #1885F2;
+            border: none;
+            cursor: pointer;
+        }
+
+        .content-container #customer-table tr td button.del-product {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #E60B2F;
+            cursor: pointer;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -490,20 +722,13 @@ nav {
     }
 }
 
-
-
-
-
-
 /* Forms */
 input {
     outline: none;
     border: none;
 }
 
-fieldset {
-    border: none;
-}
+
 
 .form-v-center {
     display: flex;
@@ -512,7 +737,7 @@ fieldset {
 
 .search-field {
     border-radius: 5px;
-    border: 1px solid #222;
+    border: 1px solid var(--border-gray);
     background: #FFF;
 }
 
@@ -520,6 +745,14 @@ fieldset {
 button {
     border: none;
 }
+
+.add-btn {
+    width: 200px;
+}
+
+    .add-btn svg {
+        margin-right: 10px;
+    }
 
 .orange-btn {
     display: flex;

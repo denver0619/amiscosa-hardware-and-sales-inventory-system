@@ -7,3 +7,136 @@
     <h1>Transaction</h1>
     <p>Main Menu | Transaction</p>
 </div>
+
+<div class="content-wrapper">
+    <div class="content-container">
+        <div class="search-customer-container">
+            <form action="" class="form-v-center search-customer-form">
+                <fieldset class="search-field medium ">
+                    <label for="search-customer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <g clip-path="url(#clip0_11_108)">
+                                <path d="M6 11.5C9.03757 11.5 11.5 9.03757 11.5 6C11.5 2.96243 9.03757 0.5 6 0.5C2.96243 0.5 0.5 2.96243 0.5 6C0.5 9.03757 2.96243 11.5 6 11.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M13.5 13.5L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_11_108">
+                                    <rect width="14" height="14" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </label>
+                    <input type="text" name="search-customer" id="search-customer" placeholder="Search customer...">
+                </fieldset>
+
+                <button class="search-customer-btn orange-btn medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <g clip-path="url(#clip0_10_94)">
+                            <path d="M3.21436 6.4286V1.9286C3.21436 1.5876 3.34982 1.26058 3.59093 1.01946C3.83205 0.778342 4.15907 0.642883 4.50007 0.642883H12.8572L17.3572 5.14288V16.0715C17.3572 16.4124 17.2217 16.7395 16.9806 16.9806C16.7396 17.2217 16.4125 17.3572 16.0715 17.3572H9.64293" stroke="white" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M4.5 9.64288V17.3572" stroke="white" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M0.642822 13.5H8.35711" stroke="white" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_10_94">
+                                <rect width="18" height="18" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    Select Customer
+                </button>
+            </form>
+        </div>
+
+        <div class="select-product-container">
+            <form action="" class="form-v-center select-product-form">
+                <fieldset class="search-field medium ">
+                    <label for="select-product">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <g clip-path="url(#clip0_11_108)">
+                                <path d="M6 11.5C9.03757 11.5 11.5 9.03757 11.5 6C11.5 2.96243 9.03757 0.5 6 0.5C2.96243 0.5 0.5 2.96243 0.5 6C0.5 9.03757 2.96243 11.5 6 11.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M13.5 13.5L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_11_108">
+                                    <rect width="14" height="14" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </label>
+                    <input type="text" name="select-product" id="select-product" placeholder="Search product...">
+                </fieldset>
+
+                <button class="select-product-btn orange-btn medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <g clip-path="url(#clip0_10_94)">
+                            <path d="M3.21436 6.4286V1.9286C3.21436 1.5876 3.34982 1.26058 3.59093 1.01946C3.83205 0.778342 4.15907 0.642883 4.50007 0.642883H12.8572L17.3572 5.14288V16.0715C17.3572 16.4124 17.2217 16.7395 16.9806 16.9806C16.7396 17.2217 16.4125 17.3572 16.0715 17.3572H9.64293" stroke="white" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M4.5 9.64288V17.3572" stroke="white" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M0.642822 13.5H8.35711" stroke="white" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_10_94">
+                                <rect width="18" height="18" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    Select Product
+                </button>
+            </form>
+        </div>
+
+        <div class="product-listing-wrapper">
+            <div class="product-listing-content-container">
+                <table id="product-listing">
+                    <thead>
+                        <tr>
+                            <th>Product ID</td>
+                            <th>Product Name</td>
+                            <th>Quantity</td>
+                            <th>Unit Price</td>
+                            <th>Total Price</td>
+                            <th>Action</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0001</td>
+                            <td>Hammer</td>
+                            <td>
+                                <form action="">
+                                    <input type="number" name="" id="" min="1" value="2">
+                                </form>
+                            </td>
+                            <td>300.00</td>
+                            <td>600.00</td>
+                            <td>
+                                <button class="del-listing">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <g clip-path="url(#clip0_11_184)">
+                                            <path d="M1 3.5H13" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2.5 3.5H11.5V12.5C11.5 12.7652 11.3946 13.0196 11.2071 13.2071C11.0196 13.3946 10.7652 13.5 10.5 13.5H3.5C3.23478 13.5 2.98043 13.3946 2.79289 13.2071C2.60536 13.0196 2.5 12.7652 2.5 12.5V3.5Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M4.5 3.5V3C4.5 2.33696 4.76339 1.70107 5.23223 1.23223C5.70107 0.763392 6.33696 0.5 7 0.5C7.66304 0.5 8.29893 0.763392 8.76777 1.23223C9.23661 1.70107 9.5 2.33696 9.5 3V3.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M5.5 6.50146V10.503" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M8.5 6.50146V10.503" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_11_184">
+                                                <rect width="14" height="14" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="confirm-transaction">
+            <div class="total-items">
+            </div>
+            <button class="orange-btn confirm-btn">Confirm</button>
+        </div>
+
+    </div>
+</div>

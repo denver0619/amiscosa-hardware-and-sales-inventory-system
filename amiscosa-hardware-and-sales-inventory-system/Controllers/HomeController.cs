@@ -32,6 +32,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return View();
         }
 
+        public IActionResult Customer()
+        {
+            return View();
+        }
+
         public IActionResult AlertHistory()
         {
             return View();

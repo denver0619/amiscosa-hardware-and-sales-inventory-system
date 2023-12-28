@@ -1,7 +1,7 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
 
-    var addItemButton = document.querySelector('.add-btn');
-    var editButtons = document.querySelectorAll('.edit-product');
+    var addItemButton = document.querySelector('.add-product');
+    var editButtons = document.querySelector('.edit-product');
 
     addItemButton.addEventListener('click', function (e) {
         var addItemPopupOverlay = document.createElement('div');
