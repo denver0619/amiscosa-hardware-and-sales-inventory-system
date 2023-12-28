@@ -13,6 +13,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
             CustomerID = customerID;
             IsInvalid = isInvalid;
         }
+        public Transaction(ITransaction transaction)
+        {
+            TransactionID = transaction.TransactionID;
+            TransactionDate = transaction.TransactionDate;
+            StaffID = transaction.StaffID;
+            CustomerID = transaction.CustomerID;
+            IsInvalid = transaction.IsInvalid;
+        }
         [Required]
         public string? TransactionID { get; set; }
         [Required]
