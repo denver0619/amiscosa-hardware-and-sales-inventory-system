@@ -103,6 +103,19 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return String.Join(",", output);
         }
 
+        public string GetFieldsForInsert(Entity entity)
+        {
+            Type type = entity!.GetType();
+            List<string> fields = new List<string>(); 
+            List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
+            foreach (PropertyInfo property in properties)
+            {
+                if (property.Name.Contains("ID")) continue;
+                fields.Add(property.Name);
+            }
+            return "(" + String.Join(",", fields) + "(";
+        }
+
         public void Dispose()
         {
             if (_connection != null)
