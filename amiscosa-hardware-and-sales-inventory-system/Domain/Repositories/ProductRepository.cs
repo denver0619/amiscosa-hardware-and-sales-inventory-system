@@ -15,29 +15,23 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             databaseHelper = new DatabaseHelper<Product>();
         }
 
-        public void AddProduct(IProduct product)
+        public void AddProduct(Product product)
         {
-            Product productData = new Product(product);
-            string productValues = "(" + productData.ProductName + "," + productData.ProductDescription + "," + productData.UnitPrice + "," + productData.Quantity + "," + productData.ManufacturerID + "," + productData.Measurement + "," + productData.IsAvailable + "," + productData.UnitCost +")";
-            List<string> values = [productValues];
-            databaseHelper.InsertRecord(tableName, databaseHelper.GetFieldsForInsert(productData), values);
+            databaseHelper.InsertRecord(tableName, product);
         }
 
-        public void DeleteProduct(IProduct product)
+        public void DeleteProduct(Product product)
         {
             Product productData = new Product(product)
             {
                 IsAvailable = false
             };
-            string constraints = "product_id = " + productData.ProductID;
-            databaseHelper.UpdateRecord(this.tableName, databaseHelper.ConvertUpdateValuesToString(productData), constraints);
+            databaseHelper.UpdateRecord(this.tableName, productData);
         }
 
-        public void UpdateProduct(IProduct product)
+        public void UpdateProduct(Product product)
         {
-            Product productData = new Product(product);
-            string constraints = "product_id = " + productData.ProductID;
-            databaseHelper.UpdateRecord(this.tableName, databaseHelper.ConvertUpdateValuesToString(productData), constraints);
+            databaseHelper.UpdateRecord(this.tableName, product);
         }
 
         public Product GetProductByID(string id)
