@@ -55,7 +55,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         }
         public List<User> GetAllActiveUser()
         {
-            string constraints = "is_active = 1";
+            string constraints = "IsActive = 1";
             DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
             List <User> users = new List<User>();
             foreach (DataRow row in dataTable.Rows)
@@ -76,7 +76,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public List<User> GetAllInactiveUser()
         {
-            string constraints = "is_active = 0";
+            string constraints = "IsActive = 0";
             DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
             List<User> users = new List<User>();
             foreach (DataRow row in dataTable.Rows)
@@ -97,7 +97,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public User GetUserByID(string id)
         {
-            string constraints = "user_id = " + id;
+            string constraints = "UserID = " + id;
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints); 
             DataRow row = dataTable.Rows[0];
             return new User(
@@ -113,7 +113,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public User GetUserByUserName(string username)
         {
-            string constraints = "user_username = " + username;
+            string constraints = "UserUsername = " + username;
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
             DataRow row = dataTable.Rows[0];
             return new User(

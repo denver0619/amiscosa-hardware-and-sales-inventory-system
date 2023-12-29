@@ -36,7 +36,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public Product GetProductByID(string id)
         {
-            string constraints = "product_id = " + id;
+            string constraints = "ProductID = " + id;
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
             DataRow row = dataTable.Rows[0];
             return new Product(
@@ -53,7 +53,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public Product GetProductByName(string name)
         {
-            string constraints = "product_name = " + name;
+            string constraints = "ProductName = " + name;
             DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
             DataRow row = dataTable.Rows[0];
             return  new Product(
