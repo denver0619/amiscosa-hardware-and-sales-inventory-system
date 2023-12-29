@@ -1,10 +1,11 @@
 ﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
 using System.Data;
+using System.Reflection.Metadata.Ecma335;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
-    public class NotificationRepository : INotificationRepository
+    public class NotificationRepository : INotificationRepository, IDisposable
     {
         private DatabaseHelper<Notification> databaseHelper;
         private readonly string tableName = "notifications";
@@ -18,8 +19,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         
         public void AddNotification(Notification notification)
         {
-            throw new NotImplementedException();
+            databaseHelper.InsertRecord(tableName, notification);
         }
+
 
         public List<Notification> GetAllNotification()
         {
@@ -35,7 +37,23 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public Notification GetNotificationByID(string id)
         {
-            throw new NotImplementedException();
+            string constraints = "NotificationID = " + id;
+            DataTable dataTable = databaseHelper.SelectRecord (this.tableName, constraints);
+            DataRow row = dataTable.Rows[0];
+            return new Notification(
+                row["NotificationID"].ToString()!,
+                row["NotificationName"].ToString()!,
+                row["NotificationDescription"].ToString()!,
+                row["ProductID"].ToString()!,
+                Int32.Parse(row["NotificationType"].ToString()!)
+                );
+        }
+        public void Dispose()
+        {
+            if (!databaseHelper.Equals(null))
+            {
+                databaseHelper!.Dispose();
+            }
         }
     }
 }
