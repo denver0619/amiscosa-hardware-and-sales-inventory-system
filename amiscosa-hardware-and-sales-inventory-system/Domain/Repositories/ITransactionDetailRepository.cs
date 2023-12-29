@@ -4,9 +4,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
     public interface ITransactionDetailRepository
     {
-        public void AddTransactionDetail(ITransactionDetail transactionDetail);
-        public void DeleteTransactionDetail(ITransactionDetail transactionDetail);
-        public void UpdateTransactionDetail(ITransactionDetail transactionDetail);
+        public void AddTransactionDetail(TransactionDetail transactionDetail);
+        public void DeleteTransactionDetail(TransactionDetail transactionDetail);
+        public void UpdateTransactionDetail(TransactionDetail transactionDetail);
         public List<TransactionDetail> GetAllTransactionDetailByTransactionID (string transactionID);
         public List<TransactionDetail> GetAllTransactionsByProductID(string productID);
     }

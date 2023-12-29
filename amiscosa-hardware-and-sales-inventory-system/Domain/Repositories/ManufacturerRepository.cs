@@ -1,30 +1,38 @@
 ﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
+using System.Data;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
     public class ManufacturerRepository : IManufacturerRepository, IDisposable
     {
-        private DatabaseHelper databaseHelper;
-        private readonly string tableName = "Manufacturers";
-        private readonly string tableFields = "(manufacturer_id, manufacturer_name, manufacturer_contact, manufacturer_address)";
-        private readonly string tableAddFields = "(manufacturer_name, manufacturer_contact, manufacturer_address)";
+        private DatabaseHelper<Manufacturer> databaseHelper;
+        private readonly string tableName = "manufacturers";
 
         public ManufacturerRepository()
         {
-            databaseHelper = new DatabaseHelper();
+            databaseHelper = new DatabaseHelper<Manufacturer>();
         }
 
-        public void AddManufacturer(IManufacturer manufacturer)
+        public void AddManufacturer(Manufacturer manufacturer)
         {
-            string manufacturerValues = "(" + manufacturer.ManufacturerName + "," + manufacturer.ManufacturerContact + "," + manufacturer.ManufacturerAddress + ")";
-            List<string> values = [manufacturerValues];
-            databaseHelper.InsertRecord(tableName, tableAddFields, values);
+            databaseHelper.InsertRecord(tableName, manufacturer);
         }
 
         public List<Manufacturer> GetAllManufacturers()
         {
-            throw new NotImplementedException();
+            DataTable dataTable = databaseHelper.SelectAllRecord(tableName);
+            List<Manufacturer> manufacturers = new List<Manufacturer>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Manufacturer manufacturer = new Manufacturer(
+                    row["ManufacturerID"].ToString()!,
+                    row["ManufacturerName"].ToString()!,
+                    row["ManufacturerContact"].ToString()!,
+                    row["ManufacturerAddress"].ToString()!);
+                manufacturers.Add(manufacturer);
+            }
+            return manufacturers;
         }
 
         public Manufacturer GetManufacturerByID(string id)
@@ -37,12 +45,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             throw new NotImplementedException();
         }
 
-        public void UpdateManufacturer(IManufacturer manufacturer)
+        public void UpdateManufacturer(Manufacturer manufacturer)
         {
             Manufacturer manufacturerData = new Manufacturer(manufacturer);
-            string manufacturerValues = "(" + manufacturer.ManufacturerID + "," + manufacturer.ManufacturerName + "," + manufacturer.ManufacturerContact + "," + manufacturer.ManufacturerAddress + ")";
-            string constraints = "manufacturer = " + manufacturerData.ManufacturerID;
-            databaseHelper.UpdateRecord(tableName, manufacturerValues, constraints);
+            databaseHelper.UpdateRecord(tableName, manufacturerData);
         }
         public void Dispose()
         {
