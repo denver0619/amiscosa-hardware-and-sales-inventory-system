@@ -1,5 +1,6 @@
 ﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
+using System.Data;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
@@ -20,7 +21,18 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public List<Manufacturer> GetAllManufacturers()
         {
-            throw new NotImplementedException();
+            DataTable dataTable = databaseHelper.SelectAllRecord(tableName);
+            List<Manufacturer> manufacturers = new List<Manufacturer>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Manufacturer manufacturer = new Manufacturer(
+                    row["ManufacturerID"].ToString()!,
+                    row["ManufacturerName"].ToString()!,
+                    row["ManufacturerContact"].ToString()!,
+                    row["ManufacturerAddress"].ToString()!);
+                manufacturers.Add(manufacturer);
+            }
+            return manufacturers;
         }
 
         public Manufacturer GetManufacturerByID(string id)
