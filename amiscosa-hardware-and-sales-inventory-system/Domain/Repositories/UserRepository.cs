@@ -7,9 +7,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
     public class UserRepository : IUserRepository, IDisposable
     {
         private DatabaseHelper<User> databaseHelper;
-        private readonly string tableName = "Users";
-        private readonly string tableFields = "(user_id, user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
-        private readonly string tableAddFields = "(user_fname, user_mname, user_lname, user_username, user_hash, user_role, is_active)";
+        private readonly string tableName = "users";
 
         public UserRepository()
         {

@@ -6,9 +6,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
     public class ManufacturerRepository : IManufacturerRepository, IDisposable
     {
         private DatabaseHelper<Manufacturer> databaseHelper;
-        private readonly string tableName = "Manufacturers";
-        private readonly string tableFields = "(manufacturer_id, manufacturer_name, manufacturer_contact, manufacturer_address)";
-        private readonly string tableAddFields = "(manufacturer_name, manufacturer_contact, manufacturer_address)";
+        private readonly string tableName = "manufacturers";
 
         public ManufacturerRepository()
         {

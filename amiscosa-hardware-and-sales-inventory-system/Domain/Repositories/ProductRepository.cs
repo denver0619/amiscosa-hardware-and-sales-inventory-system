@@ -8,7 +8,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
     public class ProductRepository : IProductRepository, IDisposable
     {
         private DatabaseHelper<Product> databaseHelper;
-        private readonly string tableName = "Products";
+        private readonly string tableName = "products";
 
         public ProductRepository()
         {
