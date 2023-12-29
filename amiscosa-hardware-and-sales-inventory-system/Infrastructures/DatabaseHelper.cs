@@ -134,7 +134,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
                 if (property.Name.Contains("ID")) continue;
                 fields.Add(property.Name);
             }
-            return "(" + String.Join(",", fields) + "(";
+            return "(" + String.Join(",", fields) + ")";
         }
 
         public List<string> GetInsertValues(List<Entity> entities)
