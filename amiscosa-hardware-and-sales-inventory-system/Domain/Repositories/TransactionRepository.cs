@@ -43,27 +43,64 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
                     row["CustomerID"].ToString()!,
                     bool.Parse(row["IsInvalid"].ToString()!)
                     );
+                transactions.Add(transaction);
             }
             return new List<Transaction>();
         }
 
         public List<Transaction> GetAllTransactionByYearMonth(DateTime dateTime)
         {
-
-            throw new NotImplementedException();
+            string constrainsts = "MONTH(TransactionDate) = " + dateTime.Month.ToString() + " AND YEAR(TransactionDate) = " + dateTime.Year.ToString();
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constrainsts);
+            List<Transaction> transactions = new List<Transaction>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Transaction transaction = new Transaction(
+                    row["TransactionID"].ToString()!,
+                    DateTime.Parse(row["TransactionDate"].ToString()!),
+                    row["StaffID"].ToString()!,
+                    row["CustomerID"].ToString()!,
+                    bool.Parse(row["IsInvalid"].ToString()!)
+                    );
+                transactions.Add(transaction);
+            }
+            return transactions;
         }
         public List<Transaction> GetAllTransactionsByYear (DateTime dateTime)
         {
-            throw new NotImplementedException();
+            string constrainsts = "YEAR(TransactionDate) = " + dateTime.Year.ToString();
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constrainsts);
+            List<Transaction> transactions = new List<Transaction>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Transaction transaction = new Transaction(
+                    row["TransactionID"].ToString()!,
+                    DateTime.Parse(row["TransactionDate"].ToString()!),
+                    row["StaffID"].ToString()!,
+                    row["CustomerID"].ToString()!,
+                    bool.Parse(row["IsInvalid"].ToString()!)
+                    );
+                transactions.Add(transaction);
+            }
+            return transactions;
         }
         public Transaction GetTransactionByID(string id)
         {
-            throw new NotImplementedException();
+            string constraints = "TransactionID = " + id;
+            DataTable  dataTable = databaseHelper.SelectRecord(tableName, constraints);
+            DataRow row = dataTable.Rows[0];
+            return new Transaction(
+                    row["TransactionID"].ToString()!,
+                    DateTime.Parse(row["TransactionDate"].ToString()!),
+                    row["StaffID"].ToString()!,
+                    row["CustomerID"].ToString()!,
+                    bool.Parse(row["IsInvalid"].ToString()!)
+                );
         }
 
         public void UpdateTransaction(Transaction transaction)
         {
-            throw new NotImplementedException();
+            databaseHelper.UpdateRecord(tableName, transaction);
         }
 
         public void Dispose()

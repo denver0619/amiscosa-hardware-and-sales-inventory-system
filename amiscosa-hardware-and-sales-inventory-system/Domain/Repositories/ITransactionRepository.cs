@@ -8,8 +8,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         public void DeleteTransaction (Transaction transaction);
         public void UpdateTransaction (Transaction transaction);
         public Transaction GetTransactionByID (string id);
-        public List<Transaction> GetAllTransactionByYearMonth(int year, int month);
-        public List<Transaction> GetAllTransactionsByYear (int year);
+        public List<Transaction> GetAllTransactionByYearMonth(DateTime dateTime);
+        public List<Transaction> GetAllTransactionsByYear (DateTime dateTime);
         public List<Transaction> GetAllTransactions ();
     }
 }
