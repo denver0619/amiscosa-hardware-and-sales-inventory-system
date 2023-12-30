@@ -3,6 +3,9 @@
     var addItemButton = document.querySelector('.add-product');
     var editButtons = document.querySelectorAll('.edit-product');
 
+
+
+    // ADD ITEM POPUP
     addItemButton.addEventListener('click', function (e) {
         var addItemPopupOverlay = document.createElement('div');
 
@@ -55,13 +58,15 @@
                 </form>
             </div>
         `
-
         document.body.append(addItemPopupOverlay);
 
+
+
+
+        // Event listener for submitting added product data
         document.querySelector('#submitAdd').addEventListener('click', function (e) {
 
             e.preventDefault();
-            console.log(1);
             // Retrieve input values
             var productName = document.getElementById('productName').value;
             var productQuantity = parseFloat(document.getElementById('productQuantity').value);
@@ -72,7 +77,6 @@
 
             // VALIDATION CHECKS
             // TO BE CHANGED
-
             var isError = false;
             if (productName === '') {
                 applyErrorStyles('productName');
@@ -137,29 +141,17 @@
             // Handle exit from edit
         });
 
+
+        // Remove the edit pop-up without submitting
         document.getElementById('exitPopupCard').addEventListener('click', function () {
-            // Remove the edit pop-up without submitting
+            
             addItemPopupOverlay.remove();
         });
     });
 
-    // Function to apply error styles to input fields
-    function applyErrorStyles(elementId) {
-        var element = document.getElementById(elementId);
-        element.style.border = '1px solid red';
-        element.classList.add('shake'); // Adding a shake class for animation
-        setTimeout(function () {
-            element.classList.remove('shake'); // Remove the shake class after the animation ends
-        }, 500);
-    }
 
-    function resetErrorStyles(elementId) {
-        var element = document.getElementById(elementId);
-        element.style.border = '1px solid #ccc'; // Reset the border
-    }
-
-    editButtons.forEach(function (editButtons) {
-        editButtons.addEventListener('click', function (e) {
+    editButtons.forEach(function (editButton) {
+        editButton.addEventListener('click', function (e) {
 
             var row = e.target.closest('tr'); // Find the closest row (tr)
 
@@ -177,7 +169,6 @@
 
             // Create the edit pop-up elements
             var editPopupOverlay = document.createElement('div');
-            // editPopupOverlay.classList.add('editFormContainer');
             editPopupOverlay.id = 'PopupOverlay';
             editPopupOverlay.innerHTML = `
                 <div class="popupCard" id="editPopup">
@@ -233,32 +224,107 @@
             document.body.append(editPopupOverlay);
 
             // Handle edit submission
-            document.getElementById('submitEdit').addEventListener('click', function () {
+            document.getElementById('submitEdit').addEventListener('click', function (e) {
                 // Perform actions to update data using AJAX or other methods
+                e.preventDefault();
 
                 // Create an object with the updated product data
+
+                var productName = document.getElementById('productName').value;
+                var productQuantity = parseFloat(document.getElementById('productQuantity').value);
+                var productUnitCost = parseFloat(document.getElementById('productUnitCost').value);
+                var productUnitPrice = parseFloat(document.getElementById('productUnitPrice').value);
+                var productMeasurement = document.getElementById('productMeasurement').value;
+                var productManufacturer = document.getElementById('productManufacturer').value;
+
+                // VALIDATION CHECKS
+                // TO BE CHANGED
+                var isError = false;
+                if (productName === '') {
+                    applyErrorStyles('productName');
+                    isError = true;
+                } else {
+                    resetErrorStyles('productName');
+                }
+
+                if (isNaN(productQuantity)) {
+                    applyErrorStyles('productQuantity');
+                    isError = true;
+                } else {
+                    resetErrorStyles('productQuantity');
+                }
+
+                if (isNaN(productUnitCost)) {
+                    applyErrorStyles('productUnitCost');
+                    isError = true;
+                } else {
+                    resetErrorStyles('productUnitCost');
+                }
+
+                if (isNaN(productUnitPrice)) {
+                    applyErrorStyles('productUnitPrice');
+                    isError = true;
+                } else {
+                    resetErrorStyles('productUnitPrice');
+                }
+
+                if (productMeasurement === '') {
+                    applyErrorStyles('productMeasurement');
+                    isError = true;
+                } else {
+                    resetErrorStyles('productMeasurement');
+                }
+
+                if (productManufacturer === '') {
+                    applyErrorStyles('productManufacturer');
+                    isError = true;
+                } else {
+                    resetErrorStyles('productManufacturer');
+                }
+
+                // Create an object with the added product data
                 var updatedProductData = {
-                    productID: productID,
-                    productName: document.getElementById('productName').value,
-                    productQuantity: document.getElementById('productQuantity').value,
-                    productUnitCost: document.getElementById('productUnitCost').value,
-                    productUnitPrice: document.getElementById('productUnitPrice').value,
-                    productMeasurement: document.getElementById('productMeasurement').value,
-                    productManufacturer: document.getElementById('productManufacturer').value
+                    productName: productName,
+                    productQuantity: productQuantity,
+                    productUnitCost: productUnitCost,
+                    productUnitPrice: productUnitPrice,
+                    productMeasurement: productMeasurement,
+                    productManufacturer: productManufacturer
                 };
 
                 console.log(updatedProductData);
 
-                // After submitting, remove the edit pop-up
-                editPopupOverlay.remove();
+                // If no error submit data to server
+                // TO BE CHANGED
+                if (isError == false) {
+                    editPopupOverlay.remove();
+                }
+
+                // Handle exit from edit
             });
 
-            // Handle exit from edit
+            // Remove the edit pop-up without submitting
             document.getElementById('exitPopupCard').addEventListener('click', function () {
-                // Remove the edit pop-up without submitting
+
                 editPopupOverlay.remove();
             });
         })
 
     })
+
+    // Function to apply error styles to input fields
+    function applyErrorStyles(elementId) {
+        var element = document.getElementById(elementId);
+        element.style.border = '1px solid red';
+        element.classList.add('shake'); // Adding a shake class for animation
+        setTimeout(function () {
+            element.classList.remove('shake'); // Remove the shake class after the animation ends
+        }, 500);
+    }
+
+    function resetErrorStyles(elementId) {
+        var element = document.getElementById(elementId);
+        element.style.border = '1px solid #ccc'; // Reset the border
+    }
+
 })
