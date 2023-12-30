@@ -9,8 +9,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         public List<User> GetAllUser();
         public List<User> GetAllActiveUser();
         public List<User> GetAllInactiveUser();
-        public void AddUser(IUser user, string password);
-        public void UpdateUser(IUser user);
-        public void DeleteUser(IUser user);
+        public void AddUser(User user, string password);
+        public void UpdateUser(User user);
+        public void DeleteUser(User user);
     }
 }

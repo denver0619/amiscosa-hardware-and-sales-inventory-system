@@ -6,11 +6,11 @@
     public interface IUser
     {
         public string? UserID { get; set; }
-        public string? FirstName { get; set; }
-        public string? MiddleName { get; set; }
-        public string? LastName { get; set; }
-        public string? UserName { get; set; }
-        public string? Hash { get; set; }
+        public string? UserFName { get; set; }
+        public string? UserMName { get; set; }
+        public string? UserLName { get; set; }
+        public string? UserUserame { get; set; }
+        public string? UserHash { get; set; }
         public string? UserRole { get; set; }
         public bool IsActive { get; set; }
     }
