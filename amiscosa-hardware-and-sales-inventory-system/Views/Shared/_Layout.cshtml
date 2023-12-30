@@ -162,7 +162,7 @@
                     </li>
 
                     <li>
-                        <a class="nav-btn @IsPageActive("Home", "Analytics")" asp-area="" asp-controller="Home" asp-action="Analytics">
+                        <a class="nav-btn @IsPageActive("Home", "Report")" asp-area="" asp-controller="Home" asp-action="Report">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <g clip-path="url(#clip0_5_132)">
@@ -175,7 +175,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <p>Analytics</p>
+                                <p>Reports</p>
                             </span>
                         </a>
                     </li>
@@ -260,6 +260,6 @@
     <footer class="">
     </footer>
 
-    <script src="~/js/app.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Analytics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-title">
+    <h1>Reports</h1>
+    <p>Main Menu | Reports</p>
+</div>
+
+<div class="content-wrapper">
+    <div class="content-container" id="report-content-container">
+        <div class="revenue-sort-date rounded-box">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="16" viewBox="0 0 17 16" fill="none">
+                <g clip-path="url(#clip0_219_591)">
+                    <path d="M2.15043 2.28564C1.84732 2.28564 1.55663 2.40606 1.3423 2.62038C1.12798 2.83471 1.00757 3.12539 1.00757 3.4285V14.2856C1.00757 14.5887 1.12798 14.8795 1.3423 15.0938C1.55663 15.308 1.84732 15.4285 2.15043 15.4285H14.7219C15.0249 15.4285 15.3157 15.308 15.53 15.0938C15.7443 14.8795 15.8647 14.5887 15.8647 14.2856V3.4285C15.8647 3.12539 15.7443 2.83471 15.53 2.62038C15.3157 2.40606 15.0249 2.28564 14.7219 2.28564H12.4361" stroke="#FF9400" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M1.00757 6.28564H15.8647" stroke="#FF9400" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.43604 0.571289V3.99986" stroke="#FF9400" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12.436 0.571289V3.99986" stroke="#FF9400" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M4.43604 2.28564H10.1503" stroke="#FF9400" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_219_591">
+                        <rect width="16" height="16" fill="white" transform="translate(0.436035)" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <select name="month-dropdown" id="month-dropdown">
+                <option>January 2024</option>
+                <option>February 2024</option>
+                <option>March 2024</option>
+                <option>April 2024</option>
+                <option>May 2024</option>
+                <option>June 2024</option>
+                <option>July 2024</option>
+                <option>August 2024</option>
+                <option>September 2024</option>
+                <option>October 2024</option>
+                <option>November 2024</option>
+                <option>December 2024</option>
+            </select>
+        </div>
+
+        <div class="total-revenue">
+            <p>Total Revenue</p>
+            <h1>99999.99</h1>
+        </div>
+
+        <div class="report-statistic">
+            <div>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none">
+                        <g clip-path="url(#clip0_219_600)">
+                            <path d="M12.6761 7.39828C12.5883 7.14986 12.4528 6.92398 12.2806 6.73162C11.9144 6.32244 11.3822 6.06494 10.7899 6.06494H9.24182C8.25584 6.06494 7.45654 6.86424 7.45654 7.85022C7.45654 8.68918 8.04072 9.41496 8.8603 9.59426L11.2173 10.1098C12.1355 10.3107 12.7899 11.1244 12.7899 12.0642C12.7899 13.1688 11.8945 14.065 10.7899 14.065H9.45656C8.58574 14.065 7.8449 13.5084 7.57034 12.7316" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10.1233 6.06496V4.06494" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10.1233 16.065V14.0649" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.9375 26.9976V16.4976C13.9375 15.8345 14.2009 15.1986 14.6697 14.7298C15.1386 14.261 15.7745 13.9976 16.4375 13.9976C17.1005 13.9976 17.7364 14.261 18.2053 14.7298C18.6741 15.1986 18.9375 15.8345 18.9375 16.4976V21.9976H22.9376C23.9984 21.9976 25.0158 22.419 25.766 23.1692C26.516 23.9192 26.9376 24.9366 26.9376 25.9976V26.9976" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M10.125 19.1274C5.11992 19.1274 1.0625 15.07 1.0625 10.0649C1.0625 5.05986 5.11992 1.00244 10.125 1.00244C15.1301 1.00244 19.1875 5.05986 19.1875 10.0649C19.1875 10.4857 19.1588 10.8997 19.1033 11.3053" stroke-width="1.5" stroke-linecap="round" />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_219_600">
+                                <rect width="28" height="28" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    Product Sold
+                </p>
+                <h1>1457</h1>
+            </div>
+            <div>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 27 28" fill="none">
+                        <path d="M13.5256 26.9997C20.8322 27.0286 26.061 24.5777 26.0827 19.0767C26.1063 13.0974 22.9906 9.09884 16.7397 6.08446L19.215 3.06465C19.3409 2.86638 19.4097 2.63982 19.4143 2.40794C19.419 2.17606 19.3593 1.94712 19.2414 1.7443C19.1236 1.54148 18.9516 1.372 18.743 1.25305C18.5345 1.13409 18.2967 1.06988 18.0538 1.06693L9.2024 1.03198C8.95948 1.03301 8.72121 1.09534 8.51171 1.21265C8.30219 1.32996 8.12892 1.49807 8.00944 1.69995C7.88994 1.90183 7.8285 2.1303 7.83132 2.36221C7.83414 2.59412 7.90111 2.82121 8.02548 3.02047L10.4768 6.07965C4.20214 9.06452 1.05501 13.0384 1.0314 19.0177C1.00984 24.4788 6.21906 26.9709 13.5256 26.9997Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M16.4648 13.6486C16.3666 13.3796 16.2144 13.1347 16.0205 12.926C15.6082 12.4819 15.0075 12.2011 14.3377 12.1985L12.5871 12.1916C11.4722 12.1872 10.5649 13.0478 10.5607 14.1139C10.5572 15.0211 11.2146 15.8084 12.1407 16.006L14.8037 16.574C15.8411 16.7952 16.5776 17.6779 16.5736 18.6942C16.5689 19.8885 15.5525 20.8536 14.3035 20.8487L12.7958 20.8427C11.8111 20.8389 10.9757 20.2337 10.6686 19.3925" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.584 12.1941L13.5925 10.0322" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M13.5415 23.0067L13.55 20.8447" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Product Sales
+                </p>
+                <h1>109500.00</h1>
+            </div>
+            <div>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 30 32" fill="none">
+                        <path d="M1 1H6.2631L8.13803 20.9615C8.21596 21.5118 8.47699 22.0134 8.87303 22.3738C9.26905 22.7343 9.7734 22.9293 10.2931 22.9231H23.8702C24.3402 22.9494 24.8053 22.8102 25.1943 22.5268C25.5835 22.2435 25.8753 21.8315 26.0253 21.3538L28.8916 12.1231C28.9985 11.776 29.0269 11.4068 28.9743 11.0457C28.9219 10.6846 28.7901 10.342 28.5898 10.0462C28.3812 9.73157 28.1022 9.47802 27.7785 9.30868C27.4548 9.13937 27.0964 9.05968 26.7365 9.07692H7.01739" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M23.5038 31.0001C22.9088 31.0001 22.4263 30.4834 22.4263 29.8462C22.4263 29.2091 22.9088 28.6924 23.5038 28.6924C24.0988 28.6924 24.5814 29.2091 24.5814 29.8462C24.5814 30.4834 24.0988 31.0001 23.5038 31.0001Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M9.49576 31.0001C8.90063 31.0001 8.41821 30.4834 8.41821 29.8462C8.41821 29.2091 8.90063 28.6924 9.49576 28.6924C10.0909 28.6924 10.5733 29.2091 10.5733 29.8462C10.5733 30.4834 10.0909 31.0001 9.49576 31.0001Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Transactions
+                </p>
+                <h1>692</h1>
+            </div>
+        </div>
+
+        <div class="sales-report-wrapper">
+            <div class="sales-report-content-container">
+                <table id="sales-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Product Name</th>
+                            <th>Product Sold</th>
+                            <th>Sales</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Hammer</td>
+                            <td>119</td>
+                            <td>35700.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

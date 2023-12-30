@@ -7,6 +7,7 @@
     --medium-orange: #fea426;
     --dark-orange: #ff9400;
     --text-black: #222222;
+    --warning: #f44336;
 }
 
 * {
@@ -236,12 +237,14 @@ nav {
         width: 5px;
     }
 
-    /* Track */
     .content-container::-webkit-scrollbar-track {
         background: #f1f1f1;
     }
 
-    /* Handle */
+    .content-container::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
     .content-container .content-search-and-filter {
         position: sticky;
         top: 0;
@@ -282,6 +285,7 @@ nav {
                 padding: 5px 10px;
                 border-radius: 5px;
                 border: 1px solid var(--border-gray);
+                color: var(--text-gray);
                 background: #FFF;
                 cursor: pointer;
             }
@@ -290,9 +294,7 @@ nav {
                     padding-left: 5px;
                 }
 
-    .content-container::-webkit-scrollbar-thumb {
-        background: #888;
-    }
+
 
     .content-container .bottom-blocker {
         position: sticky;
@@ -300,6 +302,34 @@ nav {
         height: 30px;
         background-color: white;
     }
+
+    .content-container table {
+        width: 100%;
+        position: relative;
+    }
+
+        .content-container table thead {
+            height: 60px;
+            position: sticky;
+            top: 65px;
+            z-index: 1;
+            background-color: var(--bg-white);
+        }
+
+            .content-container table thead th {
+                text-align: left;
+                padding: 20px 10px;
+            }
+
+        .content-container table tr {
+            height: 60px;
+            border-bottom: 0.5px solid var(--border-gray);
+        }
+
+
+
+
+    /* Inventory */
 
     .content-container #inventory-table {
         width: 100%;
@@ -457,13 +487,29 @@ nav {
     height: 50vh;
     width: 100%;
     padding: 0 20px;
+    overflow: auto;
 }
+
+    .product-listing-content-container::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .product-listing-content-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .product-listing-content-container::-webkit-scrollbar-thumb {
+        background: #888;
+    }
 
 #product-listing {
     width: 100%;
+    overflow: auto;
 }
 
+
     #product-listing thead {
+        top: 0;
         height: 60px;
         position: sticky;
         z-index: 1;
@@ -590,9 +636,181 @@ nav {
             cursor: pointer;
         }
 
+/* Transaction History */
+
+#transaction-history-table thead tr th:nth-child(1) {
+    width: 200px;
+}
+
+#transaction-history-table thead tr th:nth-child(2) {
+    width: 150px;
+}
+
+/* #transaction-history-table thead tr th:nth-child(3){
+} */
+
+/* Reports */
+#report-content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.revenue-sort-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    padding: 5px 10px;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+}
+
+    .revenue-sort-date #month-dropdown {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 0 5px;
+        font-size: 16px;
+        color: var(--dark-orange);
+    }
+
+.total-revenue {
+    margin: 20px 20px 20px;
+}
+
+    .total-revenue h1 {
+        color: var(--dark-orange);
+    }
+
+.report-statistic {
+    display: flex;
+    /* justify-content: space-between; */
+    width: 100%;
+}
+
+    .report-statistic svg {
+        stroke: var(--dark-orange);
+    }
+
+    .report-statistic div {
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px 20px;
+        width: 280px;
+        height: 150px;
+        border: 1px solid var(--border-gray);
+        padding: 20px;
+        border-radius: 20px;
+        border: 1px solid var(--border-gray);
+        background: #FFF;
+        text-overflow: ellipsis;
+    }
+
+        .report-statistic div p {
+            display: flex;
+            align-items: center;
+        }
+
+            .report-statistic div p svg {
+                margin-right: 10px;
+            }
+
+        .report-statistic div h1 {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            color: var(--dark-orange);
+        }
+
+.sales-report-wrapper {
+    border-radius: 20px;
+    border: 0.5px solid var(--border-gray);
+    overflow: hidden;
+    flex: 1;
+    margin: 20px;
+}
+
+.sales-report-content-container {
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+    padding: 0 20px;
+    overflow: auto;
+}
+
+    .sales-report-content-container::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .sales-report-content-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .sales-report-content-container::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+#sales-table {
+    width: 100%;
+    overflow: auto;
+}
 
 
+    #sales-table thead {
+        top: 0;
+        height: 60px;
+        position: sticky;
+        z-index: 1;
+        background-color: var(--bg-white);
+    }
 
+        #sales-table thead th {
+            text-align: left;
+            padding: 20px 10px;
+        }
+
+    #sales-table tr {
+        height: 60px;
+        border-bottom: 0.5px solid var(--border-gray);
+    }
+
+/* Report */
+#report-history-table {
+    margin: 40px auto;
+    width: 95%;
+}
+
+    #report-history-table tr {
+        border: none; /* remove inital borders */
+        border-top: 0.5px solid var(--border-gray);
+        border-bottom: 0.5px solid var(--border-gray);
+    }
+
+        #report-history-table tr td {
+            display: flex;
+            min-height: 100px;
+        }
+
+            #report-history-table tr td .red-text {
+                color: var(--warning);
+            }
+
+            #report-history-table tr td .alert-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100px;
+            }
+
+            #report-history-table tr td .alert-text {
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+            }
 
 
 
@@ -667,7 +885,6 @@ nav {
     font-size: 20px;
 }
 
-
 .popupCardFormContainer {
     display: flex;
     flex-direction: column;
@@ -728,8 +945,6 @@ input {
     border: none;
 }
 
-
-
 .form-v-center {
     display: flex;
     align-items: center;
@@ -744,6 +959,12 @@ input {
 /* Components */
 button {
     border: none;
+}
+
+.rounded-box {
+    border-radius: 5px;
+    border: 1px solid var(--border-gray);
+    background: #FFF;
 }
 
 .add-btn {
@@ -776,4 +997,5 @@ button {
 }
 
 .large {
+    height: 54px;
 }

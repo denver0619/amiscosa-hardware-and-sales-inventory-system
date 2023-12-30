@@ -41,7 +41,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         {
             return View();
         }
-        public IActionResult Analytics()
+        public IActionResult Report()
         {
             return View();
         }
