@@ -47,6 +47,7 @@ main {
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 ul {
@@ -390,8 +391,54 @@ nav {
                 cursor: pointer;
             }
 
+/* Pop Up Logout */
+.logoutCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+    padding: 10px;
+    z-index: 1000;
+    background-color: var(--bg-white);
+    border: 0.5px solid var(--border-gray);
+    border-radius: 20px;
+    background-color: #fff;
+}
 
+    .logoutCard p {
+        font-size: 30px;
+        font-weight: 700;
+        padding: 40px 20px;
+    }
 
+    .logoutCard .logout-choices {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+        .logoutCard .logout-choices a {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+            .logoutCard .logout-choices a#yes-btn {
+                background-color: #f44336;
+                color: white;
+                border-bottom-right-radius: 10px;
+            }
+
+            .logoutCard .logout-choices a#no-btn {
+                background-color: #d3d3d3;
+                border-bottom-left-radius: 10px;
+                color: var(--text-black);
+            }
 /* Pop Up Add Form */
 #addPopup h1 {
     margin-bottom: 20px;

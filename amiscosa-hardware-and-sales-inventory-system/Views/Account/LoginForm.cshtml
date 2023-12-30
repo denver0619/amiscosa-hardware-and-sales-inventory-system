@@ -10,11 +10,11 @@
             <form asp-action="LoginForm" asp-controller="Account" method="post" class="loginForm">
                 @if (ViewData["isManager"] != null && (bool)ViewData["isManager"] == true)
                 {
-                    <h1>Manager</h1>
+                    // <h1>Manager</h1>
                 }
                 else
                 {
-                    <h1>Not Manager</h1>
+                    // <h1>Not Manager</h1>
                 }
                 <label for="employeeId">Employee ID</label>
                 <input type="text" id="employeeId" name=" Username"/>

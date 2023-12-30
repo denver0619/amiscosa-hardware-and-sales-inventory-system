@@ -47,7 +47,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         }
         public IActionResult Logout()
         {
-            return View();
+            return RedirectToAction("Login", "Account");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
