@@ -51,12 +51,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
                     Convert.ToInt32(decimal.Parse(row["UnitCost"].ToString()!)));
         }
 
-        public Product GetProductByName(string name)
+        public List<Product> GetAllProductByName(string name)
         {
-            string constraints = "ProductName = " + name;
-            DataTable dataTable = databaseHelper.SelectRecord(this.tableName, constraints);
-            DataRow row = dataTable.Rows[0];
-            return  new Product(
+            string constraints = "ProductName LIKE %" + name + "%";
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
+            List<Product> products = new List<Product>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Product product = new Product(
                     row["ProductID"].ToString()!,
                     row["ProductName"].ToString()!,
                     row["ProductDescription"].ToString()!,
@@ -66,6 +68,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
                     row["Measurement"].ToString()!,
                     bool.Parse(row["IsAvailable"].ToString()!),
                     Convert.ToInt32(decimal.Parse(row["UnitCost"].ToString()!)));
+                products.Add(product);
+            }
+            return products;
         }
 
         public List<Product> GetAllProducts()

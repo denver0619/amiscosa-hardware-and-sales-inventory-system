@@ -8,7 +8,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
         void DeleteProduct(Product product);
         void UpdateProduct(Product product);
         Product GetProductByID(string id);
-        Product GetProductByName(string name);
+        List<Product> GetAllProductByName(string name);
         List<Product> GetAllProducts();
         List<Product> GetAllActiveProducts();
         List<Product> GetAllInactiveProducts();

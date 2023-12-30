@@ -1,6 +1,7 @@
 ﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
 using System.Data;
+using System.Xml.Linq;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
