@@ -75,7 +75,9 @@
             <thead>
                 <tr>
                     <th>Customer ID</th>
-                    <th>Name</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Last Name</th>
                     <th>Address</th>
                     <th>Contact No.</th>
                     <th>Actions</th>
@@ -84,11 +86,13 @@
             <tbody>
                 <tr>
                     <td>0001</td>
-                    <td>John Drexler Cubebe</td>
+                    <td>John Drexler</td>
+                    <td>Gueco</td>
+                    <td>Cubebe</td>
                     <td>Zone 6, Limay, Bataan</td>
                     <td>09050505054</td>
                     <td>
-                        <button class="edit-product">
+                        <button class="edit-customer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                                 <g clip-path="url(#clip0_11_172)">
                                     <path d="M5 12.24L0.5 13.5L1.76 9.00002L10 0.80002C10.0931 0.704774 10.2044 0.629095 10.3271 0.577428C10.4499 0.52576 10.5818 0.499146 10.715 0.499146C10.8482 0.499146 10.9801 0.52576 11.1029 0.577428C11.2256 0.629095 11.3369 0.704774 11.43 0.80002L13.2 2.58002C13.2937 2.67298 13.3681 2.78359 13.4189 2.90544C13.4697 3.0273 13.4958 3.15801 13.4958 3.29002C13.4958 3.42203 13.4697 3.55274 13.4189 3.6746C13.3681 3.79646 13.2937 3.90706 13.2 4.00002L5 12.24Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
@@ -100,7 +104,7 @@
                                 </defs>
                             </svg>
                         </button>
-                        <button class="del-product">
+                        <button class="del-customer">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                                 <g clip-path="url(#clip0_11_184)">
                                     <path d="M1 3.5H13" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
@@ -126,3 +130,7 @@
 
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/customer.js"></script>
+}

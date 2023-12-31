@@ -164,9 +164,6 @@
             var productMeasurement = row.querySelectorAll('td')[5].textContent;
             var productManufacturer = row.querySelectorAll('td')[6].textContent;
 
-
-            console.log(productID);
-
             // Create the edit pop-up elements
             var editPopupOverlay = document.createElement('div');
             editPopupOverlay.id = 'PopupOverlay';

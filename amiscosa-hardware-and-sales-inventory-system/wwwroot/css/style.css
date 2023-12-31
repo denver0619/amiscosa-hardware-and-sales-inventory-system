@@ -391,6 +391,8 @@ nav {
                 cursor: pointer;
             }
 
+            
+
 /* Pop Up Logout */
 .logoutCard {
     display: flex;
@@ -660,7 +662,7 @@ nav {
         }
 
 
-        .content-container #customer-table tr td button.edit-product {
+        .content-container #customer-table tr td button.edit-customer {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -672,7 +674,7 @@ nav {
             cursor: pointer;
         }
 
-        .content-container #customer-table tr td button.del-product {
+        .content-container #customer-table tr td button.del-customer {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -947,7 +949,8 @@ nav {
             width: 100%;
         }
 
-        .popupCardFormContainer .form-row:nth-child(4) {
+        .popupCardFormContainer .form-row:nth-child(4),
+        .popupCardFormContainer .form-row:nth-child(5) {
             justify-content: flex-end;
         }
 
