@@ -1,9 +1,85 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
 
+    var restockItemButton = document.querySelector('.restock-product')
     var addItemButton = document.querySelector('.add-product');
     var editButtons = document.querySelectorAll('.edit-product');
 
+    // RESTOCK ITEM POPUP 
+    restockItemButton.addEventListener('click', function (e) {
+        var restockItemPopupOverlay = document.createElement('div');
 
+        console.log(1)
+
+        restockItemPopupOverlay.id = 'PopupOverlay';
+        restockItemPopupOverlay.innerHTML = `
+        <div class="popupCard"  id="restockPopup">
+                <button id="exitPopupCard">X</button>
+                <h1>Restock Product</h1>
+
+                <form class="popupCardFormContainer">
+                    <div class="search-and-filter restock-search">
+                        <div>
+                            <label>Product Name</label>
+                            <fieldset class="search-bar search-field medium">
+                            <label for="search-input" id="search-icon">
+                                <a href="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                        <g clip-path="url(#clip0_11_108)">
+                                            <path d="M6 11.5C9.03757 11.5 11.5 9.03757 11.5 6C11.5 2.96243 9.03757 0.5 6 0.5C2.96243 0.5 0.5 2.96243 0.5 6C0.5 9.03757 2.96243 11.5 6 11.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M13.5 13.5L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_11_108">
+                                                <rect width="14" height="14" fill="white" />
+                                            </clipPath>
+                                        </defs>
+                                    </svg>
+                                </a>
+
+                            </label>
+                            <input type="text" name="" id="search-input" placeholder="Search anything here..">
+                        </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div>
+                            <label for="restockQuantity">Quantity</label>
+                            <input type="number" name="restockQuantity" id="restockQuantity" min="1" value="1">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <button id="submitRestock" class="orange-btn medium">Restock</button>
+                    </div>
+                </form>
+            </div>
+        `
+
+        document.body.append(restockItemPopupOverlay);
+
+        document.querySelector('#submitRestock').addEventListener('click', function (e) {
+
+            e.preventDefault();
+
+            isError = false;
+
+            // ADD VALIDATION CHECKS
+
+            // If no error submit data to server
+            // TO BE CHANGED
+            if (isError == false) {
+                restockItemPopupOverlay.remove();
+            }
+
+            // Handle exit from edit
+        });
+
+        document.getElementById('exitPopupCard').addEventListener('click', function () {
+
+            restockItemPopupOverlay.remove();
+        });
+    })
 
     // ADD ITEM POPUP
     addItemButton.addEventListener('click', function (e) {

@@ -45,7 +45,7 @@
                     </div>
                 
                     <div class="form-row">
-                        <button id="submitAdd" class="orange-btn medium">Add Item</button>
+                        <button id="submitAdd" class="orange-btn medium">Add Customer</button>
                     </div>
                     
                 </form>

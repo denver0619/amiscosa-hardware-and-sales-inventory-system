@@ -206,13 +206,16 @@ nav {
     margin-bottom: 10px;
 }
 
-.add-item {
+.utility-buttons {
     display: flex;
     justify-content: flex-end;
+    
 }
 
-.add-product {
+.restock-item,
+.add-item{
     margin-top: -60px;
+    margin-left: 10px
 }
 
 
@@ -246,7 +249,7 @@ nav {
         background: #888;
     }
 
-    .content-container .content-search-and-filter {
+    .content-search-and-filter {
         position: sticky;
         top: 0;
         z-index: 2;
@@ -254,18 +257,18 @@ nav {
         padding-top: 30px;
     }
 
-        .content-container .content-search-and-filter .search-and-filter {
+        .search-and-filter {
             display: flex;
             align-items: center;
             justify-content: flex-end;
             padding-right: 20px;
         }
 
-            .content-container .content-search-and-filter .search-and-filter form {
+            .search-and-filter form {
                 justify-content: flex-end;
             }
 
-            .content-container .content-search-and-filter .search-and-filter .search-bar {
+            .search-and-filter .search-bar {
                 display: flex;
                 align-items: center;
                 padding: 5px 15px;
@@ -273,12 +276,12 @@ nav {
                 margin-right: 20px;
             }
 
-                .content-container .content-search-and-filter .search-and-filter .search-bar input[type='text'] {
+                 .search-and-filter .search-bar input[type='text'] {
                     padding-left: 10px;
                     width: 100%;
                 }
 
-            .content-container .content-search-and-filter .search-and-filter .filter .filter-btn {
+            .search-and-filter .filter .filter-btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -291,10 +294,13 @@ nav {
                 cursor: pointer;
             }
 
-                .content-container .content-search-and-filter .search-and-filter .filter .filter-btn p {
+                .search-and-filter .filter .filter-btn p {
                     padding-left: 5px;
                 }
 
+            .search-and-filter #search-icon {
+                width: fit-content;
+            }
 
 
     .content-container .bottom-blocker {
@@ -331,6 +337,11 @@ nav {
 
 
     /* Inventory */
+
+    .restock-search {
+        justify-content: flex-start;
+        margin-bottom: 10px;
+    }
 
     .content-container #inventory-table {
         width: 100%;
@@ -441,6 +452,17 @@ nav {
                 border-bottom-left-radius: 10px;
                 color: var(--text-black);
             }
+
+/* Pop Up Restock Form*/
+#restockPopup h1 {
+    margin-bottom: 20px;
+}
+
+#submitRestock {
+    margin-top: 30px;
+    padding: 5px 20px;
+}
+
 /* Pop Up Add Form */
 #addPopup h1 {
     margin-bottom: 20px;
@@ -448,7 +470,7 @@ nav {
 
 #submitAdd {
     margin-top: 30px;
-    width: 120px;
+    padding: 5px 20px;
 }
 
 
@@ -465,7 +487,7 @@ nav {
 
 #submitEdit {
     margin-top: 30px;
-    width: 120px;
+    padding: 5px 20px;
 }
 
 
@@ -613,8 +635,6 @@ nav {
 
 /* Customer */
 .add-customer {
-    display: flex;
-    justify-content: flex-end;
     margin-top: -60px;
 }
 
@@ -725,11 +745,28 @@ nav {
         color: var(--dark-orange);
     }
 
-.total-revenue {
+.revenue-and-profit {
+    display: flex;
+}
+    .revenue-and-profit p {
+        font-weight: 500;
+    }
+
+    .revenue-and-profit .total-revenue {
+        display: inline-block;
+        margin: 20px 20px 20px;
+    }
+
+        .revenue-and-profit .total-revenue h1 {
+            color: var(--dark-orange);
+        }
+
+.total-profit {
+    display: inline-block;
     margin: 20px 20px 20px;
 }
 
-    .total-revenue h1 {
+    .total-profit h1 {
         color: var(--dark-orange);
     }
 
@@ -738,6 +775,10 @@ nav {
     /* justify-content: space-between; */
     width: 100%;
 }
+
+    .report-statistic p {
+        font-weight: 500;
+    }
 
     .report-statistic svg {
         stroke: var(--dark-orange);
@@ -949,12 +990,13 @@ nav {
             width: 100%;
         }
 
+        .popupCardFormContainer .form-row:nth-child(3),
         .popupCardFormContainer .form-row:nth-child(4),
         .popupCardFormContainer .form-row:nth-child(5) {
             justify-content: flex-end;
         }
 
-        .popupCardFormContainer .form-row label {
+        .popupCardFormContainer label {
             font-size: 18px;
             font-weight: 500;
             width: 100%;
@@ -970,6 +1012,17 @@ nav {
             padding: 0 10px;
             margin-bottom: 10px;
         }
+
+        .popupCardFormContainer input[type="number"] {
+            display: block;
+            width: 100px;
+            height: 36px;
+            background-color: var(--bg-gray);
+            border: 0.5px solid var(--border-gray);
+            border-radius: 2px;
+            padding-left: 10px;
+        }
+        
 
 .shake {
     animation: shake 0.3s;
