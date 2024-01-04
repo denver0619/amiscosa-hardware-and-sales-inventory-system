@@ -13,7 +13,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Dashboard()
         {
             return View();
         }

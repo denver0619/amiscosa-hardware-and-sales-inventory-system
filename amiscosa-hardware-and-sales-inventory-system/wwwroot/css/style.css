@@ -333,74 +333,228 @@ nav {
             border-bottom: 0.5px solid var(--border-gray);
         }
 
+/* Dashboard */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+}
 
-
-
-    /* Inventory */
-
-    .restock-search {
-        justify-content: flex-start;
-        margin-bottom: 10px;
+    .dashboard-container .revenue {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 1;
+        grid-row-end: 2;
     }
 
-    .content-container #inventory-table {
-        width: 100%;
+    .dashboard-container .profit {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+    }
+
+    .dashboard-container .payment-history {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 4;
+    }
+
+
+        .dashboard-container .payment-history #payment-history-table {
+            margin: 20px auto;
+            width: 100%;
+        }
+
+            .dashboard-container .payment-history #payment-history-table tr {
+                border: none; /* remove inital borders */
+                border-top: 0.5px solid var(--border-gray);
+                border-bottom: 0.5px solid var(--border-gray);
+                height: 60px;
+            }
+
+                .dashboard-container .payment-history #payment-history-table tr td:nth-child(2) {
+                    color: var(--text-gray);
+                }
+
+
+    .dashboard-container .notification-panel {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 1;
+        grid-row-end: 3;
+        display: flex;
+        flex-direction: column;
         position: relative;
     }
 
-        .content-container #inventory-table thead {
-            height: 60px;
-            position: sticky;
-            top: 65px;
-            z-index: 1;
-            background-color: var(--bg-white);
+        .dashboard-container .notification-panel .see-all-btn {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            color: var(--text-gray);
+            font-size: 14px;
+            font-weight: 500px;
         }
 
-            .content-container #inventory-table thead th {
-                text-align: left;
-                padding: 20px 10px;
-            }
-
-                .content-container #inventory-table thead th:last-child {
-                    text-align: center;
-                }
-
-        .content-container #inventory-table tr {
-            height: 60px;
-            border-bottom: 0.5px solid var(--border-gray);
+        .dashboard-container .notification-panel div.dashboard-table-container {
+            flex: 1;
         }
 
-            .content-container #inventory-table tr td:nth-child(2) {
-                width: 260px;
+        .dashboard-container .notification-panel #notification-panel-table {
+            margin: 20px auto;
+            width: 100%;
+        }
+
+            .dashboard-container .notification-panel #notification-panel-table tr {
+                border: none; /* remove inital borders */
+                border-top: 0.5px solid var(--border-gray);
+                border-bottom: 0.5px solid var(--border-gray);
+                height: 60px;
             }
 
-            .content-container #inventory-table tr td:last-child {
+            .dashboard-container .notification-panel #notification-panel-table tr {
+                font-weight: 500;
+            }
+
+            .dashboard-container .notification-panel #notification-panel-table .red-text {
+                color: var(--warning);
+            }
+
+
+    .dashboard-container .daily-transaction {
+        grid-column-start: 3;
+        grid-column-end: 4;
+        grid-row-start: 3;
+        grid-row-end: 4;
+    }
+
+    .dashboard-container h1 {
+        color: var(--dark-orange);
+    }
+
+    .dashboard-container p.dashboard-title {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .dashboard-container .revenue,
+    .dashboard-container .profit,
+    .dashboard-container .daily-transaction,
+    .dashboard-container .payment-history {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+        .dashboard-container .revenue h1,
+        .dashboard-container .profit h1,
+        .dashboard-container .daily-transaction h1 {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            color: var(--dark-orange);
+        }
+
+    .dashboard-container .dashboard-table-container {
+        height: 35vh;
+        overflow: auto;
+        margin-top: 20px;
+    }
+
+        .dashboard-container .dashboard-table-container::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .dashboard-container .dashboard-table-container::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .dashboard-container .dashboard-table-container::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+
+
+.rounded-container {
+    border-radius: 20px;
+    border: 1px solid var(--border-gray);
+    background: #FFF;
+    padding: 40px;
+}
+
+
+/* Inventory */
+
+.restock-search {
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
+.content-container #inventory-table {
+    width: 100%;
+    position: relative;
+}
+
+    .content-container #inventory-table thead {
+        height: 60px;
+        position: sticky;
+        top: 65px;
+        z-index: 1;
+        background-color: var(--bg-white);
+    }
+
+        .content-container #inventory-table thead th {
+            text-align: left;
+            padding: 20px 10px;
+        }
+
+            .content-container #inventory-table thead th:last-child {
                 text-align: center;
             }
 
+    .content-container #inventory-table tr {
+        height: 60px;
+        border-bottom: 0.5px solid var(--border-gray);
+    }
 
-            .content-container #inventory-table tr td button.edit-product {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                height: 24px;
-                width: 24px;
-                border-radius: 5px;
-                background: #1885F2;
-                border: none;
-                cursor: pointer;
-            }
+        .content-container #inventory-table tr td:nth-child(2) {
+            width: 260px;
+        }
 
-            .content-container #inventory-table tr td button.del-product {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                height: 24px;
-                width: 24px;
-                border-radius: 5px;
-                background: #E60B2F;
-                cursor: pointer;
-            }
+        .content-container #inventory-table tr td:last-child {
+            text-align: center;
+        }
+
+
+        .content-container #inventory-table tr td button.edit-product {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #1885F2;
+            border: none;
+            cursor: pointer;
+        }
+
+        .content-container #inventory-table tr td button.del-product {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #E60B2F;
+            cursor: pointer;
+        }
 
             
 
@@ -747,9 +901,15 @@ nav {
 
 .revenue-and-profit {
     display: flex;
+    margin-bottom: 20px;
 }
     .revenue-and-profit p {
         font-weight: 500;
+    }
+
+    .report-statistic div {
+        min-width: 280px;
+        padding: 0 20px;
     }
 
     .revenue-and-profit .total-revenue {
@@ -759,22 +919,26 @@ nav {
 
         .revenue-and-profit .total-revenue h1 {
             color: var(--dark-orange);
+            font-size: 42px;
         }
 
-.total-profit {
-    display: inline-block;
-    margin: 20px 20px 20px;
-}
-
-    .total-profit h1 {
-        color: var(--dark-orange);
+    .revenue-and-profit .total-profit {
+        display: inline-block;
+        margin: 20px 20px 20px;
     }
+
+        .revenue-and-profit .total-profit h1 {
+            color: var(--dark-orange);
+            font-size: 42px;
+        }
 
 .report-statistic {
     display: flex;
     /* justify-content: space-between; */
     width: 100%;
 }
+
+
 
     .report-statistic p {
         font-weight: 500;
@@ -869,34 +1033,34 @@ nav {
     }
 
 /* Report */
-#report-history-table {
+#alert-history-table {
     margin: 40px auto;
     width: 95%;
 }
 
-    #report-history-table tr {
+    #alert-history-table tr {
         border: none; /* remove inital borders */
         border-top: 0.5px solid var(--border-gray);
         border-bottom: 0.5px solid var(--border-gray);
     }
 
-        #report-history-table tr td {
+        #alert-history-table tr td {
             display: flex;
             min-height: 100px;
         }
 
-            #report-history-table tr td .red-text {
+            #alert-history-table tr td .red-text {
                 color: var(--warning);
             }
 
-            #report-history-table tr td .alert-icon {
+            #alert-history-table tr td .alert-icon {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 width: 100px;
             }
 
-            #report-history-table tr td .alert-text {
+            #alert-history-table tr td .alert-text {
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
