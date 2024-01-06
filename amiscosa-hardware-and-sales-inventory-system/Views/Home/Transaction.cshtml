@@ -89,12 +89,12 @@
                 <table id="product-listing">
                     <thead>
                         <tr>
-                            <th>Product ID</td>
-                            <th>Product Name</td>
-                            <th>Quantity</td>
-                            <th>Unit Price</td>
-                            <th>Total Price</td>
-                            <th>Action</td>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -102,24 +102,26 @@
                             <td>0001</td>
                             <td>Hammer</td>
                             <td>
-                                <form action="">
-                                    <input type="number" name="" id="" min="1" value="2">
-                                </form>
+                                <div class="custom-number-input">
+                                    <form action="">
+                                        <button class="decrement">-</button>
+                                        <input type="number" min="1" value="1">
+                                        <button class="increment">+</button>
+                                    </form>
+                                </div>
+                                
                             </td>
                             <td>300.00</td>
-                            <td>600.00</td>
+                            <td>300.00</td>
                             <td>
                                 <button class="del-listing">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                        <g clip-path="url(#clip0_11_184)">
-                                            <path d="M1 3.5H13" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M2.5 3.5H11.5V12.5C11.5 12.7652 11.3946 13.0196 11.2071 13.2071C11.0196 13.3946 10.7652 13.5 10.5 13.5H3.5C3.23478 13.5 2.98043 13.3946 2.79289 13.2071C2.60536 13.0196 2.5 12.7652 2.5 12.5V3.5Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M4.5 3.5V3C4.5 2.33696 4.76339 1.70107 5.23223 1.23223C5.70107 0.763392 6.33696 0.5 7 0.5C7.66304 0.5 8.29893 0.763392 8.76777 1.23223C9.23661 1.70107 9.5 2.33696 9.5 3V3.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M5.5 6.50146V10.503" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M8.5 6.50146V10.503" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
+                                        <g clip-path="url(#clip0_227_704)">
+                                            <path d="M7 13.5C10.5899 13.5 13.5 10.5899 13.5 7C13.5 3.41015 10.5899 0.5 7 0.5C3.41015 0.5 0.5 3.41015 0.5 7C0.5 10.5899 3.41015 13.5 7 13.5Z" stroke="#E60B2F" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M4 7H10" stroke="#E60B2F" stroke-linecap="round" stroke-linejoin="round" />
                                         </g>
                                         <defs>
-                                            <clipPath id="clip0_11_184">
+                                            <clipPath id="clip0_227_704">
                                                 <rect width="14" height="14" fill="white" />
                                             </clipPath>
                                         </defs>
@@ -140,3 +142,8 @@
 
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/transaction.js"></script>
+}
+

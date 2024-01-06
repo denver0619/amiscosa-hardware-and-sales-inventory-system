@@ -3,8 +3,8 @@
     {
         string isActive = "";
 
-        if (Context.Request.RouteValues["controller"].ToString() == controller &&
-            Context.Request.RouteValues["action"].ToString() == action)
+        if (Context.Request.RouteValues["controller"]!.ToString() == controller &&
+            Context.Request.RouteValues["action"]!.ToString() == action)
         {
             isActive = "current";
         }
@@ -199,7 +199,7 @@
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                <p>Logout</p>
+                                Logout
                             </span>
                         </a>
                     </li>
@@ -246,7 +246,7 @@
                             </clipPath>
                         </defs>
                     </svg>
-                    <p>Jaeia Apad</p>
+                    Jaeia Apad
                 </span>
             </div>
         </div>
