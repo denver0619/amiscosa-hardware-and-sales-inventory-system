@@ -1,6 +1,8 @@
-using amiscosa_hardware_and_sales_inventory_system.Models;
+using amiscosa_hardware_and_sales_inventory_system.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
+using System.Text.Json;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 {
@@ -20,8 +22,20 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult Inventory()
         {
-            return View();
+            InventoryService inventoryService = new InventoryService();
+            /*String JsonString = JsonSerializer.Serialize(inventoryService.Model);
+            Debug.WriteLine(JsonString);*/
+            InventoryModel inventoryModel = inventoryService.Model;
+            inventoryService.Dispose();
+
+            return View(inventoryModel);
         }
+
+        public IActionResult InventoryPopulate()
+        {
+            return RedirectToAction("Index");
+        }
+
         public IActionResult Transaction()
         {
             return View();

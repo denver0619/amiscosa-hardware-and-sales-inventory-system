@@ -7,7 +7,7 @@
             <img src="~/images/storename.png" alt="">
         </div>
         <div class="choice-btn">
-            <form asp-action="LoginForm" asp-controller="Account" method="post" class="loginForm">
+            <form asp-action="LoginFormSubmit" asp-controller="Account" method="post" class="loginForm">
                 @if (ViewData["isManager"] != null && (bool)ViewData["isManager"] == true)
                 {
                     // <h1>Manager</h1>
