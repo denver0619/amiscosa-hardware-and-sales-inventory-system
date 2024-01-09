@@ -1,4 +1,4 @@
-namespace amiscosa_hardware_and_sales_inventory_system.Models
+namespace amiscosa_hardware_and_sales_inventory_system.Domain.Models
 {
     public class ErrorViewModel
     {
