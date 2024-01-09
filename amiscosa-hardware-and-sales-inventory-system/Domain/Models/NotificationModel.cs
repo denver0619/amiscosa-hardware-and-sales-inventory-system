@@ -2,8 +2,8 @@
 
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Models
 {
-    public class InventoryModel
+    public class NotificationModel
     {
-        public List<Product>? ProductList { get; set; }
+        public List<Notification>? NotificationList { get; set; }
     }
 }

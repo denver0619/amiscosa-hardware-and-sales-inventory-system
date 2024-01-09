@@ -4,26 +4,25 @@ using amiscosa_hardware_and_sales_inventory_system.Domain.Repositories;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Services
 {
-    public class ProductService : IDisposable
+    public class InventoryService : IDisposable
     {
-        private InventoryModel inventoryModel;
         private ProductRepository productRepository;
 
-        public ProductService()
+        public InventoryService()
         {
             productRepository = new ProductRepository();
-            inventoryModel = new InventoryModel(GetProductList());
+            Model = new InventoryModel();
+            Model = GetAllProductList();
         }
 
-        public InventoryModel GetModel()
+        public InventoryModel Model { get; set; }
+
+        public InventoryModel GetAllProductList()
         {
-            return inventoryModel;
+            Model.ProductList = productRepository.GetAllProducts();
+            return Model;
         }
 
-        public List<Product> GetProductList()
-        {
-            return productRepository.GetAllProducts();
-        }
 
         public void Dispose()
         {
