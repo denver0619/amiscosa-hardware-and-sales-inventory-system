@@ -46,5 +46,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
         public bool IsAvailable { get; set; }
         [Required]
         public int UnitCost { get; set; }
+        public string? ManufacturerName { get; set; }
     }
 }
