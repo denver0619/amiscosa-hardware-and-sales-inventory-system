@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Analytics";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-title">
+    <h1>Dashboard</h1>
+    <p>Main Menu | Dashboard</p>
+</div>
+
+<div class="dashboard-container">
+    <div class="revenue rounded-container">
+        <p class="dashboard-title">Daily Revenue</p>
+        <h1>₱ 99999.99</h1>
+    </div>
+    <div class="profit rounded-container">
+        <p class="dashboard-title">Daily Profit</p>
+        <h1>₱ 9999.99</h1>
+    </div>
+
+    <div class="payment-history rounded-container">
+        <p class="dashboard-title">Payment History</p>
+        <div class="dashboard-table-container">
+            <table id="payment-history-table">
+                <tr>
+                    <td>Hazee Marie Joy Batumbakal D. Ilao</td>
+                    <td>02 January 2024</td>
+                    <td>₱ 1200.00</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="notification-panel rounded-container">
+        <div class="see-all-btn">
+            <a asp-area="" asp-controller="Home" asp-action="AlertHistory">See all</a>
+        </div>
+        <p class="dashboard-title">Notifications</p>
+        <div class="dashboard-table-container">
+            <table id="notification-panel-table">
+                <tr>
+                    <td><span class="red-text">Low Stock Alert</span> - Paints</td>
+                </tr>
+                <!-- <tr>
+                    <td><span class="red-text">Low Stock Alert</span> - Paints</td>
+                </tr>
+                <tr>
+                    <td><span class="red-text">Low Stock Alert</span> - Paints</td>
+                </tr>
+                <tr>
+                    <td><span class="red-text">Low Stock Alert</span> - Paints</td>
+                </tr>
+                <tr>
+                    <td><span class="red-text">Low Stock Alert</span> - Paints</td>
+                </tr> -->
+            </table>
+        </div>
+
+    </div>
+    <div class="daily-transaction rounded-container">
+        <p class="dashboard-title">Daily Transactions</p>
+        <h1>99</h1>
+    </div>
+</div>
+

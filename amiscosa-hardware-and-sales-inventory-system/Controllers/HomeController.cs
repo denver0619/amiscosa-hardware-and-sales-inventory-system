@@ -13,14 +13,41 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Dashboard()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Inventory()
         {
             return View();
+        }
+        public IActionResult Transaction()
+        {
+            return View();
+        }
+
+        public IActionResult TransactionHistory()
+        {
+            return View();
+        }
+
+        public IActionResult Customer()
+        {
+            return View();
+        }
+
+        public IActionResult AlertHistory()
+        {
+            return View();
+        }
+        public IActionResult Report()
+        {
+            return View();
+        }
+        public IActionResult Logout()
+        {
+            return RedirectToAction("Login", "Account");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
