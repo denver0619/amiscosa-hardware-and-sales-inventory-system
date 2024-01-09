@@ -7,10 +7,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
     public class InventoryService : IDisposable
     {
         private ProductRepository productRepository;
+        private ManufacturerRepository manufacturerRepository; 
 
         public InventoryService()
         {
             productRepository = new ProductRepository();
+            manufacturerRepository = new ManufacturerRepository();
             Model = new InventoryModel();
             Model = GetAllProductList();
         }
@@ -20,7 +22,26 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         public InventoryModel GetAllProductList()
         {
             Model.ProductList = productRepository.GetAllProducts();
+            foreach (Product product in Model.ProductList)
+            {
+                product.ManufacturerName = manufacturerRepository.GetManufacturerByID(product.ManufacturerID!).ManufacturerID;
+            }
             return Model;
+        }
+
+        public void AddProduct(Product product)
+        {
+            productRepository.AddProduct(product);
+        }
+
+        public void EditProduct(Product product)
+        {
+            productRepository.UpdateProduct(product);
+        }
+
+        public void RemoveProduct(Product product)
+        {
+            productRepository.DeleteProduct(product);
         }
 
 
