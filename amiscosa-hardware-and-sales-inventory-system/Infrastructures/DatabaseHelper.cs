@@ -179,11 +179,18 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
                     List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
                     foreach (PropertyInfo property in properties)
                     {
-                        if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
                         object? value = property.GetValue(entity);
+                        if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
                         if (value != null)
                         {
-                            currentEntityValue.Add(value.ToString()!);
+                            if (property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID")))
+                            {
+                                currentEntityValue.Add("\'"+value.ToString()!+ "\'");
+                            }
+                            else
+                            {
+                                currentEntityValue.Add(value.ToString()!);
+                            }
                         }
                         else
                         {
