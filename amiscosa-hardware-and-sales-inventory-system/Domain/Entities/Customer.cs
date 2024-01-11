@@ -4,6 +4,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
 {
     public class Customer : ICustomer
     {
+        public Customer() { }
         public Customer(string customerID, string firstName, string middleName, string lastName, string address, string contact)
         {
             CustomerID = customerID;
