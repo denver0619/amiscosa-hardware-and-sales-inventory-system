@@ -1,9 +1,10 @@
-﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
+﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
+using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Repositories;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Services
 {
-    public class NotificationService
+    public class NotificationService : IDisposable
     {
         private NotificationRepository notificationRepository;
         public NotificationService()
@@ -17,6 +18,16 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         {
             Model.NotificationList = notificationRepository.GetAllNotification();
             return Model;
+        }
+
+        public void AddNotification(Notification notification)
+        {
+            notificationRepository.AddNotification(notification);
+        }
+
+        public void Dispose()
+        {
+            notificationRepository.Dispose();
         }
     }
 }
