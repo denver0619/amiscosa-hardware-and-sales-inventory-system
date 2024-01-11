@@ -1,16 +1,16 @@
-﻿
+﻿document.addEventListener('DOMContentLoaded', function () {
+   
+    setupRestockForm();
+    setupAddItemForm();
+    setupEditItemForm();
+    setupDelButton();  
 
-document.addEventListener('DOMContentLoaded', function () {
+})
 
+function setupRestockForm() {
     var restockItemButton = document.querySelector('.restock-product')
-    var addItemButton = document.querySelector('.add-product');
-    var editButtons = document.querySelectorAll('.edit-product');
-
-    // RESTOCK ITEM POPUP 
     restockItemButton.addEventListener('click', function (e) {
         var restockItemPopupOverlay = document.createElement('div');
-
-        console.log(1)
 
         restockItemPopupOverlay.id = 'PopupOverlay';
         restockItemPopupOverlay.innerHTML = `
@@ -64,27 +64,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
             e.preventDefault();
 
-            isError = false;
 
             // ADD VALIDATION CHECKS
 
             // If no error submit data to server
             // TO BE CHANGED
-            if (isError == false) {
-                restockItemPopupOverlay.remove();
-            }
+
+            restockItemPopupOverlay.remove();
+
 
             // Handle exit from edit
         });
 
         document.getElementById('exitPopupCard').addEventListener('click', function () {
-
+            console.log(420)
             restockItemPopupOverlay.remove();
         });
     })
+}
 
-    // ADD ITEM POPUP
+function setupAddItemForm() {
+    var addItemButton = document.querySelector('.add-product')
+
     addItemButton.addEventListener('click', function (e) {
+
         var addItemPopupOverlay = document.createElement('div');
 
         addItemPopupOverlay.id = 'PopupOverlay';
@@ -216,14 +219,9 @@ document.addEventListener('DOMContentLoaded', function () {
             // If no error submit data to server
             // TO BE CHANGED
 
-
-            
-            
-  
-
             if (isError == false) {
-                
-                addItemForm(addedProductData);
+
+                addItemFormSendData(addedProductData);
                 addItemPopupOverlay.remove();
             }
 
@@ -233,14 +231,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Remove the edit pop-up without submitting
         document.getElementById('exitPopupCard').addEventListener('click', function () {
-            
+
             addItemPopupOverlay.remove();
         });
     });
+}
 
-    
+function setupEditItemForm() {
 
-
+    var editButtons = document.querySelectorAll('.edit-product');
     editButtons.forEach(function (editButton) {
         editButton.addEventListener('click', function (e) {
 
@@ -390,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (isError == false) {
 
                     console.log('Here')
-                    editItemForm(updatedProductData);
+                    editItemFormSendData(updatedProductData);
                     editPopupOverlay.remove();
                 }
 
@@ -405,91 +404,108 @@ document.addEventListener('DOMContentLoaded', function () {
         })
 
     })
+}
 
-    /*function addItemForm(addedProductData) {
-        var xhr = new XMLHttpRequest();
+function setupDelButton() {
+    var delButtons = document.querySelectorAll('.del-product');
+    delButtons.forEach(function (delButton) {
+        delButton.addEventListener('click', function (e) {
+            var row = e.target.closest('tr'); // Find the closest row (tr)
 
-        xhr.open('POST', '/Home/AddInventoryProduct', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
+            // get data
+            var productID = row.querySelectorAll('td')[0].textContent;
+            var productName = row.querySelectorAll('td')[1].textContent;
+            var productQuantity = row.querySelectorAll('td')[2].textContent;
+            var productUnitCost = row.querySelectorAll('td')[3].textContent;
+            var productUnitPrice = row.querySelectorAll('td')[4].textContent;
+            var productMeasurement = row.querySelectorAll('td')[5].textContent;
+            var productManufacturer = row.querySelectorAll('td')[6].textContent;
 
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    if (response.success) {
-                        console.log('Product added successfully:', response.message);
-                        // Optionally, perform actions after successful product addition
-                    } else {
-                        console.error('Error adding product:', response.message);
-                    }
-                } else {
-                    console.error('Error:', xhr.statusText);
-                }
-            }
-        };
+            var ProductData = {
+                ProductID: productID,
+                ProductName: productName,
+                ProductDescription: "",
+                UnitPrice: productUnitPrice,
+                Quantity: productQuantity,
+                UnitCost: productUnitCost,
+                ManufacturerID: productManufacturer,
+                Measurement: productMeasurement,
+                IsAvailable: false,
+                UnitCost: productUnitCost
+            };
 
-        xhr.onerror = function () {
-            console.error('Request failed');
-        };
-        console.log(addedProductData);
-        var data = JSON.stringify(addedProductData)
-        console.log(data);
+            delProductSendData(ProductData);
 
-        xhr.send(data);
-
-
-    }*/
-
-    function addItemForm(addedProductData) {
-        console.log(addedProductData)
-        fetch('/Home/AddInventoryProduct', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(addedProductData)
         })
-            .then(data => {
-                console.log('Product added successfully:', data);
-                location.reload();
-                // Optionally, perform actions after successful product addition
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-    }
+    })
+}
 
-    function editItemForm(editProductData) {
-        fetch('/Home/EditInventoryProduct', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(editProductData)
+function addItemFormSendData(addedProductData) {
+    console.log(addedProductData)
+    fetch('/Home/AddInventoryProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addedProductData)
+    })
+        .then(data => {
+            console.log('Product added successfully:', data);
+            location.reload();
+            // Optionally, perform actions after successful product addition
         })
-            .then(data => {
-                console.log('Product added successfully:', data);
-                location.reload();
-                // Optionally, perform actions after successful product addition
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-    }
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
 
-    // Function to apply error styles to input fields
-    function applyErrorStyles(elementId) {
-        var element = document.getElementById(elementId);
-        element.style.border = '1px solid red';
-        element.classList.add('shake'); // Adding a shake class for animation
-        setTimeout(function () {
-            element.classList.remove('shake'); // Remove the shake class after the animation ends
-        }, 500);
-    }
+function editItemFormSendData(editProductData) {
+    fetch('/Home/EditInventoryProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editProductData)
+    })
+        .then(data => {
+            console.log('Product added successfully:', data);
+            location.reload();
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
 
-    function resetErrorStyles(elementId) {
-        var element = document.getElementById(elementId);
-        element.style.border = '1px solid #ccc'; // Reset the border
-    }
+function delProductSendData(productData) {
+    fetch('/Home/DeleteProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productData)
+    })
+        .then(data => {
+            console.log('Product added successfully:', data);
+            location.reload();
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
 
-})
+// Function to apply error styles to input fields
+function applyErrorStyles(elementId) {
+    var element = document.getElementById(elementId);
+    element.style.border = '1px solid red';
+    element.classList.add('shake'); // Adding a shake class for animation
+    setTimeout(function () {
+        element.classList.remove('shake'); // Remove the shake class after the animation ends
+    }, 500);
+}
+
+function resetErrorStyles(elementId) {
+    var element = document.getElementById(elementId);
+    element.style.border = '1px solid #ccc'; // Reset the border
+}

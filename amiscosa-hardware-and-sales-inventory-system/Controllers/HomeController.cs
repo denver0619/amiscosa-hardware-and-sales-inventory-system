@@ -26,8 +26,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         public IActionResult Inventory()
         {
             InventoryService inventoryService = new InventoryService();
-            /*String JsonString = JsonSerializer.Serialize(inventoryService.Model);
-            Debug.WriteLine(JsonString);*/
             InventoryModel inventoryModel = inventoryService.Model;
             inventoryService.Dispose();
 
@@ -37,8 +35,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         [HttpPost]
         public IActionResult AddInventoryProduct([FromBody] Product productData)
         {
-            string serializedProduct = JsonSerializer.Serialize(productData);
-            Debug.WriteLine(serializedProduct);
+
             InventoryService inventoryService = new InventoryService();
             inventoryService.AddProduct(productData);
             inventoryService.Dispose();
@@ -50,7 +47,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         public IActionResult EditInventoryProduct([FromBody] Product productData)
         {
 
-            string serializedProduct = JsonSerializer.Serialize(productData);
             InventoryService inventoryService = new InventoryService();
             inventoryService.EditProduct(productData);
             inventoryService.Dispose();
@@ -59,9 +55,21 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return Ok("Success");
         }
 
+        [HttpPost]
+        public IActionResult DeleteProduct([FromBody] Product productData)
+        {
+
+            InventoryService inventoryService = new InventoryService();
+            inventoryService.RemoveProduct(productData);
+            inventoryService.Dispose();
+
+
+            return Ok("Success");
+        }
+
         public IActionResult Transaction()
         {
-            return View("~/Home/Inventory");
+            return View();
         }
 
         public IActionResult TransactionHistory()
