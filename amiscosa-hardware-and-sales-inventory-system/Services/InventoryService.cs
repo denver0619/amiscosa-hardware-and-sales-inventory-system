@@ -1,4 +1,5 @@
-﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
+﻿using amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects;
+using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Repositories;
 
@@ -7,10 +8,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
     public class InventoryService : IDisposable
     {
         private ProductRepository productRepository;
+        private ManufacturerRepository manufacturerRepository;
 
         public InventoryService()
         {
             productRepository = new ProductRepository();
+            manufacturerRepository = new ManufacturerRepository();
             Model = new InventoryModel();
             Model = GetAllProductList();
         }
@@ -19,7 +22,15 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
 
         public InventoryModel GetAllProductList()
         {
-            Model.ProductList = productRepository.GetAllProducts();
+            List<Product> products = productRepository.GetAllProducts();
+            List<ProductDataTransferObject> productData = new List<ProductDataTransferObject>();
+            foreach (Product product in products)
+            {
+                ProductDataTransferObject productDataTransferObject = new ProductDataTransferObject(product);
+                productDataTransferObject.Manufacturer = manufacturerRepository.GetManufacturerByID(product.ManufacturerID!);
+                productData.Add(productDataTransferObject);
+            }
+            Model.ProductList = productData;
             return Model;
         }
 

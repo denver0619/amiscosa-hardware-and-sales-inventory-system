@@ -26,10 +26,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         {
             customerRepository.AddCustomer(customer);
         }
-        public void RemoveCustomer(Customer customer)
-        {
-            customerRepository.DeleteCustomer(customer);
-        }
         public void UpdateCustomer(Customer customer)
         {
             customerRepository.UpdateCustomer(customer);
