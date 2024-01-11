@@ -12,6 +12,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         {
             customerRepository = new CustomerRepository();
             Model = new CustomerModel();
+            Model = GetAllCustomerList();
         }
 
         public CustomerModel Model { get; set; }
