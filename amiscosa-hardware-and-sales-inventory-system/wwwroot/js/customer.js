@@ -286,8 +286,9 @@ function addCustomerFormSendData(addedCustomerData) {
         body: JSON.stringify(addedCustomerData)
     })
         .then(data => {
-            console.log('Product added successfully:', data);
             location.reload();
+            console.log('Product added successfully:', data);
+            
             // Optionally, perform actions after successful product addition
         })
         .catch(error => {

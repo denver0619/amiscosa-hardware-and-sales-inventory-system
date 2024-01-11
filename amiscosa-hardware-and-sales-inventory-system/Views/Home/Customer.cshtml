@@ -85,16 +85,16 @@
                 </tr>
             </thead>
             <tbody>
-                @if(Model.CustomerList != null)
-                {
-                    foreach (amiscosa_hardware_and_sales_inventory_system.Domain.Entities.Customer customer in Model.CustomerList!)
+                @* @if(Model.CustomerList != null)
+                { *@
+                    @foreach (amiscosa_hardware_and_sales_inventory_system.Domain.Entities.Customer customer in Model.CustomerList!)
                     {
 
                         <tr>
                             <td>@customer.CustomerID</td>
-                            <td>@customer.CustomerFirstName</td>
-                            <td>@customer.CustomerMiddleName</td>
-                            <td>@customer.CustomerLastName</td>
+                            <td>@customer.CustomerFName</td>
+                            <td>@customer.CustomerMName</td>
+                            <td>@customer.CustomerLName</td>
                             <td>@customer.CustomerAddress</td>
                             <td>@customer.CustomerContact</td>
                             <td>
@@ -129,12 +129,12 @@
                             </td>
                         </tr>
                     }
-                }else
+                @* }else
                 {
                     <tr >
                         <td colspan="7">There are currently no customers</td>
                     </tr>
-                }
+                } *@
 
                 
                 
