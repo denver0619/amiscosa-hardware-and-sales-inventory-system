@@ -22,7 +22,15 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
 
         public InventoryModel GetAllProductList()
         {
-            Model.ProductList = productRepository.GetAllProducts();
+            List<Product> products = productRepository.GetAllProducts();
+            List<ProductDataTransferObject> productData = new List<ProductDataTransferObject>();
+            foreach (Product product in products)
+            {
+                ProductDataTransferObject productDataTransferObject = new ProductDataTransferObject(product);
+                productDataTransferObject.Manufacturer = manufacturerRepository.GetManufacturerByID(product.ManufacturerID!);
+                productData.Add(productDataTransferObject);
+            }
+            Model.ProductList = productData;
             return Model;
         }
 

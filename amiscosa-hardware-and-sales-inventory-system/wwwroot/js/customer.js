@@ -1,7 +1,7 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
 
-    
-    // Function to apply error styles to input fields
+    setupAddCustomerForm();
+    setupEditCustomerForm();
     
 })
 
@@ -105,11 +105,12 @@ function setupAddCustomerForm() {
 
             // Create an object with the added product data
             var addedCustomerData = {
-                firstName: firstName,
-                middleName: middleName,
-                lastName: lastName,
-                address: address,
-                contact: contact
+                CustomerID: "",
+                CustomerFName: firstName,
+                CustomerMName: middleName,
+                CustomerLName: lastName,
+                CustomerAddress: address,
+                CustomerContact: contact
             };
 
 
@@ -277,7 +278,7 @@ function setupEditCustomerForm() {
 }
 
 function addCustomerFormSendData(addedCustomerData) {
-    fetch('/Home/AddInventoryProduct', {
+    fetch('/Home/AddCustomer', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

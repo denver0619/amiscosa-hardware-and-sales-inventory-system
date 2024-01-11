@@ -153,7 +153,7 @@
                         </button>
                     </td>
                 </tr> *@
-                @foreach(amiscosa_hardware_and_sales_inventory_system.Domain.Entities.Product product in Model.ProductList!)
+                @foreach(amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects.ProductDataTransferObject product in Model.ProductList!)
                 {
                     <tr>
                         <td>@product.ProductID</td>
@@ -162,7 +162,7 @@
                         <td>@product.UnitCost</td>
                         <td>@product.UnitPrice</td>
                         <td>@product.Measurement</td>
-                        <td>@product.ManufacturerID</td>
+                        <td>@product.Manufacturer!.ManufacturerName</td>
                         <td>@product.IsAvailable</td>
                         
                         <td>
