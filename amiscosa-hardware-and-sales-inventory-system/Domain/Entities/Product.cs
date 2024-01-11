@@ -5,6 +5,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
 {
     public class Product : IProduct
     {
+
+        public Product() { }
         public Product(string productID, string productName, string productDescription, int unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, int unitCost)
         {
             ProductID = productID;
@@ -46,6 +48,5 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
         public bool IsAvailable { get; set; }
         [Required]
         public int UnitCost { get; set; }
-        public string? ManufacturerName { get; set; }
     }
 }

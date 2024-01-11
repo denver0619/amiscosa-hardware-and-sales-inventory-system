@@ -22,10 +22,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         public InventoryModel GetAllProductList()
         {
             Model.ProductList = productRepository.GetAllProducts();
-            foreach (Product product in Model.ProductList)
+            /*foreach (Product product in Model.ProductList)
             {
-                product.ManufacturerName = manufacturerRepository.GetManufacturerByID(product.ManufacturerID!).ManufacturerID;
-            }
+                product.ManufacturerName = manufacturerRepository.GetManufacturerByID(product.ManufacturerID!).ManufacturerName;
+            }*/
             return Model;
         }
 

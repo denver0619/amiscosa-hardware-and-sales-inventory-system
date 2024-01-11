@@ -1,6 +1,11 @@
-using amiscosa_hardware_and_sales_inventory_system.Models;
+using amiscosa_hardware_and_sales_inventory_system.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
+using System.Text.Json;
+using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
+
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 {
@@ -20,8 +25,48 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult Inventory()
         {
-            return View();
+            InventoryService inventoryService = new InventoryService();
+            InventoryModel inventoryModel = inventoryService.Model;
+            inventoryService.Dispose();
+
+            return View(inventoryModel);
         }
+
+        [HttpPost]
+        public IActionResult AddInventoryProduct([FromBody] Product productData)
+        {
+
+            InventoryService inventoryService = new InventoryService();
+            inventoryService.AddProduct(productData);
+            inventoryService.Dispose();
+
+            return Ok("Success");
+        }
+
+        [HttpPost]
+        public IActionResult EditInventoryProduct([FromBody] Product productData)
+        {
+
+            InventoryService inventoryService = new InventoryService();
+            inventoryService.EditProduct(productData);
+            inventoryService.Dispose();
+
+
+            return Ok("Success");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteProduct([FromBody] Product productData)
+        {
+
+            InventoryService inventoryService = new InventoryService();
+            inventoryService.RemoveProduct(productData);
+            inventoryService.Dispose();
+
+
+            return Ok("Success");
+        }
+
         public IActionResult Transaction()
         {
             return View();

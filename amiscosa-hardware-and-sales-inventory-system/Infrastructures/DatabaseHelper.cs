@@ -12,7 +12,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 
         public DatabaseHelper()
         {
-            Configuration.MySQL.ConnectionString = "server=26.92.41.207;user=root;database=amiscosadatabase;password="; //Temporary
+            Configuration.MySQL.ConnectionString = "server=127.0.0.1;port=3307;user=root;database=amiscosadatabase;password="; //Temporary
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
         }
@@ -22,9 +22,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
         {
             _connection.Open();
             string querytype = "INSERT INTO ";
-            string fields = this.GetInsertFields(entity);
+            string fields = this.GetInsertFields(tableName, entity);
             string recordValues = " VALUES ";
-            List<string> values = this.GetInsertValues(new List<Entity> { entity });
+            List<string> values = this.GetInsertValues(tableName, new List<Entity> { entity });
             string terminator = ";";
             foreach (string value in values)
             {
@@ -105,7 +105,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
             foreach (PropertyInfo property in properties)
             {
-                output.Add(property.Name + " = " + property.GetValue(entity));
+                if (property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID")))
+                {
+                    output.Add(property.Name + " = \'" + property.GetValue(entity) + "\'");
+                }
+                else
+                {
+                    output.Add(property.Name + " = " + property.GetValue(entity));
+                }
             }
             return String.Join(",", output);
         }
@@ -117,7 +124,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
             foreach (PropertyInfo property in properties)
             {
-                if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 1)))
+                if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2)))
                 {
                     output = property.Name + " = " + property.GetValue(entity);
                 }
@@ -125,32 +132,80 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return output;
         }
 
-        public string GetInsertFields(Entity entity)
+        public string GetInsertFields(string tableName, Entity entity)
         {
             Type type = entity!.GetType();
             List<string> fields = new List<string>(); 
             List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
             foreach (PropertyInfo property in properties)
             {
-                if (property.Name.Contains("ID")) continue;
+                if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
                 fields.Add(property.Name);
             }
             return "(" + String.Join(",", fields) + ")";
         }
 
-        public List<string> GetInsertValues(List<Entity> entities)
+        /*public List<string> GetInsertValues(List<Entity> entities)
         {
             List<string> values = new List<string>();
-            foreach (Entity entity in entities)
+            foreach (Entity? entity in entities)
             {
-                Type type = entity!.GetType();
-                List<string> currentEntityValue = new List<string>();
-                List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
-                foreach (PropertyInfo property in properties)
+                if (entity != null)
                 {
-                    currentEntityValue.Add(property!.GetValue(entity)!.ToString()!);
+                    Type type = entity.GetType();
+                    List<string> currentEntityValue = new List<string>();
+                    List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
+                    foreach (PropertyInfo property in properties)
+                    {
+                        if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
+                        object? value = property.GetValue(entity);
+                        if (value != null)
+                        {
+                            currentEntityValue.Add(value.ToString()!);
+                        }
+                        else
+                        {
+                            currentEntityValue.Add("NULL");
+                        }
+                    }
+                    values.Add("(" + string.Join(",", currentEntityValue) + ")");
                 }
-                values.Add("(" + String.Join(",", currentEntityValue) + ")");
+            }
+            return values;
+        }*/
+
+        public List<string> GetInsertValues(String tableName, List<Entity> entities)
+        {
+            List<string> values = new List<string>();
+            foreach (Entity? entity in entities)
+            {
+                if (entity != null)
+                {
+                    Type type = entity.GetType();
+                    List<string> currentEntityValue = new List<string>();
+                    List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
+                    foreach (PropertyInfo property in properties)
+                    {
+                        object? value = property.GetValue(entity);
+                        if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
+                        if (value != null)
+                        {
+                            if (property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID")))
+                            {
+                                currentEntityValue.Add("\'"+value.ToString()!+ "\'");
+                            }
+                            else
+                            {
+                                currentEntityValue.Add(value.ToString()!);
+                            }
+                        }
+                        else
+                        {
+                            currentEntityValue.Add("NULL");
+                        }
+                    }
+                    values.Add("(" + string.Join(",", currentEntityValue) + ")");
+                }
             }
             return values;
         }

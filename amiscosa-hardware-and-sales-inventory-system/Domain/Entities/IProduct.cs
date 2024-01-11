@@ -11,6 +11,5 @@
         public string? Measurement { get; set; }
         public bool IsAvailable { get; set; }
         public int UnitCost { get; set; }
-        public string? ManufacturerName { get; set; }
     }
 }

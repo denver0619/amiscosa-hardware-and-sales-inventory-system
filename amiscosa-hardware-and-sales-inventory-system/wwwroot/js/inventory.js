@@ -1,14 +1,16 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
+   
+    setupRestockForm();
+    setupAddItemForm();
+    setupEditItemForm();
+    setupDelButton();  
 
+})
+
+function setupRestockForm() {
     var restockItemButton = document.querySelector('.restock-product')
-    var addItemButton = document.querySelector('.add-product');
-    var editButtons = document.querySelectorAll('.edit-product');
-
-    // RESTOCK ITEM POPUP 
     restockItemButton.addEventListener('click', function (e) {
         var restockItemPopupOverlay = document.createElement('div');
-
-        console.log(1)
 
         restockItemPopupOverlay.id = 'PopupOverlay';
         restockItemPopupOverlay.innerHTML = `
@@ -62,27 +64,30 @@
 
             e.preventDefault();
 
-            isError = false;
 
             // ADD VALIDATION CHECKS
 
             // If no error submit data to server
             // TO BE CHANGED
-            if (isError == false) {
-                restockItemPopupOverlay.remove();
-            }
+
+            restockItemPopupOverlay.remove();
+
 
             // Handle exit from edit
         });
 
         document.getElementById('exitPopupCard').addEventListener('click', function () {
-
+            console.log(420)
             restockItemPopupOverlay.remove();
         });
     })
+}
 
-    // ADD ITEM POPUP
+function setupAddItemForm() {
+    var addItemButton = document.querySelector('.add-product')
+
     addItemButton.addEventListener('click', function (e) {
+
         var addItemPopupOverlay = document.createElement('div');
 
         addItemPopupOverlay.id = 'PopupOverlay';
@@ -135,9 +140,6 @@
             </div>
         `
         document.body.append(addItemPopupOverlay);
-
-
-
 
         // Event listener for submitting added product data
         document.querySelector('#submitAdd').addEventListener('click', function (e) {
@@ -198,19 +200,28 @@
 
             // Create an object with the added product data
             var addedProductData = {
-                productName: productName,
-                productQuantity: productQuantity,
-                productUnitCost: productUnitCost,
-                productUnitPrice: productUnitPrice,
-                productMeasurement: productMeasurement,
-                productManufacturer: productManufacturer
+                ProductID: '',
+                ProductName: productName,
+                ProductDescription: "",
+                UnitPrice: productUnitPrice,
+                Quantity: productQuantity,
+                UnitCost: productUnitCost,
+                ManufacturerID: productManufacturer,
+                Measurement: productMeasurement,
+                IsAvailable: true,
+                UnitCost: productUnitCost
             };
 
+
             console.log(addedProductData);
+            console.log(JSON.stringify(addedProductData));
 
             // If no error submit data to server
             // TO BE CHANGED
+
             if (isError == false) {
+
+                addItemFormSendData(addedProductData);
                 addItemPopupOverlay.remove();
             }
 
@@ -220,12 +231,15 @@
 
         // Remove the edit pop-up without submitting
         document.getElementById('exitPopupCard').addEventListener('click', function () {
-            
+
             addItemPopupOverlay.remove();
         });
     });
+}
 
+function setupEditItemForm() {
 
+    var editButtons = document.querySelectorAll('.edit-product');
     editButtons.forEach(function (editButton) {
         editButton.addEventListener('click', function (e) {
 
@@ -303,6 +317,7 @@
 
                 // Create an object with the updated product data
 
+
                 var productName = document.getElementById('productName').value;
                 var productQuantity = parseFloat(document.getElementById('productQuantity').value);
                 var productUnitCost = parseFloat(document.getElementById('productUnitCost').value);
@@ -357,19 +372,24 @@
 
                 // Create an object with the added product data
                 var updatedProductData = {
-                    productName: productName,
-                    productQuantity: productQuantity,
-                    productUnitCost: productUnitCost,
-                    productUnitPrice: productUnitPrice,
-                    productMeasurement: productMeasurement,
-                    productManufacturer: productManufacturer
+                    ProductID: productID,
+                    ProductName: productName,
+                    ProductDescription: "",
+                    UnitPrice: productUnitPrice,
+                    Quantity: productQuantity,
+                    UnitCost: productUnitCost,
+                    ManufacturerID: productManufacturer,
+                    Measurement: productMeasurement,
+                    IsAvailable: true,
+                    UnitCost: productUnitCost
                 };
-
-                console.log(updatedProductData);
 
                 // If no error submit data to server
                 // TO BE CHANGED
                 if (isError == false) {
+
+                    console.log('Here')
+                    editItemFormSendData(updatedProductData);
                     editPopupOverlay.remove();
                 }
 
@@ -384,20 +404,108 @@
         })
 
     })
+}
 
-    // Function to apply error styles to input fields
-    function applyErrorStyles(elementId) {
-        var element = document.getElementById(elementId);
-        element.style.border = '1px solid red';
-        element.classList.add('shake'); // Adding a shake class for animation
-        setTimeout(function () {
-            element.classList.remove('shake'); // Remove the shake class after the animation ends
-        }, 500);
-    }
+function setupDelButton() {
+    var delButtons = document.querySelectorAll('.del-product');
+    delButtons.forEach(function (delButton) {
+        delButton.addEventListener('click', function (e) {
+            var row = e.target.closest('tr'); // Find the closest row (tr)
 
-    function resetErrorStyles(elementId) {
-        var element = document.getElementById(elementId);
-        element.style.border = '1px solid #ccc'; // Reset the border
-    }
+            // get data
+            var productID = row.querySelectorAll('td')[0].textContent;
+            var productName = row.querySelectorAll('td')[1].textContent;
+            var productQuantity = row.querySelectorAll('td')[2].textContent;
+            var productUnitCost = row.querySelectorAll('td')[3].textContent;
+            var productUnitPrice = row.querySelectorAll('td')[4].textContent;
+            var productMeasurement = row.querySelectorAll('td')[5].textContent;
+            var productManufacturer = row.querySelectorAll('td')[6].textContent;
 
-})
+            var ProductData = {
+                ProductID: productID,
+                ProductName: productName,
+                ProductDescription: "",
+                UnitPrice: productUnitPrice,
+                Quantity: productQuantity,
+                UnitCost: productUnitCost,
+                ManufacturerID: productManufacturer,
+                Measurement: productMeasurement,
+                IsAvailable: false,
+                UnitCost: productUnitCost
+            };
+
+            delProductSendData(ProductData);
+
+        })
+    })
+}
+
+function addItemFormSendData(addedProductData) {
+    console.log(addedProductData)
+    fetch('/Home/AddInventoryProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addedProductData)
+    })
+        .then(data => {
+            console.log('Product added successfully:', data);
+            location.reload();
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function editItemFormSendData(editProductData) {
+    fetch('/Home/EditInventoryProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(editProductData)
+    })
+        .then(data => {
+            console.log('Product added successfully:', data);
+            location.reload();
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function delProductSendData(productData) {
+    fetch('/Home/DeleteProduct', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productData)
+    })
+        .then(data => {
+            console.log('Product added successfully:', data);
+            location.reload();
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+// Function to apply error styles to input fields
+function applyErrorStyles(elementId) {
+    var element = document.getElementById(elementId);
+    element.style.border = '1px solid red';
+    element.classList.add('shake'); // Adding a shake class for animation
+    setTimeout(function () {
+        element.classList.remove('shake'); // Remove the shake class after the animation ends
+    }, 500);
+}
+
+function resetErrorStyles(elementId) {
+    var element = document.getElementById(elementId);
+    element.style.border = '1px solid #ccc'; // Reset the border
+}

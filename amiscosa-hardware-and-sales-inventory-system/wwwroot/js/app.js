@@ -1,6 +1,5 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     var logoutBtn = document.getElementById("logout-btn");
-    console.log(1)
     logoutBtn.addEventListener("click", function(e) {
         e.preventDefault();
 

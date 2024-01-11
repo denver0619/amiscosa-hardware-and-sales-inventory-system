@@ -7,6 +7,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
     /// </summary>
     public class User : IUser
     {
+        public User() { }
         public User(string userID, string firstName, string middleName, string lastName, string userName, string hash, string userRole, bool isActive = true)
         {
             UserID = userID;
