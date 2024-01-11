@@ -79,7 +79,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult Customer()
         {
-            return View();
+
+            CustomerService customerService = new CustomerService();
+            CustomerModel customerModel = customerService.Model;
+            //customerService.Dispose();
+
+            return View(customerModel);
         }
 
         public IActionResult AlertHistory()

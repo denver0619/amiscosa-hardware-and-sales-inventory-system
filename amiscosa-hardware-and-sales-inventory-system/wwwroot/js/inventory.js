@@ -441,7 +441,6 @@ function setupDelButton() {
 }
 
 function addItemFormSendData(addedProductData) {
-    console.log(addedProductData)
     fetch('/Home/AddInventoryProduct', {
         method: 'POST',
         headers: {
