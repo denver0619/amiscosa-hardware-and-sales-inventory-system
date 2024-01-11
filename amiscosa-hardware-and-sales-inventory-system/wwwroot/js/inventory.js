@@ -1,4 +1,6 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿
+
+document.addEventListener('DOMContentLoaded', function () {
 
     var restockItemButton = document.querySelector('.restock-product')
     var addItemButton = document.querySelector('.add-product');
@@ -136,24 +138,21 @@
         `
         document.body.append(addItemPopupOverlay);
 
-
-
-
         // Event listener for submitting added product data
         document.querySelector('#submitAdd').addEventListener('click', function (e) {
 
             e.preventDefault();
             // Retrieve input values
-            var productName = document.getElementById('productName').value;
+            /*var productName = document.getElementById('productName').value;
             var productQuantity = parseFloat(document.getElementById('productQuantity').value);
             var productUnitCost = parseFloat(document.getElementById('productUnitCost').value);
             var productUnitPrice = parseFloat(document.getElementById('productUnitPrice').value);
-            var productMeasurement = document.getElementById('productMeasurement').value;
-            var productManufacturer = document.getElementById('productManufacturer').value;
+            var productMeasurement = document.getElementById('productMeasurement').value;*/
+            /*var productManufacturer = document.getElementById('productManufacturer').value;*/
 
             // VALIDATION CHECKS
             // TO BE CHANGED
-            var isError = false;
+            /*var isError = false;
             if (productName === '') {
                 applyErrorStyles('productName');
                 isError = true;
@@ -187,32 +186,44 @@
                 isError = true;
             } else {
                 resetErrorStyles('productMeasurement');
-            }
+            }*/
 
-            if (productManufacturer === '') {
+            /*if (productManufacturer === '') {
                 applyErrorStyles('productManufacturer');
                 isError = true;
             } else {
                 resetErrorStyles('productManufacturer');
-            }
+            }*/
 
             // Create an object with the added product data
             var addedProductData = {
-                productName: productName,
-                productQuantity: productQuantity,
-                productUnitCost: productUnitCost,
-                productUnitPrice: productUnitPrice,
-                productMeasurement: productMeasurement,
-                productManufacturer: productManufacturer
+                ProductID: '',
+                ProductName: "Hammer",
+                ProductDescription: "try",
+                UnitPrice: 5,
+                Quantity: 100,
+                UnitCost: 12,
+                ManufacturerID: "1",
+                Measurement: "5",
+                IsAvailable: true,
+                UnitCost: 777
             };
 
+
             console.log(addedProductData);
+            console.log(JSON.stringify(addedProductData));
 
             // If no error submit data to server
             // TO BE CHANGED
-            if (isError == false) {
+
+
+            
+            addItemForm(addedProductData);
+
+            /*if (isError == false) {
+                
                 addItemPopupOverlay.remove();
-            }
+            }*/
 
             // Handle exit from edit
         });
@@ -224,6 +235,8 @@
             addItemPopupOverlay.remove();
         });
     });
+
+    
 
 
     editButtons.forEach(function (editButton) {
@@ -384,6 +397,64 @@
         })
 
     })
+
+    /*function addItemForm(addedProductData) {
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '/Home/AddInventoryProduct', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        console.log('Product added successfully:', response.message);
+                        // Optionally, perform actions after successful product addition
+                    } else {
+                        console.error('Error adding product:', response.message);
+                    }
+                } else {
+                    console.error('Error:', xhr.statusText);
+                }
+            }
+        };
+
+        xhr.onerror = function () {
+            console.error('Request failed');
+        };
+        console.log(addedProductData);
+        var data = JSON.stringify(addedProductData)
+        console.log(data);
+
+        xhr.send(data);
+
+
+    }*/
+
+    function addItemForm(addedProductData) {
+        console.log(addedProductData)
+        fetch('/Home/AddInventoryProduct', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(addedProductData)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Product added successfully:', data);
+                // Optionally, perform actions after successful product addition
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
 
     // Function to apply error styles to input fields
     function applyErrorStyles(elementId) {

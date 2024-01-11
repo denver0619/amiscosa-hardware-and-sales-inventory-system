@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
 using System.Text.Json;
+using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
+
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 {
@@ -26,14 +28,29 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             /*String JsonString = JsonSerializer.Serialize(inventoryService.Model);
             Debug.WriteLine(JsonString);*/
             InventoryModel inventoryModel = inventoryService.Model;
-            inventoryService.Dispose();
+            //inventoryService.Dispose();
 
             return View(inventoryModel);
         }
 
-        public IActionResult InventoryPopulate()
+        [HttpPost]
+        public IActionResult AddInventoryProduct([FromBody] Product productData)
         {
-            return RedirectToAction("Index");
+            /*Debug.WriteLine("asdfasdfasdfasdfas hakjahsdf");
+            Product
+            Debug.WriteLine(productData);*/
+
+            string serializedProduct = JsonSerializer.Serialize(productData);
+            Debug.WriteLine(serializedProduct);
+            InventoryService inventoryService = new InventoryService();
+            inventoryService.AddProduct(productData);
+
+            /*Debug.Write(JsonSerializer.Serialize(product));*/
+
+
+
+
+            return Ok("Data received successfully");
         }
 
         public IActionResult Transaction()
