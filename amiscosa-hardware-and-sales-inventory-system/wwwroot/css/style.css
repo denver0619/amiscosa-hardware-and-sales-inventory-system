@@ -1077,11 +1077,12 @@ nav {
         border: none; /* remove inital borders */
         border-top: 0.5px solid var(--border-gray);
         border-bottom: 0.5px solid var(--border-gray);
+        height: 100px;
     }
 
         #alert-history-table tr td {
             display: flex;
-            min-height: 100px;
+            
         }
 
             #alert-history-table tr td .red-text {
@@ -1361,4 +1362,19 @@ button {
 
 .large {
     height: 54px;
+}
+
+#no-content-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#no-content-cell {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
