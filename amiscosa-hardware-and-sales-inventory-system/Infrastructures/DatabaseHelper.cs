@@ -167,7 +167,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return values;
         }*/
 
-        public List<string> GetInsertValues(List<Entity> entities)
+        public List<string> GetInsertValues(String tableName, List<Entity> entities)
         {
             List<string> values = new List<string>();
             foreach (Entity? entity in entities)
@@ -179,6 +179,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
                     List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
                     foreach (PropertyInfo property in properties)
                     {
+                        if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
                         object? value = property.GetValue(entity);
                         if (value != null)
                         {
