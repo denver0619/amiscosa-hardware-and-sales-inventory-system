@@ -34,6 +34,21 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             return Model;
         }
 
+        public void AddProduct(Product product)
+        {
+            productRepository.AddProduct(product);
+        }
+
+        public void EditProduct(Product product)
+        {
+            productRepository.UpdateProduct(product);
+        }
+
+        public void RemoveProduct(Product product)
+        {
+            productRepository.DeleteProduct(product);
+        }
+
 
         public void Dispose()
         {

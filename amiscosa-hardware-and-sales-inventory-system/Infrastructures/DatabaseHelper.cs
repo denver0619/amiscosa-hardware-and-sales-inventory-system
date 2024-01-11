@@ -12,7 +12,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 
         public DatabaseHelper()
         {
-            Configuration.MySQL.ConnectionString = "server=26.92.41.207;user=root;database=amiscosadatabase;password="; //Temporary
+            Configuration.MySQL.ConnectionString = "server=127.0.0.1;port=3307;user=root;database=amiscosadatabase;password="; //Temporary
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
         }
@@ -145,7 +145,36 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return "(" + String.Join(",", fields) + ")";
         }
 
-        public List<string> GetInsertValues(string tableName, List<Entity> entities)
+        /*public List<string> GetInsertValues(List<Entity> entities)
+        {
+            List<string> values = new List<string>();
+            foreach (Entity? entity in entities)
+            {
+                if (entity != null)
+                {
+                    Type type = entity.GetType();
+                    List<string> currentEntityValue = new List<string>();
+                    List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
+                    foreach (PropertyInfo property in properties)
+                    {
+                        if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
+                        object? value = property.GetValue(entity);
+                        if (value != null)
+                        {
+                            currentEntityValue.Add(value.ToString()!);
+                        }
+                        else
+                        {
+                            currentEntityValue.Add("NULL");
+                        }
+                    }
+                    values.Add("(" + string.Join(",", currentEntityValue) + ")");
+                }
+            }
+            return values;
+        }*/
+
+        public List<string> GetInsertValues(String tableName, List<Entity> entities)
         {
             List<string> values = new List<string>();
             foreach (Entity? entity in entities)
