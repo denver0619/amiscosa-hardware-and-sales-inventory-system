@@ -33,9 +33,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             {
                 Customer customer = new Customer(
                 row["CustomerID"].ToString()!,
-                row["CustomerFirstName"].ToString()!,
-                row["CustomerMiddleName"].ToString()!,
-                row["CustomerLastName"].ToString()!,
+                row["CustomerFName"].ToString()!,
+                row["CustomerMName"].ToString()!,
+                row["CustomerLName"].ToString()!,
                 row["CustomerAddress"].ToString()!,
                 row["CustomerContact"].ToString()!
                 );
@@ -51,9 +51,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             DataRow row = dataTable.Rows[0];
             return new Customer(
                 row["CustomerID"].ToString()!,
-                row["CustomerFirstName"].ToString()!,
-                row["CustomerMiddleName"].ToString()!,
-                row["CustomerLastName"].ToString()!,
+                row["CustomerFName"].ToString()!,
+                row["CustomerMName"].ToString()!,
+                row["CustomerLName"].ToString()!,
                 row["CustomerAddress"].ToString()!,
                 row["CustomerContact"].ToString()!
                 );
