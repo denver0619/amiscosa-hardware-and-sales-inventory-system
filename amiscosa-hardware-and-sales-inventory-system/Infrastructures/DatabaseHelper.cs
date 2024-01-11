@@ -22,9 +22,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
         {
             _connection.Open();
             string querytype = "INSERT INTO ";
-            string fields = this.GetInsertFields(entity);
+            string fields = this.GetInsertFields(tableName, entity);
             string recordValues = " VALUES ";
-            List<string> values = this.GetInsertValues(new List<Entity> { entity });
+            List<string> values = this.GetInsertValues(tableName, new List<Entity> { entity });
             string terminator = ";";
             foreach (string value in values)
             {
