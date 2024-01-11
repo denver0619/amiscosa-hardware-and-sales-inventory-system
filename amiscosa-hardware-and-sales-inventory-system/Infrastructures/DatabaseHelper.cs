@@ -105,7 +105,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
             foreach (PropertyInfo property in properties)
             {
-                output.Add(property.Name + " = " + property.GetValue(entity));
+                if (property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID")))
+                {
+                    output.Add(property.Name + " = \'" + property.GetValue(entity) + "\'");
+                }
+                else
+                {
+                    output.Add(property.Name + " = " + property.GetValue(entity));
+                }
             }
             return String.Join(",", output);
         }
