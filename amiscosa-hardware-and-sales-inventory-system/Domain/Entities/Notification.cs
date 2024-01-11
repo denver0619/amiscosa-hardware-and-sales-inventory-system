@@ -2,6 +2,7 @@
 {
     public class Notification : INotification
     {
+        public Notification() { }
         public Notification(string notificationID, string notificationName, string notificationDescription, string productID, int notificationType)
         {
             NotificationID = notificationID;

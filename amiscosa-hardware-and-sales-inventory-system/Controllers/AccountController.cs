@@ -1,4 +1,4 @@
-﻿using amiscosa_hardware_and_sales_inventory_system.Models;
+﻿//using amiscosa_hardware_and_sales_inventory_system.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 
@@ -26,7 +26,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoginForm(LoginFormModel model)
+        public IActionResult LoginFormSubmit()
         {
             return RedirectToAction("Dashboard", "Home");
         }

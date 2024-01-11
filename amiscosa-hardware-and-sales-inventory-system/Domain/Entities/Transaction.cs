@@ -5,6 +5,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
 
     public class Transaction : ITransaction
     {
+        public Transaction() { }
         public Transaction(string transactionID, DateTime transactionDate, string staffID, string customerID, bool isInvalid)
         {
             TransactionID = transactionID;

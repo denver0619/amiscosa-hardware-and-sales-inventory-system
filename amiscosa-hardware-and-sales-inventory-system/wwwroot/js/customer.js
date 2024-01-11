@@ -1,6 +1,12 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
+
+    setupAddCustomerForm();
+    setupEditCustomerForm();
+    
+})
+
+function setupAddCustomerForm() {
     var addCustomerButton = document.querySelector('.add-customer');
-    var editButtons = document.querySelectorAll('.edit-customer')
     addCustomerButton.addEventListener('click', function (e) {
 
         var addCustomerPopupOverlay = document.createElement('div');
@@ -99,20 +105,20 @@
 
             // Create an object with the added product data
             var addedCustomerData = {
-                firstName: firstName,
-                middleName: middleName,
-                lastName: lastName,
-                address: address,
-                contact: contact
+                CustomerID: "",
+                CustomerFName: firstName,
+                CustomerMName: middleName,
+                CustomerLName: lastName,
+                CustomerAddress: address,
+                CustomerContact: contact
             };
 
-            console.log(addedCustomerData);
-            console.log(isError);
 
 
             // If no error submit data to server
             // TO BE CHANGED
             if (isError == false) {
+                addCustomerFormSendData(addedCustomerData);
                 addCustomerPopupOverlay.remove();
             }
 
@@ -125,6 +131,11 @@
             addCustomerPopupOverlay.remove();
         });
     })
+}
+
+function setupEditCustomerForm() {
+    var editButtons = document.querySelectorAll('.edit-customer')
+
 
     editButtons.forEach(function (editButton) {
         editButton.addEventListener('click', function (e) {
@@ -261,21 +272,39 @@
 
                 editCustomerPopupOverlay.remove();
             });
-        })      
+        })
     })
 
-    // Function to apply error styles to input fields
-    function applyErrorStyles(elementId) {
-        var element = document.getElementById(elementId);
-        element.style.border = '1px solid red';
-        element.classList.add('shake'); // Adding a shake class for animation
-        setTimeout(function () {
-            element.classList.remove('shake'); // Remove the shake class after the animation ends
-        }, 500);
-    }
+}
 
-    function resetErrorStyles(elementId) {
-        var element = document.getElementById(elementId);
-        element.style.border = '1px solid #ccc'; // Reset the border
-    }
-})
+function addCustomerFormSendData(addedCustomerData) {
+    fetch('/Home/AddCustomer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(addedCustomerData)
+    })
+        .then(data => {
+            location.reload();
+            console.log('Product added successfully:', data);
+            
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+function applyErrorStyles(elementId) {
+    var element = document.getElementById(elementId);
+    element.style.border = '1px solid red';
+    element.classList.add('shake'); // Adding a shake class for animation
+    setTimeout(function () {
+        element.classList.remove('shake'); // Remove the shake class after the animation ends
+    }, 500);
+}
+
+function resetErrorStyles(elementId) {
+    var element = document.getElementById(elementId);
+    element.style.border = '1px solid #ccc'; // Reset the border
+}

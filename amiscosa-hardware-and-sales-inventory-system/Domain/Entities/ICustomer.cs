@@ -3,9 +3,9 @@
     public interface ICustomer
     {
         public string? CustomerID { get; set; }
-        public string? CustomerFirstName { get; set; }
-        public string? CustomerMiddleName { get; set; }
-        public string? CustomerLastName { get; set; }
+        public string? CustomerFName { get; set; }
+        public string? CustomerMName { get; set; }
+        public string? CustomerLName { get; set; }
         public string? CustomerAddress { get; set; }
         public string? CustomerContact { get; set; }
 

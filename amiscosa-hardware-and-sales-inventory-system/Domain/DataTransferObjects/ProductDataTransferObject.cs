@@ -1,13 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Formats.Asn1;
+﻿using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
+using System.ComponentModel.DataAnnotations;
 
-namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
+namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects
 {
-    public class Product : IProduct
+    public class ProductDataTransferObject : amiscosa_hardware_and_sales_inventory_system.Domain.Entities.IProduct
     {
-
-        public Product() { }
-        public Product(string productID, string productName, string productDescription, int unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, int unitCost)
+        public ProductDataTransferObject() { }
+        public ProductDataTransferObject(string productID, string productName, string productDescription, int unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, int unitCost)
         {
             ProductID = productID;
             ProductName = productName;
@@ -19,7 +18,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
             IsAvailable = isAvailable;
             UnitCost = unitCost;
         }
-        public Product(IProduct product)
+        public ProductDataTransferObject(IProduct product)
         {
             ProductID = product.ProductID;
             ProductName = product.ProductName;
@@ -48,5 +47,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
         public bool IsAvailable { get; set; }
         [Required]
         public int UnitCost { get; set; }
+        public Manufacturer? Manufacturer { get; set; }
     }
 }
