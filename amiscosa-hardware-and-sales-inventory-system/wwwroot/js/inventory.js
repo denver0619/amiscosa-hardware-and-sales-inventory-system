@@ -143,16 +143,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
             e.preventDefault();
             // Retrieve input values
-            /*var productName = document.getElementById('productName').value;
+            var productName = document.getElementById('productName').value;
             var productQuantity = parseFloat(document.getElementById('productQuantity').value);
             var productUnitCost = parseFloat(document.getElementById('productUnitCost').value);
             var productUnitPrice = parseFloat(document.getElementById('productUnitPrice').value);
-            var productMeasurement = document.getElementById('productMeasurement').value;*/
-            /*var productManufacturer = document.getElementById('productManufacturer').value;*/
+            var productMeasurement = document.getElementById('productMeasurement').value;
+            var productManufacturer = document.getElementById('productManufacturer').value;
 
             // VALIDATION CHECKS
             // TO BE CHANGED
-            /*var isError = false;
+            var isError = false;
             if (productName === '') {
                 applyErrorStyles('productName');
                 isError = true;
@@ -186,27 +186,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 isError = true;
             } else {
                 resetErrorStyles('productMeasurement');
-            }*/
+            }
 
-            /*if (productManufacturer === '') {
+            if (productManufacturer === '') {
                 applyErrorStyles('productManufacturer');
                 isError = true;
             } else {
                 resetErrorStyles('productManufacturer');
-            }*/
+            }
 
             // Create an object with the added product data
             var addedProductData = {
                 ProductID: '',
-                ProductName: "Hammer",
-                ProductDescription: "try",
-                UnitPrice: 5,
-                Quantity: 100,
-                UnitCost: 12,
-                ManufacturerID: "1",
-                Measurement: "5",
+                ProductName: productName,
+                ProductDescription: "",
+                UnitPrice: productUnitPrice,
+                Quantity: productQuantity,
+                UnitCost: productUnitCost,
+                ManufacturerID: productManufacturer,
+                Measurement: productMeasurement,
                 IsAvailable: true,
-                UnitCost: 777
+                UnitCost: productUnitCost
             };
 
 
@@ -218,12 +218,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
             
-            addItemForm(addedProductData);
+            
+  
 
-            /*if (isError == false) {
+            if (isError == false) {
                 
+                addItemForm(addedProductData);
                 addItemPopupOverlay.remove();
-            }*/
+            }
 
             // Handle exit from edit
         });
@@ -316,6 +318,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Create an object with the updated product data
 
+
                 var productName = document.getElementById('productName').value;
                 var productQuantity = parseFloat(document.getElementById('productQuantity').value);
                 var productUnitCost = parseFloat(document.getElementById('productUnitCost').value);
@@ -370,19 +373,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Create an object with the added product data
                 var updatedProductData = {
-                    productName: productName,
-                    productQuantity: productQuantity,
-                    productUnitCost: productUnitCost,
-                    productUnitPrice: productUnitPrice,
-                    productMeasurement: productMeasurement,
-                    productManufacturer: productManufacturer
+                    ProductID: productID,
+                    ProductName: productName,
+                    ProductDescription: "",
+                    UnitPrice: productUnitPrice,
+                    Quantity: productQuantity,
+                    UnitCost: productUnitCost,
+                    ManufacturerID: productManufacturer,
+                    Measurement: productMeasurement,
+                    IsAvailable: true,
+                    UnitCost: productUnitCost
                 };
-
-                console.log(updatedProductData);
 
                 // If no error submit data to server
                 // TO BE CHANGED
                 if (isError == false) {
+
+                    console.log('Here')
+                    editItemForm(updatedProductData);
                     editPopupOverlay.remove();
                 }
 
@@ -441,14 +449,27 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify(addedProductData)
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
             .then(data => {
                 console.log('Product added successfully:', data);
+                location.reload();
+                // Optionally, perform actions after successful product addition
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+    function editItemForm(editProductData) {
+        fetch('/Home/EditInventoryProduct', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(editProductData)
+        })
+            .then(data => {
+                console.log('Product added successfully:', data);
+                location.reload();
                 // Optionally, perform actions after successful product addition
             })
             .catch(error => {

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
 using System.Text.Json;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
@@ -28,7 +29,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             /*String JsonString = JsonSerializer.Serialize(inventoryService.Model);
             Debug.WriteLine(JsonString);*/
             InventoryModel inventoryModel = inventoryService.Model;
-            //inventoryService.Dispose();
+            inventoryService.Dispose();
 
             return View(inventoryModel);
         }
@@ -36,26 +37,31 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         [HttpPost]
         public IActionResult AddInventoryProduct([FromBody] Product productData)
         {
-            /*Debug.WriteLine("asdfasdfasdfasdfas hakjahsdf");
-            Product
-            Debug.WriteLine(productData);*/
-
             string serializedProduct = JsonSerializer.Serialize(productData);
             Debug.WriteLine(serializedProduct);
             InventoryService inventoryService = new InventoryService();
             inventoryService.AddProduct(productData);
+            inventoryService.Dispose();
 
-            /*Debug.Write(JsonSerializer.Serialize(product));*/
+            return Ok("Success");
+        }
+
+        [HttpPost]
+        public IActionResult EditInventoryProduct([FromBody] Product productData)
+        {
+
+            string serializedProduct = JsonSerializer.Serialize(productData);
+            InventoryService inventoryService = new InventoryService();
+            inventoryService.EditProduct(productData);
+            inventoryService.Dispose();
 
 
-
-
-            return Ok("Data received successfully");
+            return Ok("Success");
         }
 
         public IActionResult Transaction()
         {
-            return View();
+            return View("~/Home/Inventory");
         }
 
         public IActionResult TransactionHistory()
