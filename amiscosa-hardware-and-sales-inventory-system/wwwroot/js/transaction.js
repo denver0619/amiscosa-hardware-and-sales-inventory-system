@@ -34,26 +34,19 @@ function setupCustomerSearchSuggestion() {
     })
 
     searchCustomerInput.addEventListener("blur", function () {
-        var searchSuggestionContainer = document.querySelector(".search-customer-form .search-suggestion-container");
-        var searchSuggestionCards = document.querySelectorAll(".search-suggestion-card");
-
-        searchSuggestionCards.forEach(function (card) {
-            searchSuggestionContainer.removeChild(card);
-        });
-
-        searchSuggestionContainer.style.display = "none";
+        hideCustomerSuggestion();
 
     });
 
     searchCustomerInput.addEventListener("input", function () {
-        showSuggestion();
+        showCustomerSuggestion();
     });
 
 
 
 }
 
-function showSuggestion() {
+function showCustomerSuggestion() {
     var searchSuggestionContainer = document.querySelector(".search-customer-form .search-suggestion-container");
 
     customerInfo.forEach(function (customer) {
@@ -73,6 +66,19 @@ function showSuggestion() {
 
     });
 }
+
+function hideCustomerSuggestion() {
+    var searchSuggestionContainer = document.querySelector(".search-customer-form .search-suggestion-container");
+    var searchSuggestionCards = document.querySelectorAll(".search-suggestion-card");
+
+    searchSuggestionCards.forEach(function (card) {
+        searchSuggestionContainer.removeChild(card);
+    });
+
+    searchSuggestionContainer.style.display = "none";
+}
+
+
 
 function setupCustomNumberInput() {
     document.querySelectorAll('.custom-number-input').forEach(function (inputGroup) {
@@ -109,7 +115,7 @@ function setupCustomNumberInput() {
             if ((key === "-" && currentValue <= 1) || isNaN(currentValue)) {
                 e.preventDefault();
             }
-        });   
+        });
     });
 }
 
