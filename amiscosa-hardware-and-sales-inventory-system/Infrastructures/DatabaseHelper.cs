@@ -12,7 +12,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 
         public DatabaseHelper()
         {
-            Configuration.MySQL.ConnectionString = "server=127.0.0.1;port=3307;user=root;database=amiscosadatabase;password="; //Temporary
+            Configuration.MySQL.ConnectionString = "server=26.92.41.207;port=3306;user=root;database=amiscosadatabase;password="; //Temporary
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
         }

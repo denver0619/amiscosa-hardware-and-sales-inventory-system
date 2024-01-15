@@ -9,6 +9,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
     {
         private ProductRepository productRepository;
         private ManufacturerRepository manufacturerRepository;
+        public InventoryModel Model { get; set; }
 
         public InventoryService()
         {
@@ -18,12 +19,13 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             Model = GetAllProductList();
         }
 
-        public InventoryModel Model { get; set; }
 
         public InventoryModel GetAllProductList()
         {
             List<Product> products = productRepository.GetAllProducts();
+
             List<ProductDataTransferObject> productData = new List<ProductDataTransferObject>();
+
             foreach (Product product in products)
             {
                 ProductDataTransferObject productDataTransferObject = new ProductDataTransferObject(product);
@@ -53,6 +55,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         public void Dispose()
         {
             productRepository.Dispose();
+            manufacturerRepository.Dispose();
         }
 
     }
