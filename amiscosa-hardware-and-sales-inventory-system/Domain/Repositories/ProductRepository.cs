@@ -15,6 +15,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             databaseHelper = new DatabaseHelper<Product>();
         }
 
+        /// <summary>
+        /// Adds product to the database
+        /// </summary>
+        /// <param name="product"></param>
         public void AddProduct(Product product)
         {
             databaseHelper.InsertRecord(tableName, product);
