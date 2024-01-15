@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "Alert History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @model amiscosa_hardware_and_sales_inventory_system.Domain.Models.NotificationModel;
+}
+
+<div class="content-title">
+    <h1>Alert History</h1>
+    <p>Main Menu | Alert History</p>
+</div>
+
+<div class="content-wrapper">
+    <div class="content-container">
+        <div class="content-search-and-filter">
+            <div class="search-and-filter">
+                <form action="" class="form-v-center">
+                    <fieldset class="search-bar search-field medium">
+                        <label for="search-input">
+                            <a href="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                    <g clip-path="url(#clip0_11_108)">
+                                        <path d="M6 11.5C9.03757 11.5 11.5 9.03757 11.5 6C11.5 2.96243 9.03757 0.5 6 0.5C2.96243 0.5 0.5 2.96243 0.5 6C0.5 9.03757 2.96243 11.5 6 11.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M13.5 13.5L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_11_108">
+                                            <rect width="14" height="14" fill="white" />
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </a>
+
+                        </label>
+                        <input type="text" name="" id="search-input" placeholder="Search anything here..">
+                    </fieldset>
+
+                    <fieldset class="filter">
+                        <button class="filter-btn medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                <g clip-path="url(#clip0_10_103)">
+                                    <path d="M13.5 0.5H0.5L5.5 7.5V13.5L8.5 11.5V7.5L13.5 0.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_10_103">
+                                        <rect width="14" height="14" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <p>Filter</p>
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="filter">
+            </div>
+        </div>
+
+        <table id="alert-history-table">
+            @if(Model.NotificationList != null) {
+                foreach (amiscosa_hardware_and_sales_inventory_system.Domain.Entities.Notification notification in Model.NotificationList!)
+                {
+                    if (@notification.NotificationType == 1)
+                    {
+                        <tr>
+                            <td>
+                                <div class="alert-icon" id="low-stock-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+                                        <path d="M17.9229 41H24.0767Z" fill="#6B6B6B" />
+                                        <path d="M17.9229 41H24.0767" stroke="#6B6B6B" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M33.3081 16.9998C33.3081 13.605 32.0115 10.3493 29.7032 7.94876C27.3951 5.54829 24.2646 4.19971 21.0003 4.19971C17.7361 4.19971 14.6056 5.54829 12.2974 7.94876C9.98927 10.3493 8.69256 13.605 8.69256 16.9998V28.1999C8.69256 29.4729 8.20628 30.694 7.34074 31.5942C6.47519 32.4943 5.30122 32.9999 4.07715 32.9999H37.9235C36.6995 32.9999 35.5253 32.4943 34.6598 31.5942C33.7942 30.694 33.3081 29.4729 33.3081 28.1999V16.9998Z" fill="#6B6B6B" stroke="#6B6B6B" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M1 16.5841C1.00166 13.5381 1.70011 10.5363 3.03767 7.82652C4.37522 5.11674 6.31348 2.77681 8.69235 1" fill="#6B6B6B" />
+                                        <path d="M1 16.5841C1.00166 13.5381 1.70011 10.5363 3.03767 7.82652C4.37522 5.11674 6.31348 2.77681 8.69235 1" stroke="#6B6B6B" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M41 16.5841C40.9984 13.5381 40.3 10.5363 38.9624 7.82652C37.6249 5.11674 35.6864 2.77681 33.3076 1" fill="#6B6B6B" />
+                                        <path d="M41 16.5841C40.9984 13.5381 40.3 10.5363 38.9624 7.82652C37.6249 5.11674 35.6864 2.77681 33.3076 1" stroke="#6B6B6B" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="alert-text" id="low-stock-text">
+                                    <h3><span class="red-text">Low Stock Alert</span> - @notification.ProductID</h3>
+                                    <p><span>@notification.ProductID</span> stock is depleted. Reorder now to avoid shortages.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                <div class="alert-icon" id="no-stock-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none">
+                                        <path d="M29.5935 40.0988C29.0165 40.6757 28.2338 41 27.4178 41H14.5822C13.7662 41 12.9835 40.6757 12.4065 40.0988L1.90121 29.5935C1.32418 29.0165 1 28.2338 1 27.4178V14.5822C1 13.7662 1.32418 12.9835 1.90121 12.4065L12.4065 1.90121C12.9835 1.32418 13.7662 1 14.5822 1H27.4178C28.2338 1 29.0165 1.32418 29.5935 1.90121L40.0988 12.4065C40.6757 12.9835 41 13.7662 41 14.5822V27.4178C41 28.2338 40.6757 29.0165 40.0988 29.5935L29.5935 40.0988Z" fill="#6B6B6B" stroke="#FCF3E7" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M20.9998 11.7695V21.7695Z" fill="#6B6B6B" />
+                                        <path d="M20.9998 11.7695V21.7695" stroke="#FCF3E7" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M20.9999 30.2308C20.5751 30.2308 20.2307 29.8864 20.2307 29.4616C20.2307 29.0368 20.5751 28.6924 20.9999 28.6924" fill="#6B6B6B" />
+                                        <path d="M20.9999 30.2308C20.5751 30.2308 20.2307 29.8864 20.2307 29.4616C20.2307 29.0368 20.5751 28.6924 20.9999 28.6924" stroke="#FCF3E7" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M20.9998 30.2308C21.4246 30.2308 21.769 29.8864 21.769 29.4616C21.769 29.0368 21.4246 28.6924 20.9998 28.6924" fill="#6B6B6B" />
+                                        <path d="M20.9998 30.2308C21.4246 30.2308 21.769 29.8864 21.769 29.4616C21.769 29.0368 21.4246 28.6924 20.9998 28.6924" stroke="#FCF3E7" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div class="alert-text" id="no-stock-text">
+                                    <h3><span class="red-text">No Stock Alert</span> - @notification.ProductID</h3>
+                                    <p><span>@notification.ProductID</span> stock is depleted. Reorder now to avoid shortages.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    
+
+                    
+                }
+            }else{
+                <tr id="no-content-row">
+                    <td id="no-content-cell">There are currently no Notifications</td>
+                </tr>
+            }
+           
+        </table>
+        <div class="bottom-blocker"></div>
+    </div>
+</div>

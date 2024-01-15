@@ -4,6 +4,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
 {
     public class Manufacturer : IManufacturer
     {
+        public Manufacturer() { }
         public Manufacturer(string manufacturerID, string name, string contact, string address)
         {
             ManufacturerID = manufacturerID;

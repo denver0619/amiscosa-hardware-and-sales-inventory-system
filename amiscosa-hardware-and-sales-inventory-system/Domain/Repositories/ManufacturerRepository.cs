@@ -37,18 +37,37 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 
         public Manufacturer GetManufacturerByID(string id)
         {
-            throw new NotImplementedException();
+            string constraints = "ManufacturerID = " + id;
+            DataTable dataTable = databaseHelper.SelectRecord(tableName, constraints);
+            DataRow row = dataTable.Rows[0];
+            return new Manufacturer(
+                    row["ManufacturerID"].ToString()!,
+                    row["ManufacturerName"].ToString()!,
+                    row["ManufacturerContact"].ToString()!,
+                    row["ManufacturerAddress"].ToString()!
+                );
         }
 
-        public Manufacturer GetManufacturerByName(string name)
+        public List<Manufacturer> GetAllManufacturerByName(string name)
         {
-            throw new NotImplementedException();
+            string constraints = "ManufacturerName LIKE %" + name + "%";
+            DataTable dataTable = databaseHelper.SelectAllRecordWith(tableName, constraints);
+            List<Manufacturer> manufacturers = new List<Manufacturer>();
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Manufacturer manufacturer = new Manufacturer(
+                    row["ManufacturerID"].ToString()!,
+                    row["ManufacturerName"].ToString()!,
+                    row["ManufacturerContact"].ToString()!,
+                    row["ManufacturerAddress"].ToString()!);
+                manufacturers.Add(manufacturer);
+            }
+            return manufacturers;
         }
 
         public void UpdateManufacturer(Manufacturer manufacturer)
         {
-            Manufacturer manufacturerData = new Manufacturer(manufacturer);
-            databaseHelper.UpdateRecord(tableName, manufacturerData);
+            databaseHelper.UpdateRecord(tableName, manufacturer);
         }
         public void Dispose()
         {
