@@ -18,6 +18,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         }
 
         public TransactionModel Model { get; set; }
+
         public TransactionModel GetAllCustomerList()
         {
             Model.CustomerList = customerRepository.GetAllCustomers();
