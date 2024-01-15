@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects
 {
-    public class ProductDataTransferObject : amiscosa_hardware_and_sales_inventory_system.Domain.Entities.IProduct
+    public class ProductSoldDataTransferObject: IProduct
     {
-        public ProductDataTransferObject() { }
-        public ProductDataTransferObject(string productID, string productName, string productDescription, double unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, double unitCost)
+        public ProductSoldDataTransferObject() { }
+        public ProductSoldDataTransferObject(string productID, string productName, string productDescription, double unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, double unitCost)
         {
             ProductID = productID;
             ProductName = productName;
@@ -18,7 +18,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObject
             IsAvailable = isAvailable;
             UnitCost = unitCost;
         }
-        public ProductDataTransferObject(IProduct product)
+        public ProductSoldDataTransferObject(IProduct product)
         {
             ProductID = product.ProductID;
             ProductName = product.ProductName;
@@ -47,6 +47,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObject
         public bool IsAvailable { get; set; }
         [Required]
         public double UnitCost { get; set; }
-        public Manufacturer? Manufacturer { get; set; }
+
+        public int ProductSold { get; set; }
+        public double ProductSales { get; set; }
+
     }
 }
+

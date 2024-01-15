@@ -7,7 +7,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
     {
 
         public Product() { }
-        public Product(string productID, string productName, string productDescription, int unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, int unitCost)
+        public Product(string productID, string productName, string productDescription, double unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, double unitCost)
         {
             ProductID = productID;
             ProductName = productName;
@@ -38,7 +38,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
         public string? ProductName { get; set; }
         public string? ProductDescription { get; set; }
         [Required]
-        public int UnitPrice { get; set; }
+        public double UnitPrice { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
@@ -47,6 +47,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
         [Required]
         public bool IsAvailable { get; set; }
         [Required]
-        public int UnitCost { get; set; }
+        public double UnitCost { get; set; }
     }
 }
