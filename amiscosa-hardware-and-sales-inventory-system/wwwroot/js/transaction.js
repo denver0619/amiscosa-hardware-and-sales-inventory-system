@@ -1,9 +1,10 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
-
+    console.log(1)
     setupCustomerSearchSuggestion();
     setupProductSearchSuggestion();
     selectCustomer();
     setupCustomNumberInput();
+    removeProduct();
 
 });
 
@@ -182,6 +183,10 @@ function fillInputWithCustomerName(clickedCard) {
     hideCustomerSuggestion();
 }
 
+
+
+
+
 function setupProductSearchSuggestion() {
     var searchProductInput = document.querySelector("#select-product");
     var searchSuggestionContainer = document.querySelector(".select-product-form .search-suggestion-container");
@@ -191,6 +196,8 @@ function setupProductSearchSuggestion() {
     });
 
     searchProductInput.addEventListener("input", function () {
+        // Clear the existing timeout if any
+        /*clearTimeout(hideSuggestionTimeout);*/
         showProductSuggestion();
     });
 
@@ -198,6 +205,8 @@ function setupProductSearchSuggestion() {
         var clickedCard = event.target.closest(".search-suggestion-card");
         if (clickedCard) {
             fillInputWithProductName(clickedCard);
+            // Call selectProduct with the ProductID
+            selectProduct(parseInt(clickedCard.querySelector('.productID').textContent));
         }
     });
 
@@ -228,6 +237,7 @@ function showProductSuggestion() {
 
         // Add product information to the card
         suggestionCard.innerHTML = `
+            <p class="productID">${product.ProductID}</p>
             <p class="name">${product.ProductName}</p>
             <p class="other-info">Quantity: ${product.Quantity}</p>
             <p class="other-info">Unit Price: ${product.UnitPrice.toFixed(2)}</p>
@@ -251,6 +261,10 @@ function fillInputWithProductName(clickedCard) {
     hideProductSuggestion();
 }
 
+
+
+
+
 function selectCustomer() {
     document.getElementById('select-customer').addEventListener('click', function (event) {
         event.preventDefault(); // Prevent form submission (if the form has an action attribute)
@@ -263,25 +277,98 @@ function selectCustomer() {
     });
 }
 
+function selectProduct(productId) {
+    // Find the selected product in the productInfo array
+    var selectedProduct = productInfo.find(product => product.ProductID === productId);
+
+    // Check if the product is found
+    if (selectedProduct) {
+        // Get the table body element
+        var tableBody = document.querySelector("#product-listing tbody");
+
+        // Create a new table row
+        var newRow = document.createElement("tr");
+
+        // Fill the row with product information using template literals
+        newRow.innerHTML = `
+            <td>${selectedProduct.ProductID}</td>
+            <td>${selectedProduct.ProductName}</td>
+            <td>
+                <div class="custom-number-input">
+                    <button class="decrement">-</button>
+                    <input type="number" min="1" max="${selectedProduct.Quantity}" value="1">
+                    <button class="increment">+</button>
+                </div>
+            </td>
+            <td>${selectedProduct.UnitPrice.toFixed(2)}</td>
+            <td>${(selectedProduct.UnitPrice).toFixed(2)}</td>
+            <td>
+                <button class="del-listing">
+                    -
+                </button>
+            </td>
+        `;
+
+        // Append the new row to the table body
+        tableBody.appendChild(newRow);
+    } else {
+        console.error("Product not found");
+    }
+}
+
+
+
+function removeProduct() {
+    var tableBody = document.querySelector("#product-listing tbody");
+
+    tableBody.addEventListener("click", function (event) {
+        var deleteButton = event.target.closest(".del-listing");
+
+        if (deleteButton) {
+            console.log("Remove button clicked");
+
+            var row = deleteButton.closest("tr");
+            if (row) {
+                console.log("Row found and removed");
+                row.remove();
+            }
+        }
+    });
+}
+
+
 function setupCustomNumberInput() {
+    var tableBody = document.querySelector("#product-listing tbody");
+
+    tableBody.addEventListener("click", function (event) {
+        var target = event.target;
+
+        // Check if the clicked element is a decrement or increment button
+        if (target.classList.contains("decrement") || target.classList.contains("increment")) {
+            event.preventDefault();
+
+            // Find the input field in the same row
+            var inputField = target.closest("tr").querySelector('input[type="number"]');
+
+            // Perform the appropriate action based on the button clicked
+            if (target.classList.contains("decrement")) {
+                inputField.stepDown();
+            } else if (target.classList.contains("increment")) {
+                inputField.stepUp();
+            }
+
+            // Update the total price
+            updateTotalPrice(inputField);
+        }
+    });
+
     document.querySelectorAll('.custom-number-input').forEach(function (inputGroup) {
         const inputField = inputGroup.querySelector('input[type="number"]');
         const decrementButton = inputGroup.querySelector('.decrement');
         const incrementButton = inputGroup.querySelector('.increment');
 
-        decrementButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            inputField.stepDown();
-            updateTotalPrice(inputField);
-        });
-
-        incrementButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            inputField.stepUp();
-            updateTotalPrice(inputField);
-        });
-
         inputField.addEventListener("input", function (e) {
+            e.preventDefault();
             const currentValue = parseFloat(e.target.value);
 
             if (currentValue <= 0 || isNaN(currentValue)) {

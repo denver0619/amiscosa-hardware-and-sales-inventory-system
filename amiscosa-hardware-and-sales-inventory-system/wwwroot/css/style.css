@@ -686,6 +686,10 @@ nav {
         background-color: var(--bg-gray);
     }
 
+    .select-product-container .select-product-form fieldset.product-field {
+        width: 100%;
+    }
+
     .select-product-container .select-product-form svg {
         margin-right: 10px;
     }
@@ -786,11 +790,18 @@ nav {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            /*height: 24px;
+            height: 24px;
             width: 24px;
-            border-radius: 5px;
-            background: #E60B2F;*/
+            border-radius: 50%;
+            background: white;
+            color: #E60B2F;
+            border: 0.5px solid #E60B2F;
             cursor: pointer;
+            outline: none;
+        }
+
+        #product-listing tr td button.del-listing svg{
+            pointer-events: none;
         }
 
 .confirm-transaction {
@@ -1323,6 +1334,7 @@ input {
         display: flex;
         align-items: center;
         position: relative;
+        border: 0.5px solid var(--border-gray)
     }
 
     .custom-number-input input[type="number"] {
@@ -1354,11 +1366,17 @@ input {
     .custom-number-input .decrement {
         display: inline-block;
         color: var(--warning);
+        height: 36px;
+        width: 36px;
+        cursor: pointer;
     }
 
     .custom-number-input .increment {
         display: inline-block;
         color: var(--success);
+        height: 36px;
+        width: 36px;
+        cursor: pointer;
     }
 
 .number-input input[type=number] {
