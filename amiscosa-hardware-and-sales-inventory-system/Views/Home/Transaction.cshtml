@@ -38,7 +38,7 @@
                     </div>
                 </fieldset>
 
-                <button class="search-customer-btn orange-btn medium">
+                <button class="search-customer-btn orange-btn medium" id="select-customer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
                         <g clip-path="url(#clip0_10_94)">
                             <path d="M3.21436 6.4286V1.9286C3.21436 1.5876 3.34982 1.26058 3.59093 1.01946C3.83205 0.778342 4.15907 0.642883 4.50007 0.642883H12.8572L17.3572 5.14288V16.0715C17.3572 16.4124 17.2217 16.7395 16.9806 16.9806C16.7396 17.2217 16.4125 17.3572 16.0715 17.3572H9.64293" stroke="white" stroke-width="1.73" stroke-linecap="round" stroke-linejoin="round" />
@@ -75,6 +75,17 @@
                         </svg>
                     </label>
                     <input type="text" name="select-product" id="select-product" placeholder="Search product...">
+                    <div class="search-suggestion-container">
+                        <!-- <div class="search-suggestion-card">
+                            <p class="name">Hammer</p>
+                            <p class="other-info">Quantity: 10,</p>
+                            <p class="other-info">UnitPrice: 199.99,</p>
+                            <p class="other-info">Manufacturer: ABC Hardware</p>
+                        </div>
+                        <div class="search-suggestion-card">
+                            test
+                        </div> -->
+                    </div>
                 </fieldset>
 
                 <button class="select-product-btn orange-btn medium">
@@ -93,6 +104,10 @@
                     Select Product
                 </button>
             </form>
+        </div>
+
+        <div class="customer-name-container">
+            <p>Customer Name: <span id="selected-customer-name"></span></p>
         </div>
 
         <div class="product-listing-wrapper">

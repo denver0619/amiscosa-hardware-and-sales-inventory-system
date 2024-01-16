@@ -702,6 +702,14 @@ nav {
     height: 30px;
 }
 
+.customer-name-container {
+    margin-top: 30px;
+}
+
+    .customer-name-container #selected-customer-name{
+        font-weight: 700;
+    }
+
 .product-listing-wrapper {
     border-radius: 20px;
     border: 0.5px solid var(--border-gray);
@@ -711,7 +719,7 @@ nav {
 
 .product-listing-content-container {
     border-radius: 20px;
-    height: 50vh;
+    height: 46vh;
     width: 100%;
     padding: 0 20px;
     overflow: auto;
@@ -1292,6 +1300,7 @@ input {
     width: 100%;
     background: #FFF;
     padding: 10px;
+    cursor: pointer;
 }
 
     .search-suggestion-card p.name {
