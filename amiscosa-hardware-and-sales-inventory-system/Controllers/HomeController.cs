@@ -72,6 +72,27 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult GetTransactionDataList()
+        {
+            TransactionService transactionService = new TransactionService();
+            List<Product> productList = transactionService.Model.ProductList;
+            List<Customer> customerList = transactionService.Model.CustomerList;
+            
+            Debug.WriteLine(JsonSerializer.Serialize(productList));
+            Debug.WriteLine(JsonSerializer.Serialize(customerList));
+
+            var result = new
+            {
+                Products = productList,
+                Customers = customerList
+            };
+
+            
+
+            return Ok(result);
+        }
+
         public IActionResult TransactionHistory()
         {
             return View();
