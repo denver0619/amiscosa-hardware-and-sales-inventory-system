@@ -15,6 +15,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             databaseHelper = new DatabaseHelper<Product>();
         }
 
+        /// <summary>
+        /// Adds product to the database
+        /// </summary>
+        /// <param name="product"></param>
         public void AddProduct(Product product)
         {
             databaseHelper.InsertRecord(tableName, product);
@@ -43,12 +47,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
                     row["ProductID"].ToString()!,
                     row["ProductName"].ToString()!,
                     row["ProductDescription"].ToString()!,
-                    Int32.Parse(row["UnitPrice"].ToString()!),
+                    Double.Parse(row["UnitPrice"].ToString()!),
                     Int32.Parse(row["Quantity"].ToString()!),
                     row["ManufacturerID"].ToString()!,
                     row["Measurement"].ToString()!,
                     bool.Parse(row["IsAvailable"].ToString()!),
-                    Convert.ToInt32(decimal.Parse(row["UnitCost"].ToString()!)));
+                    Double.Parse(row["UnitCost"].ToString()!));
         }
 
         public List<Product> GetAllProductByName(string name)
@@ -62,12 +66,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
                     row["ProductID"].ToString()!,
                     row["ProductName"].ToString()!,
                     row["ProductDescription"].ToString()!,
-                    Int32.Parse(row["UnitPrice"].ToString()!),
+                    Double.Parse(row["UnitPrice"].ToString()!),
                     Int32.Parse(row["Quantity"].ToString()!),
                     row["ManufacturerID"].ToString()!,
                     row["Measurement"].ToString()!,
                     bool.Parse(row["IsAvailable"].ToString()!),
-                    Convert.ToInt32(decimal.Parse(row["UnitCost"].ToString()!)));
+                    Double.Parse(row["UnitCost"].ToString()!));
                 products.Add(product);
             }
             return products;
@@ -80,15 +84,15 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
             foreach (DataRow row in dataTable.Rows)
             {
                 Product product = new Product(
-                    row["ProductID"].ToString()!, 
-                    row["ProductName"].ToString()!, 
-                    row["ProductDescription"].ToString()!, 
-                    Int32.Parse(row["UnitPrice"].ToString()!), 
-                    Int32.Parse(row["Quantity"].ToString()!), 
-                    row["ManufacturerID"].ToString()!, 
-                    row["Measurement"].ToString()!, 
-                    bool.Parse(row["IsAvailable"].ToString()!), 
-                    Convert.ToInt32(decimal.Parse(row["UnitCost"].ToString()!)));
+                    row["ProductID"].ToString()!,
+                    row["ProductName"].ToString()!,
+                    row["ProductDescription"].ToString()!,
+                    Double.Parse(row["UnitPrice"].ToString()!),
+                    Int32.Parse(row["Quantity"].ToString()!),
+                    row["ManufacturerID"].ToString()!,
+                    row["Measurement"].ToString()!,
+                    bool.Parse(row["IsAvailable"].ToString()!),
+                    Double.Parse(row["UnitCost"].ToString()!));
                 products.Add(product);
             }
             return products;
@@ -105,12 +109,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
                     row["ProductID"].ToString()!,
                     row["ProductName"].ToString()!,
                     row["ProductDescription"].ToString()!,
-                    Int32.Parse(row["UnitPrice"].ToString()!),
+                    Double.Parse(row["UnitPrice"].ToString()!),
                     Int32.Parse(row["Quantity"].ToString()!),
                     row["ManufacturerID"].ToString()!,
                     row["Measurement"].ToString()!,
                     bool.Parse(row["IsAvailable"].ToString()!),
-                    Convert.ToInt32(decimal.Parse(row["UnitCost"].ToString()!)));
+                    Double.Parse(row["UnitCost"].ToString()!));
                 products.Add(product);
             }
             return products;
@@ -127,12 +131,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
                     row["ProductID"].ToString()!,
                     row["ProductName"].ToString()!,
                     row["ProductDescription"].ToString()!,
-                    Int32.Parse(row["UnitPrice"].ToString()!),
+                    Double.Parse(row["UnitPrice"].ToString()!),
                     Int32.Parse(row["Quantity"].ToString()!),
                     row["ManufacturerID"].ToString()!,
                     row["Measurement"].ToString()!,
                     bool.Parse(row["IsAvailable"].ToString()!),
-                    Convert.ToInt32(decimal.Parse(row["UnitCost"].ToString()!))); 
+                    Double.Parse(row["UnitCost"].ToString()!));
                 products.Add(product);
             }
             return products;
