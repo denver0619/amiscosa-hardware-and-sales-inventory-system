@@ -12,7 +12,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 
         public DatabaseHelper()
         {
-            Configuration.MySQL.ConnectionString = "server=26.92.41.207;port=3306;user=root;database=amiscosadatabase;password="; //Temporary
+            Configuration.MySQL.ConnectionString = "server=localhost;port=3307;user=root;database=amiscosadatabase;password="; //Temporary
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
         }
@@ -190,7 +190,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
                         if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
                         if (value != null)
                         {
-                            if (property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID")))
+                            if ((property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID"))) || property.Name.Contains("Date"))
                             {
                                 currentEntityValue.Add("\'"+value.ToString()!+ "\'");
                             }

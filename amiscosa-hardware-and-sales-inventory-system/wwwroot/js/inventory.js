@@ -7,6 +7,59 @@
 
 })
 
+var productInfo = [
+    {
+        "productID": "1",
+        "productName": "Hammer",
+        "quantity": 10,
+        "unitCost": 150.75,
+        "unitPrice": 199.99,
+        "measurement": "Each",
+        "manufacturerID": "ABC Hardware",
+        "isAvailable": true
+    },
+    {
+        "productID": "2",
+        "productName": "Screwdriver Set",
+        "quantity": 20,
+        "unitCost": 75.25,
+        "unitPrice": 99.99,
+        "measurement": "Set",
+        "manufacturerID": "XYZ Tools",
+        "isAvailable": true
+    },
+    {
+        "productID": "3",
+        "productName": "Plywood Sheet",
+        "quantity": 5,
+        "unitCost": 300.50,
+        "unitPrice": 399.99,
+        "measurement": "Sheet",
+        "manufacturerID": "DEF Lumber",
+        "isAvailable": false
+    },
+    {
+        "productID": "4",
+        "productName": "Paint Roller Kit",
+        "quantity": 15,
+        "unitCost": 50.90,
+        "unitPrice": 69.99,
+        "measurement": "Kit",
+        "manufacturerID": "LMN Supplies",
+        "isAvailable": true
+    },
+    {
+        "productID": "5",
+        "productName": "Cordless Drill",
+        "quantity": 8,
+        "unitCost": 200.25,
+        "unitPrice": 259.99,
+        "measurement": "Each",
+        "manufacturerID": "GHI Tools",
+        "isAvailable": true
+    }
+]
+
 function setupRestockForm() {
     var restockItemButton = document.querySelector('.restock-product')
     restockItemButton.addEventListener('click', function (e) {
@@ -23,24 +76,35 @@ function setupRestockForm() {
                         <div>
                             <label>Product Name</label>
                             <fieldset class="search-bar search-field medium">
-                            <label for="search-input" id="search-icon">
-                                <a href="">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                        <g clip-path="url(#clip0_11_108)">
-                                            <path d="M6 11.5C9.03757 11.5 11.5 9.03757 11.5 6C11.5 2.96243 9.03757 0.5 6 0.5C2.96243 0.5 0.5 2.96243 0.5 6C0.5 9.03757 2.96243 11.5 6 11.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
-                                            <path d="M13.5 13.5L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_11_108">
-                                                <rect width="14" height="14" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </a>
+                                <label for="search-input" id="search-icon">
+                                    <a href="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                                            <g clip-path="url(#clip0_11_108)">
+                                                <path d="M6 11.5C9.03757 11.5 11.5 9.03757 11.5 6C11.5 2.96243 9.03757 0.5 6 0.5C2.96243 0.5 0.5 2.96243 0.5 6C0.5 9.03757 2.96243 11.5 6 11.5Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M13.5 13.5L10 10" stroke="black" stroke-linecap="round" stroke-linejoin="round" />
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_11_108">
+                                                    <rect width="14" height="14" fill="white" />
+                                                </clipPath>
+                                            </defs>
+                                        </svg>
+                                    </a>
 
-                            </label>
-                            <input type="text" name="" id="search-input" placeholder="Search anything here..">
-                        </fieldset>
+                                </label>
+                                <input type="text" name="" id="search-restock" placeholder="Search anything here..">
+                                <div class="search-suggestion-container search-restock-suggestion-container">
+
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div>
+                            <p>ID: <span class="productID"><span></p>
+                            <p>Name: <span class="productName"><span></p>
+                            <p>Manufacturer: <span class="manufacturerID"><span></p>
                         </div>
                     </div>
 
@@ -60,6 +124,7 @@ function setupRestockForm() {
 
         document.body.append(restockItemPopupOverlay);
 
+        setupProductRestockSearchSuggestion();
         document.querySelector('#submitRestock').addEventListener('click', function (e) {
 
             e.preventDefault();
@@ -77,11 +142,105 @@ function setupRestockForm() {
         });
 
         document.getElementById('exitPopupCard').addEventListener('click', function () {
-            console.log(420)
             restockItemPopupOverlay.remove();
         });
     })
 }
+
+function setupProductRestockSearchSuggestion() {
+    var searchProductInput = document.querySelector("#search-restock");
+    var searchSuggestionContainer = document.querySelector(".search-restock-suggestion-container");
+
+    searchProductInput.addEventListener("focus", function () {
+        searchSuggestionContainer.style.display = "block";
+    });
+
+    searchProductInput.addEventListener("input", function () {
+        // Clear the existing timeout if any
+        /*clearTimeout(hideSuggestionTimeout);*/
+        showProductRestockSuggestion();
+    });
+
+    searchSuggestionContainer.addEventListener("click", function (event) {
+        var clickedCard = event.target.closest(".search-suggestion-card");
+        if (clickedCard) {
+            fillWithProductDetails(clickedCard);
+            // Call selectProduct with the productID
+            selectProductRestock(clickedCard.querySelector('.productID').textContent);
+        }
+    });
+
+    searchProductInput.addEventListener("blur", function () {
+        /*hideSuggestionTimeout = setTimeout(function () {
+            hideProductRestockSuggestion();
+        }, 200);*/
+    });
+}
+
+function showProductRestockSuggestion() {
+    var searchSuggestionContainer = document.querySelector(".search-restock-suggestion-container");
+    var inputValue = document.getElementById("search-restock").value.toLowerCase();
+
+    // Clear existing suggestions
+    searchSuggestionContainer.innerHTML = "";
+
+    // Filter productInfo based on input value
+    var filteredProducts = productInfo.filter(function (product) {
+        var productName = product.productName.toLowerCase();
+        return productName.includes(inputValue);
+    });
+
+    filteredProducts.forEach(function (product) {
+        // Create a new search suggestion card for products
+        var suggestionCard = document.createElement("div");
+        suggestionCard.classList.add("search-suggestion-card");
+
+        // Add product information to the card
+        suggestionCard.innerHTML = `
+            <p class="productID">${product.productID}</p>
+            <p class="productName">${product.productName}</p>
+            <p class="other-info">quantity: ${product.quantity}</p>
+            <p class="other-info">Unit Price: ${product.unitPrice.toFixed(2)}</p>
+            <p class="other-info">manufacturerID: ${product.manufacturerID}</p>
+        `;
+
+        // Append the card to the search suggestion container
+        searchSuggestionContainer.appendChild(suggestionCard);
+    });
+}
+
+function hideProductRestockSuggestion() {
+    var searchSuggestionContainer = document.querySelector(".search-restock-suggestion-container");
+    searchSuggestionContainer.style.display = "none";
+}
+
+function fillWithProductDetails(clickedCard) {
+    var productName = clickedCard.querySelector(".productName").textContent;
+    document.getElementById("search-restock").value = productName;
+    hideProductRestockSuggestion();
+}
+
+function selectProductRestock(productID) {
+
+    // Find the selected product in the productInfo array
+    var selectedProduct = productInfo.find(product => product.productID === productID);
+
+    // Check if the product is found
+    if (selectedProduct) {
+        // Get the spans in the restock form
+        var productIDSpan = document.querySelector("span.productID");
+        var productNameSpan = document.querySelector("span.productName");
+        var manufacturerIDSpan = document.querySelector("span.manufacturerID");
+
+        // Update spans with product details
+        productIDSpan.innerText = selectedProduct.productID;
+        productNameSpan.innerText = selectedProduct.productName;
+        manufacturerIDSpan.innerText = selectedProduct.manufacturerID;
+    } else {
+        console.error("Product not found");
+    }
+}
+
 
 function setupAddItemForm() {
     var addItemButton = document.querySelector('.add-product')
@@ -212,9 +371,6 @@ function setupAddItemForm() {
                 UnitCost: productUnitCost
             };
 
-
-            console.log(addedProductData);
-            console.log(JSON.stringify(addedProductData));
 
             // If no error submit data to server
             // TO BE CHANGED
@@ -388,7 +544,6 @@ function setupEditItemForm() {
                 // TO BE CHANGED
                 if (isError == false) {
 
-                    console.log('Here')
                     editItemFormSendData(updatedProductData);
                     editPopupOverlay.remove();
                 }
