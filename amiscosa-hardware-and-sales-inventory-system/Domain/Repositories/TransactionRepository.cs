@@ -45,7 +45,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
                     );
                 transactions.Add(transaction);
             }
-            return new List<Transaction>();
+            return transactions;
         }
 
         public List<Transaction> GetAllTransactionByYearMonth(DateTime dateTime)

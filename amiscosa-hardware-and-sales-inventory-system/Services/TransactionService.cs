@@ -2,6 +2,7 @@
 using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Repositories;
+using System.Diagnostics;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Services
 {
@@ -55,7 +56,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             Model.TransactionDetails = model.TransactionDetails;
             transactionRepository.AddTransaction(Model.Transaction!);
             List<Transaction> transactions = transactionRepository.GetAllTransactions();
-            Transaction transaction = transactions[transactions.Count - 1]; 
+            Debug.WriteLine("Transaction Count: " + transactions.Count);
+            Debug.WriteLine("Transaction Count index: " + (transactions.Count - 1));
+            Transaction transaction = transactions[transactions.Count - 1];
             foreach (TransactionDetail transactionDetail in Model.TransactionDetails!)
             {
                 Product product = new Product(productRepository.GetProductByID(transactionDetail.ProductID!));
