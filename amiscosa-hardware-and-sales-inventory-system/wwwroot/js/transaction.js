@@ -64,9 +64,9 @@
         customerContact: "09345678901"
     }
 
-]
+]*/
 
-var productInfo = [
+/*var productInfo = [
     {
         "productID": 1,
         "productName": "Hammer",
@@ -119,9 +119,9 @@ var productInfo = [
     }
 ]*/
 
-/*var customerInfo = []
-var productInfo = []
-*/
+/*var customerInfo = []*/
+/*var productInfo = []*/
+
 function setupCustomerSearchSuggestion() {
     var searchCustomerInput = document.querySelector("#search-customer")
     var searchSuggestionContainer = document.querySelector(".search-customer-form .search-suggestion-container");

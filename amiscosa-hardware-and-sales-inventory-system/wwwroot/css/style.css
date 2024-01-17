@@ -498,6 +498,12 @@ nav {
     margin-bottom: 10px;
 }
 
+.restock-search div fieldset{
+    position: relative;
+}
+
+
+
 .content-container #inventory-table {
     width: 100%;
     position: relative;
@@ -611,6 +617,10 @@ nav {
 /* Pop Up Restock Form*/
 #restockPopup h1 {
     margin-bottom: 20px;
+}
+
+#restockPopup span {
+    font-weight: 700;
 }
 
 #submitRestock {

@@ -76,11 +76,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         public IActionResult GetTransactionDataList()
         {
             TransactionService transactionService = new TransactionService();
-            List<Product> productList = transactionService.Model.ProductList;
-            List<Customer> customerList = transactionService.Model.CustomerList;
-            
-            Debug.WriteLine(JsonSerializer.Serialize(productList));
-            Debug.WriteLine(JsonSerializer.Serialize(customerList));
+            List<Product> productList = transactionService.Model.ProductList!;
+            List<Customer> customerList = transactionService.Model.CustomerList!;         
 
             var result = new
             {
