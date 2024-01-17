@@ -190,7 +190,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
                         if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
                         if (value != null)
                         {
-                            if (property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID")))
+                            if ((property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID"))) || property.Name.Contains("Date"))
                             {
                                 currentEntityValue.Add("\'"+value.ToString()!+ "\'");
                             }

@@ -5,6 +5,7 @@ using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
 using System.Text.Json;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
+using amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects;
 
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
@@ -85,9 +86,55 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
                 Customers = customerList
             };
 
-            
-
             return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult SendTransaction([FromBody] TransactionDataTransferObject transactionDataTransferObject)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                Debug.WriteLine("Model state errors: " + string.Join(", ", errors));
+                return BadRequest(ModelState);
+            }
+
+            Debug.WriteLine(1);
+            Debug.WriteLine(JsonSerializer.Serialize(transactionDataTransferObject));
+            Debug.WriteLine(2);
+
+            TransactionService transactionService = new TransactionService();
+            TransactionModel transactionModel = new TransactionModel();
+            transactionModel.Transaction = transactionDataTransferObject.TransactionData;
+            transactionModel.TransactionDetails = transactionDataTransferObject.TransactionDetails;
+
+            transactionService.AddTransaction(transactionModel);
+            transactionService.Dispose();
+
+            return Ok();
+
+            /*if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                Debug.WriteLine("Model state errors: " + string.Join(", ", errors));
+                return BadRequest(ModelState);
+            }
+            TransactionDataTransferObject transactionDTO = JsonSerializer.Deserialize<TransactionDataTransferObject>(transactionDataTransferObject)!;
+            transactionDTO.TransactionData.TransactionDate = DateTime.Now;
+
+            Debug.WriteLine(1);
+            Debug.WriteLine(transactionDataTransferObject);
+            Debug.WriteLine(2);
+
+            TransactionService transactionService = new TransactionService();
+            TransactionModel transactionModel = new TransactionModel();
+            transactionModel.Transaction = transactionDTO.TransactionData;
+            transactionModel.TransactionDetails = transactionDTO.TransactionDetails;
+
+            transactionService.AddTransaction(transactionModel);
+            transactionService.Dispose();
+
+            return Ok();*/
         }
 
         public IActionResult TransactionHistory()

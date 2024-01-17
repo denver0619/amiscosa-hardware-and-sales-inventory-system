@@ -8,18 +8,21 @@
             // Update customerInfo and productInfo with the fetched data
             customerInfo = data.customers;
             productInfo = data.products;
-            console.log(data)
+            /*console.log(data)
             console.log(customerInfo)
-            console.log(customerInfo)
+            console.log(customerInfo)*/
 
             setupCustomerSearchSuggestion();
             setupProductSearchSuggestion();
             selectCustomer();
             setupCustomNumberInput();
             removeProduct();
+            
         })
         .catch(error => console.error('Error fetching data:', error));
 
+
+    setupTransactionConfirmation();
 });
 
 /*var customerInfo = [
@@ -298,8 +301,8 @@ function selectProduct(productID) {
     // Find the selected product in the productInfo array
     var selectedProduct = productInfo.find(product => product.productID === productID);
 
-    console.log(productID)
-    console.log(selectedProduct)
+/*    console.log(productID)
+    console.log(selectedProduct)*/
     // Check if the product is found
     if (selectedProduct) {
         // Get the table body element
@@ -334,7 +337,6 @@ function selectProduct(productID) {
         console.error("Product not found");
     }
 }
-
 
 
 function removeProduct() {
@@ -422,4 +424,95 @@ function updateTotalPrice(input) {
 
     const totalPrice = quantity * unitPrice;
     totalPriceElement.textContent = totalPrice.toFixed(2);
+}
+
+
+function setupTransactionConfirmation() {
+    console.log("setup")
+   
+
+    // Add an event listener for the Confirm button
+    document.querySelector('.confirm-btn').addEventListener('click', function () {
+        // Call a function to gather and process the data
+        console.log("click")
+
+        gatherAndProcessData();
+    });
+
+}
+
+
+function gatherAndProcessData() {
+
+    var selectedCustomerName = document.getElementById('search-customer').value;
+
+    // Find the selected customer in the customerInfo array
+    var selectedCustomer = customerInfo.find(function (customer) {
+        var fullName = `${customer.customerFName} ${customer.customerMName ? customer.customerMName + ' ' : ''}${customer.customerLName}`;
+        return fullName === selectedCustomerName;
+    });
+
+    var customerID = selectedCustomer.customerID;
+    console.log(customerID)
+
+
+    var transactionData = {
+        CustomerID: customerID,
+        IsInvalid: false,
+        TransactionDate: new Date(),
+        StaffID: "1",
+        TransactionID: "",
+    }  
+
+
+
+    // Get all rows in the table
+    var tableRows = document.querySelectorAll("#product-listing tbody tr");
+
+    // Create an array to store product data
+    var productsData = [];
+
+    // Iterate over each row
+    tableRows.forEach(function (row) {
+        // Extract product ID and quantity from the row
+        var productID = row.querySelector('td:nth-child(1)').textContent;
+        var quantity = parseInt(row.querySelector('input[type="number"]').value, 10);
+
+        // Create an object with product data
+        var productData = {
+            TransactionID: "",
+            TransactionDetailID: "",
+            ProductID: productID,
+            Quantity: quantity
+        };
+
+        // Push the object to the array
+        productsData.push(productData);
+    });
+
+
+    var requestData = {
+        TransactionData: transactionData,
+        TransactionDetails: productsData
+    };
+
+
+
+    console.log(requestData)
+
+    fetch('/Home/SendTransaction', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+    })
+        .then(data => {
+            //console.log('Product added successfully:', data);
+            //location.reload();
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
 }

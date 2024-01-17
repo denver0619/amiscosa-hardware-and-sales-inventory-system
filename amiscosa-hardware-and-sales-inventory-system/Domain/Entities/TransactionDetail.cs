@@ -19,9 +19,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Entities
             ProductID = transactionDetail.ProductID;
             Quantity = transactionDetail.Quantity;
         } 
-        [Required]
+
         public string? TransactionDetailID { get; set; }
-        [Required]
+
         public string? TransactionID { get; set; }
         [Required]
         public string? ProductID { get; set; }
