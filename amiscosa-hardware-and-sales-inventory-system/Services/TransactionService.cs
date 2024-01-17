@@ -54,12 +54,16 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             Model.Transaction = model.Transaction;
             Model.TransactionDetails = model.TransactionDetails;
             transactionRepository.AddTransaction(Model.Transaction!);
+            List<Transaction> transactions = transactionRepository.GetAllTransactions();
+            Transaction transaction = transactions[transactions.Count - 1]; 
             foreach (TransactionDetail transactionDetail in Model.TransactionDetails!)
             {
                 Product product = new Product(productRepository.GetProductByID(transactionDetail.ProductID!));
+                TransactionDetail transactionDetailData = new TransactionDetail(transactionDetail);
+                transactionDetailData.TransactionID = transaction.TransactionID;
                 product.Quantity -= transactionDetail.Quantity;
                 productRepository.UpdateProduct(product);
-                transactionDetailRepository.AddTransactionDetail(transactionDetail);
+                transactionDetailRepository.AddTransactionDetail(transactionDetailData);
             }
         }
 
