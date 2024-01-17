@@ -77,7 +77,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         public IActionResult GetTransactionDataList()
         {
             TransactionService transactionService = new TransactionService();
-            List<Product> productList = transactionService.Model.ProductList!;
+            List<Product> productList = new List<Product>();
+            foreach (ProductDataTransferObject product in transactionService.Model.ProductList!)
+            {
+                productList.Add(new Product(product));
+            }
             List<Customer> customerList = transactionService.Model.CustomerList!;         
 
             var result = new
@@ -102,6 +106,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             Debug.WriteLine(1);
             Debug.WriteLine(JsonSerializer.Serialize(transactionDataTransferObject));
             Debug.WriteLine(2);
+            TransactionDataTransferObject transaction = transactionDataTransferObject;
+            transaction.TransactionData!.TransactionDate = DateTime.Now;
 
             TransactionService transactionService = new TransactionService();
             TransactionModel transactionModel = new TransactionModel();

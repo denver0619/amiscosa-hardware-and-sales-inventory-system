@@ -2,6 +2,7 @@
 using amiscosa_hardware_and_sales_inventory_system.Configurations;
 using System.Data;
 using System.Reflection;
+using System.Diagnostics;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 {
@@ -12,7 +13,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 
         public DatabaseHelper()
         {
-            Configuration.MySQL.ConnectionString = "server=localhost;port=3307;user=root;database=amiscosadatabase;password="; //Temporary
+            Configuration.MySQL.ConnectionString = "server=26.223.107.167;port=3306;user=root;database=amiscosadatabase;password=;Convert Zero Datetime=True;"; //Temporary
             _connectionManager = new DatabaseConnectionManager(Configuration.MySQL.ConnectionString);
             _connection = _connectionManager.Connection;
         }
@@ -139,40 +140,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
             foreach (PropertyInfo property in properties)
             {
-                if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
+                if (property.Name.EndsWith("ID") && (property.Name.Contains(tableName.Substring(1, tableName.Length - 2))|| property.Name.Contains("TransactionDetail"))) continue;
                 fields.Add(property.Name);
             }
             return "(" + String.Join(",", fields) + ")";
         }
-
-        /*public List<string> GetInsertValues(List<Entity> entities)
-        {
-            List<string> values = new List<string>();
-            foreach (Entity? entity in entities)
-            {
-                if (entity != null)
-                {
-                    Type type = entity.GetType();
-                    List<string> currentEntityValue = new List<string>();
-                    List<PropertyInfo> properties = type.GetProperties().OrderBy(property => property.Name).ToList();
-                    foreach (PropertyInfo property in properties)
-                    {
-                        if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
-                        object? value = property.GetValue(entity);
-                        if (value != null)
-                        {
-                            currentEntityValue.Add(value.ToString()!);
-                        }
-                        else
-                        {
-                            currentEntityValue.Add("NULL");
-                        }
-                    }
-                    values.Add("(" + string.Join(",", currentEntityValue) + ")");
-                }
-            }
-            return values;
-        }*/
 
         public List<string> GetInsertValues(String tableName, List<Entity> entities)
         {
@@ -187,12 +159,17 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
                     foreach (PropertyInfo property in properties)
                     {
                         object? value = property.GetValue(entity);
-                        if (property.Name.EndsWith("ID") && property.Name.Contains(tableName.Substring(1, tableName.Length - 2))) continue;
+                        if (property.Name.EndsWith("ID") && (property.Name.Contains(tableName.Substring(1, tableName.Length - 2)) || property.Name.Contains("TransactionDetail"))) continue;
                         if (value != null)
                         {
-                            if ((property.PropertyType == typeof(string) && !(property.Name.EndsWith("ID"))) || property.Name.Contains("Date"))
+                            if ((property.PropertyType == typeof(string) && !property.Name.EndsWith("ID")))
                             {
                                 currentEntityValue.Add("\'"+value.ToString()!+ "\'");
+                            }
+                            else if ( property.Name.Contains("Date"))
+                            {
+                                DateTime date = (DateTime)value;
+                                currentEntityValue.Add("\'"+ date.ToString("yyyy-MM-dd hh:mm:ss ") + date.ToString("tt").ToUpper() + "\'");
                             }
                             else
                             {
