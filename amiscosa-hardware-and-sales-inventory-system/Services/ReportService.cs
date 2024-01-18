@@ -82,7 +82,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             {
                 Model.TotalRevenue += product.ProductSales;
                 Model.NumberOfProductsSold += product.ProductSold;
-                totalCost += product.UnitCost;
+                totalCost +=  Model.ProductTally![product.ProductID!]*product.UnitCost;
             }
             //get the profit
             Model.TotalProfit = Model.TotalRevenue - totalCost;
