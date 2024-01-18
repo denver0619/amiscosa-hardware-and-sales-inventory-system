@@ -46,12 +46,12 @@
         <div class="revenue-and-profit">
             <div class="total-revenue">
                 <p>Total Revenue</p>
-                <h1>₱ @Model.TotalRevenue</h1>
+                <h1 id="total-revenue">₱ @Model.TotalRevenue</h1>
             </div>
 
             <div class="total-profit">
                 <p>Total Profit</p>
-                <h1>₱ @Model.TotalProfit</h1>
+                <h1 id="total-profit">₱ @Model.TotalProfit</h1>
             </div>
         </div>
 
@@ -76,19 +76,7 @@
                     </svg>
                     Product Sold
                 </p>
-                <h1>@Model.NumberOfProductsSold</h1>
-            </div>
-            <div>
-                <p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 27 28" fill="none">
-                        <path d="M13.5256 26.9997C20.8322 27.0286 26.061 24.5777 26.0827 19.0767C26.1063 13.0974 22.9906 9.09884 16.7397 6.08446L19.215 3.06465C19.3409 2.86638 19.4097 2.63982 19.4143 2.40794C19.419 2.17606 19.3593 1.94712 19.2414 1.7443C19.1236 1.54148 18.9516 1.372 18.743 1.25305C18.5345 1.13409 18.2967 1.06988 18.0538 1.06693L9.2024 1.03198C8.95948 1.03301 8.72121 1.09534 8.51171 1.21265C8.30219 1.32996 8.12892 1.49807 8.00944 1.69995C7.88994 1.90183 7.8285 2.1303 7.83132 2.36221C7.83414 2.59412 7.90111 2.82121 8.02548 3.02047L10.4768 6.07965C4.20214 9.06452 1.05501 13.0384 1.0314 19.0177C1.00984 24.4788 6.21906 26.9709 13.5256 26.9997Z" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M16.4648 13.6486C16.3666 13.3796 16.2144 13.1347 16.0205 12.926C15.6082 12.4819 15.0075 12.2011 14.3377 12.1985L12.5871 12.1916C11.4722 12.1872 10.5649 13.0478 10.5607 14.1139C10.5572 15.0211 11.2146 15.8084 12.1407 16.006L14.8037 16.574C15.8411 16.7952 16.5776 17.6779 16.5736 18.6942C16.5689 19.8885 15.5525 20.8536 14.3035 20.8487L12.7958 20.8427C11.8111 20.8389 10.9757 20.2337 10.6686 19.3925" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M13.584 12.1941L13.5925 10.0322" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M13.5415 23.0067L13.55 20.8447" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    Product Sales
-                </p>
-                <h1>109500.00</h1>
+                <h1 id="products-sold">@Model.NumberOfProductsSold</h1>
             </div>
             <div>
                 <p>
@@ -99,7 +87,7 @@
                     </svg>
                     Transactions
                 </p>
-                <h1>@Model.NumberOfTransactionsDone</h1>
+                <h1 id="transactions-done">@Model.NumberOfTransactionsDone</h1>
             </div>
         </div>
 
@@ -114,7 +102,7 @@
                             <th>Sales</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="sales-table-body">
                         
                         @foreach(amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects.ProductSoldDataTransferObject productSold in Model.ProductList)
                         {
@@ -135,3 +123,7 @@
 
     </div>
 </div>
+
+@section Scripts {
+    <script src="~/js/report.js"></script>
+}

@@ -6,6 +6,7 @@ using System.Text.Json;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects;
+using System;
 
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
@@ -182,7 +183,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult TransactionHistory()
         {
-            return View();
+            /*TransactionService transactionService = new TransactionService();
+            transactionService.Model.*/
+
+            return Ok();
         }
 
         public IActionResult Customer()
@@ -222,6 +226,13 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
             return View(notificationModel);
         }
+        public IActionResult ReportPreLoad()
+        {
+            // asdasda
+
+
+            return RedirectToAction("Home", "Report", new {});
+        }
 
         public IActionResult Report()
         {
@@ -232,6 +243,21 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
             return View(reportModel);
         }
+
+        [HttpPost]
+        public IActionResult GetReportData([FromBody]string selectedMonth) {
+            Debug.WriteLine(selectedMonth);
+            
+            DateTime dateTime = DateTime.Parse(selectedMonth);
+            ReportService reportService = new ReportService(dateTime);
+            ReportModel reportModel = reportService.Model;
+            reportService.Dispose();
+
+            Debug.WriteLine(JsonSerializer.Serialize(reportModel));
+
+            return Json(reportModel);
+        }
+
 
         public IActionResult Logout()
         {
