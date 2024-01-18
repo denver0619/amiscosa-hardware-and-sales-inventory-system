@@ -37,19 +37,23 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         {
             List<Transaction> transactions = transactionRepository.GetAllTransactionByYearMonth(datetime);// get the list of transaction in the specified date
             List<ProductSoldDataTransferObject> productSolds = new List<ProductSoldDataTransferObject>();//
+            Model.ProductTally = new Dictionary<string, int> ();
 
             for (int i = 0; i < transactions.Count; i++)
             {
                 List<TransactionDetail> transactiondetails = transactionDetailRepository.GetAllTransactionDetailByTransactionID(transactions[i].TransactionID!);
-                for (int j = 0; j < transactiondetails.Count; j++)//list of product and quantity bought
+                if (transactiondetails != null)
                 {
-                    if (Model.ProductTally!.ContainsKey(transactiondetails[j].ProductID!))//if the product id is in the tally, iaadd lang
+                    for (int j = 0; j < transactiondetails.Count; j++)//list of product and quantity bought
                     {
-                        Model.ProductTally[transactiondetails[j].ProductID!] = Model.ProductTally[transactiondetails[j].ProductID!] + transactiondetails[j].Quantity;
-                    }
-                    else// if not, append the product the id and the quantity
-                    {
-                        Model.ProductTally.Add(transactiondetails[j].ProductID!, transactiondetails[j].Quantity);
+                        if ( Model.ProductTally!.ContainsKey(transactiondetails[j].ProductID!))//if the product id is in the tally, iaadd lang
+                        {
+                            Model.ProductTally[transactiondetails[j].ProductID!] = Model.ProductTally[transactiondetails[j].ProductID!] + transactiondetails[j].Quantity;
+                        }
+                        else// if not, append the product the id and the quantity
+                        {
+                            Model.ProductTally.Add(transactiondetails[j].ProductID!, transactiondetails[j].Quantity);
+                        }
                     }
                 }
              
