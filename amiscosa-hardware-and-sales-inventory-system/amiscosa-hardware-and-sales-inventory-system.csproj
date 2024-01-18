@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>amiscosa_hardware_and_sales_inventory_system</RootNamespace>
+    <UserSecretsId>38d3b3f0-8f77-4489-9cd8-14ef74621d07</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -6,24 +6,32 @@ using System;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Services
 {
-    public class ReportService
+    public class ReportService : IDisposable
     {
         //Declaration of all the repositories needed
         private TransactionRepository transactionRepository;
         private TransactionDetailRepository transactionDetailRepository;
         private ProductRepository productRepository;
         
-        public ReportService (DateTime dateTime)
+        public ReportService ()
         {
             transactionRepository = new TransactionRepository ();
             transactionDetailRepository = new TransactionDetailRepository ();
             productRepository = new ProductRepository ();
             Model = new ReportModel();
-            Model = GetAllProductList(dateTime);
+            Model = GetAllProductList(DateTime.Now);
+            GetAllStats (DateTime.Now);
  
         }
 
         public ReportModel Model { get; set; } //required; Data na makikita sa UI. Pinapasa sa controller papuntang views.
+
+        public void Dispose()
+        {
+            transactionDetailRepository.Dispose ();
+            productRepository.Dispose ();
+            transactionRepository.Dispose ();
+        }
 
         public ReportModel GetAllProductList(DateTime datetime)
         {
@@ -61,18 +69,23 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             return Model;           
         }
 
+        public ReportModel GetAllStats(DateTime dateTime)
+        {
 
-
-
-
-
-
-
-
-
-
-
-
-
+            double totalCost = 0;
+            //get the cost and revenue and total of all products sold
+            foreach (ProductSoldDataTransferObject product in Model.ProductList!)
+            {
+                Model.TotalRevenue += product.ProductSales;
+                Model.NumberOfProductsSold += product.ProductSold;
+                totalCost += product.UnitCost;
+            }
+            //get the profit
+            Model.TotalProfit = Model.TotalRevenue - totalCost;
+            //get the total number of transaction
+            List<Transaction> transactions = transactionRepository.GetAllTransactionByYearMonth(dateTime);
+            Model.NumberOfTransactionsDone = transactions.Count;
+            return Model;
+        }
     }
 }

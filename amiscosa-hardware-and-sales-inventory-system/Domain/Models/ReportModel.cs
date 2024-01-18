@@ -5,7 +5,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.Models
 {
     public class ReportModel
     {
-        public int TotalRevenue { get; set; }
+        public double TotalRevenue { get; set; }
+        public double TotalProfit { get; set; }
         public int NumberOfProductsSold { get; set; }
         public int NumberOfTransactionsDone { get; set; }
         public List<ProductSoldDataTransferObject>? ProductList { get; set; }
