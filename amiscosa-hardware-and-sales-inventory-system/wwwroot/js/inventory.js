@@ -7,7 +7,7 @@
 
 })
 
-var productInfo = [
+/*var productInfo = [
     {
         "productID": "1",
         "productName": "Hammer",
@@ -59,7 +59,7 @@ var productInfo = [
         "isAvailable": true
     }
 ]
-
+*/
 function setupRestockForm() {
     var restockItemButton = document.querySelector('.restock-product')
     restockItemButton.addEventListener('click', function (e) {
@@ -121,6 +121,8 @@ function setupRestockForm() {
                 </form>
             </div>
         `
+
+        getManufacturerList();
 
         document.body.append(restockItemPopupOverlay);
 
@@ -287,7 +289,9 @@ function setupAddItemForm() {
                         </div>
                         <div>
                             <label for="productManufacturer">Manufacturer:</label>                         
-                            <input type="text" id="productManufacturer" name="productManufacturer" value="" />
+                            <select id="productManufacturer" name="productManufacturer">
+
+                            </select>
                         </div>
                     </div>
                 
@@ -298,6 +302,8 @@ function setupAddItemForm() {
                 </form>
             </div>
         `
+
+        getManufacturerList();
         document.body.append(addItemPopupOverlay);
 
         // Event listener for submitting added product data
@@ -453,7 +459,9 @@ function setupEditItemForm() {
 
                             <div>
                                 <label for="productManufacturer">Manufacturer:</label>
-                                <input type="text" id="productManufacturer" name="productManufacturer" value="${productManufacturer}" />
+                                <select id="productManufacturer" name="productManufacturer">
+
+                                </select>
                             </div>                          
                         </div>
                     
@@ -463,6 +471,8 @@ function setupEditItemForm() {
                     </form>
                 </div>
             `;
+
+            getEditManufacturerList(productManufacturer);
 
             document.body.append(editPopupOverlay);
 
@@ -648,6 +658,74 @@ function delProductSendData(productData) {
             console.error('There was a problem with the fetch operation:', error);
         });
 }
+
+
+function getManufacturerList() {
+    // Fetch manufacturers from the server
+    fetch('/Home/GetManufacturerList')
+        .then(response => response.json())
+        .then(manufacturerList => {
+            // Call a function to populate the manufacturer dropdown
+            populateManufacturerDropdown(manufacturerList);
+        })
+        .catch(error => {
+            console.error('Error fetching manufacturers:', error);
+        });
+}
+
+function populateManufacturerDropdown(manufacturerList) {
+    // Get the select element
+    var manufacturerDropdown = document.getElementById('productManufacturer');
+
+    // Clear existing options
+    manufacturerDropdown.innerHTML = `<option value="" disabled selected hidden>Manufacturer</option>`;
+
+
+    // Populate options from the manufacturer list
+    manufacturerList.forEach(manufacturer => {
+        var option = document.createElement('option');
+        option.value = manufacturer.manufacturerID;
+        option.textContent = manufacturer.manufacturerName;
+        manufacturerDropdown.appendChild(option);
+    });
+}
+
+function getEditManufacturerList(productManufacturer) {
+    // Fetch manufacturers from the server
+    fetch('/Home/GetManufacturerList')
+        .then(response => response.json())
+        .then(manufacturerList => {
+            // Find the manufacturer in the list based on the given name
+            var selectedManufacturer = manufacturerList.find(manufacturer => manufacturer.manufacturerName === productManufacturer);
+
+            // Call a function to populate the manufacturer dropdown with the default option
+            populateEditManufacturerDropdown(manufacturerList, selectedManufacturer);
+        })
+        .catch(error => {
+            console.error('Error fetching manufacturers:', error);
+        });
+}
+
+function populateEditManufacturerDropdown(manufacturerList, selectedManufacturer) {
+    var manufacturerDropdown = document.getElementById('productManufacturer');
+    manufacturerDropdown.innerHTML = ''; // Clear existing options
+
+    // Populate options from the manufacturer list
+    manufacturerList.forEach(manufacturer => {
+        var option = document.createElement('option');
+        option.value = manufacturer.manufacturerID;
+        option.textContent = manufacturer.manufacturerName;
+
+        // Set the default option if it matches the selected manufacturer
+        if (selectedManufacturer && manufacturer.manufacturerID === selectedManufacturer.manufacturerID) {
+            option.selected = true;
+        }
+
+        manufacturerDropdown.appendChild(option);
+    });
+}
+
+
 
 // Function to apply error styles to input fields
 function applyErrorStyles(elementId) {

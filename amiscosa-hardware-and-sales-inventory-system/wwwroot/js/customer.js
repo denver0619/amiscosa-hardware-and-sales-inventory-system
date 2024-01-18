@@ -247,11 +247,12 @@ function setupEditCustomerForm() {
 
                 // Create an object with the added product data
                 var updatedCustomerData = {
-                    firstName: firstName,
-                    middleName: middleName,
-                    lastName: lastName,
-                    address: address,
-                    contact: contact
+                    CustomerId: customerID,
+                    CustomerFName: firstName,
+                    CustomerMName: middleName,
+                    CustomerLName: lastName,
+                    CustomerAddress: address,
+                    CustomerContact: contact
                 };
 
                 console.log(updatedCustomerData);
@@ -259,6 +260,7 @@ function setupEditCustomerForm() {
                 // If no error submit data to server
                 // TO BE CHANGED
                 if (isError == false) {
+                    editCustomerFormSendData(updatedCustomerData);
                     editCustomerPopupOverlay.remove();
                 }
 
@@ -289,6 +291,25 @@ function addCustomerFormSendData(addedCustomerData) {
             location.reload();
             console.log('Product added successfully:', data);
             
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function editCustomerFormSendData(updatedCustomerData) {
+    fetch('/Home/EditCustomer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedCustomerData)
+    })
+        .then(data => {
+            location.reload();
+            console.log('Product added successfully:', data);
+
             // Optionally, perform actions after successful product addition
         })
         .catch(error => {

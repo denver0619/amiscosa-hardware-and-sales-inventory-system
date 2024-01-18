@@ -13,14 +13,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         private TransactionDetailRepository transactionDetailRepository;
         private ProductRepository productRepository;
         
-        public ReportService ()
+        public ReportService (DateTime dateTime)
         {
             transactionRepository = new TransactionRepository ();
             transactionDetailRepository = new TransactionDetailRepository ();
             productRepository = new ProductRepository ();
             Model = new ReportModel();
-            Model = GetAllProductList(DateTime.Now);
-            GetAllStats (DateTime.Now);
+            Model = GetAllProductList(dateTime);
+            GetAllStats (dateTime);
  
         }
 

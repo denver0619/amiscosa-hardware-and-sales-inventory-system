@@ -897,6 +897,60 @@ nav {
             cursor: pointer;
         }
 
+/* Manufacturer */
+.add-manufacturer {
+    margin-top: -60px;
+}
+
+.content-container #manufacturer-table {
+    width: 100%;
+    position: relative;
+}
+
+    .content-container #manufacturer-table thead {
+        height: 60px;
+        position: sticky;
+        top: 65px;
+        z-index: 1;
+        background-color: var(--bg-white);
+    }
+
+        .content-container #manufacturer-table thead th {
+            text-align: left;
+            padding: 20px 10px;
+        }
+
+            .content-container #manufacturer-table thead th:last-child {
+                text-align: left;
+            }
+
+    .content-container #manufacturer-table tr {
+        height: 60px;
+        border-bottom: 0.5px solid var(--border-gray);
+    }
+        .content-container #manufacturer-table tr td button.edit-manufacturer {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #1885F2;
+            border: none;
+            cursor: pointer;
+        }
+
+        .content-container #manufacturer-table tr td button.del-manufacturer {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #E60B2F;
+            cursor: pointer;
+        }
+
 /* Transaction History */
 
 #transaction-history-table thead tr th:nth-child(1) {
@@ -1230,7 +1284,8 @@ nav {
         width: 100%;
     }
 
-    .popupCardFormContainer .form-row input[type='text'] {
+    .popupCardFormContainer .form-row input[type='text'],
+    .popupCardFormContainer .form-row select {
         width: 100%;
         height: 30px;
         border-radius: 5px;

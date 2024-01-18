@@ -36,7 +36,7 @@ internal class Program
             name: "default",
             pattern: "{controller=Account}/{action=Login}/{id?}");
 
-        OpenBrowser("http://localhost:5000");
+        /*OpenBrowser("http://localhost:5000");*/
         app.Run();
     }
     public static void OpenBrowser(string url)

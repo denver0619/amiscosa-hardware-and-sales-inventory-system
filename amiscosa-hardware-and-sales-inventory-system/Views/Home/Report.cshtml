@@ -1,6 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Analytics";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @model amiscosa_hardware_and_sales_inventory_system.Domain.Models.ReportModel;
+    int counter = 1;
 }
 
 <div class="content-title">
@@ -26,30 +28,30 @@
                 </defs>
             </svg>
             <select name="month-dropdown" id="month-dropdown">
-                <option>January 2024</option>
-                <option>February 2024</option>
-                <option>March 2024</option>
-                <option>April 2024</option>
-                <option>May 2024</option>
-                <option>June 2024</option>
-                <option>July 2024</option>
-                <option>August 2024</option>
-                <option>September 2024</option>
-                <option>October 2024</option>
-                <option>November 2024</option>
-                <option>December 2024</option>
+                <option value="2024-01-01">January 2024</option>
+                <option value="2024-02-01">February 2024</option>
+                <option value="2024-03-01">March 2024</option>
+                <option value="2024-04-01">April 2024</option>
+                <option value="2024-05-01">May 2024</option>
+                <option value="2024-06-01">June 2024</option>
+                <option value="2024-07-01">July 2024</option>
+                <option value="2024-08-01">August 2024</option>
+                <option value="2024-09-01">September 2024</option>
+                <option value="2024-10-01">October 2024</option>
+                <option value="2024-11-01">November 2024</option>
+                <option value="2024-12-01">December 2024</option>
             </select>
         </div>
 
         <div class="revenue-and-profit">
             <div class="total-revenue">
                 <p>Total Revenue</p>
-                <h1>₱ 99999.99</h1>
+                <h1>₱ @Model.TotalRevenue</h1>
             </div>
 
             <div class="total-profit">
                 <p>Total Profit</p>
-                <h1>₱ 99999.99</h1>
+                <h1>₱ @Model.TotalProfit</h1>
             </div>
         </div>
 
@@ -74,7 +76,7 @@
                     </svg>
                     Product Sold
                 </p>
-                <h1>1457</h1>
+                <h1>@Model.NumberOfProductsSold</h1>
             </div>
             <div>
                 <p>
@@ -97,7 +99,7 @@
                     </svg>
                     Transactions
                 </p>
-                <h1>692</h1>
+                <h1>@Model.NumberOfTransactionsDone</h1>
             </div>
         </div>
 
@@ -113,12 +115,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Hammer</td>
-                            <td>119</td>
-                            <td>35700.00</td>
-                        </tr>
+                        
+                        @foreach(amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects.ProductSoldDataTransferObject productSold in Model.ProductList)
+                        {
+                            <tr>
+                                <td>@counter</td>
+                                <td>@productSold.ProductName</td>
+                                <td>@productSold.ProductSold</td>
+                                <td>@productSold.ProductSales</td>
+                            </tr>
+
+                            counter++;
+                        }
+                        
                     </tbody>
                 </table>
             </div>
