@@ -97,16 +97,13 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         [HttpPost]
         public IActionResult SendTransaction([FromBody] TransactionDataTransferObject transactionDataTransferObject)
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
                 Debug.WriteLine("Model state errors: " + string.Join(", ", errors));
                 return BadRequest(ModelState);
-            }
+            }*/
 
-            Debug.WriteLine(1);
-            Debug.WriteLine(JsonSerializer.Serialize(transactionDataTransferObject));
-            Debug.WriteLine(2);
             TransactionDataTransferObject transaction = transactionDataTransferObject;
             transaction.TransactionData!.TransactionDate = DateTime.Now;
 
@@ -208,7 +205,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         }
 
         public IActionResult EditCustomer([FromBody] Customer customerData) {
-            Debug.WriteLine(1);
             CustomerService customerService = new CustomerService();
             customerService.UpdateCustomer(customerData);
             customerService.Dispose();
@@ -252,8 +248,6 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             ReportService reportService = new ReportService(dateTime);
             ReportModel reportModel = reportService.Model;
             reportService.Dispose();
-
-            Debug.WriteLine(JsonSerializer.Serialize(reportModel));
 
             return Json(reportModel);
         }

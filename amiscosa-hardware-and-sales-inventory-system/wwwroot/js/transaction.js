@@ -428,13 +428,9 @@ function updateTotalPrice(input) {
 
 
 function setupTransactionConfirmation() {
-    console.log("setup")
-   
-
     // Add an event listener for the Confirm button
     document.querySelector('.confirm-btn').addEventListener('click', function () {
         // Call a function to gather and process the data
-        console.log("click")
 
         gatherAndProcessData();
     });
@@ -495,10 +491,6 @@ function gatherAndProcessData() {
         TransactionData: transactionData,
         TransactionDetails: productsData
     };
-
-
-
-    console.log(requestData)
 
     fetch('/Home/SendTransaction', {
         method: 'POST',

@@ -210,7 +210,6 @@ function setupEditManufacturerForm() {
                     ManufacturerAddress: ManufacturerAddress,
                 };
 
-                console.log(updatedManufacturerData);
 
                 // If no error submit data to server
                 // TO BE CHANGED

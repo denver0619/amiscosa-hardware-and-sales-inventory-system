@@ -255,8 +255,6 @@ function setupEditCustomerForm() {
                     CustomerContact: contact
                 };
 
-                console.log(updatedCustomerData);
-
                 // If no error submit data to server
                 // TO BE CHANGED
                 if (isError == false) {

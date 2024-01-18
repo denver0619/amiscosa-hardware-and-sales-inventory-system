@@ -20,7 +20,6 @@ function updateContent() {
     clearTable();
 
     var selectedMonth = document.getElementById("month-dropdown").value;
-    console.log(selectedMonth);
 
     var selectedDate = JSON.stringify(selectedMonth);
     // Make a Fetch request to the controller action
