@@ -145,7 +145,39 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult Manufacturer()
         {
-            return View();
+            ManufacturerService manufacturerService = new ManufacturerService();
+            ManufacturerModel manufacturerModel = manufacturerService.Model;
+            manufacturerService.Dispose();
+
+            return View(manufacturerModel);
+        }
+
+        public IActionResult AddManufacturer([FromBody] Manufacturer manufacturerData)
+        {
+            ManufacturerService manufacturerService = new ManufacturerService();
+            manufacturerService.AddManufacturer(manufacturerData);
+            manufacturerService.Dispose();
+
+            return Ok("Success");
+        }
+
+        public IActionResult EditManufacturer([FromBody] Manufacturer manufacturerData)
+        {
+            ManufacturerService manufacturerService = new ManufacturerService();
+            manufacturerService.EditManufacturer(manufacturerData);
+            manufacturerService.Dispose();
+
+            return Ok("Success");
+        }
+
+        public IActionResult GetManufacturerList()
+        {
+            ManufacturerService manufacturerService = new ManufacturerService();
+            List<Manufacturer> manufacturers = manufacturerService.Model.ManufacturerList!;
+
+            manufacturerService.Dispose();
+
+            return Ok(manufacturers);
         }
 
         public IActionResult TransactionHistory()
@@ -190,10 +222,17 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
             return View(notificationModel);
         }
+
         public IActionResult Report()
         {
-            return View();
+            DateTime dateTime = DateTime.Now;
+            ReportService reportService = new ReportService(dateTime);
+            ReportModel reportModel = reportService.Model;
+            reportService.Dispose();
+
+            return View(reportModel);
         }
+
         public IActionResult Logout()
         {
             return RedirectToAction("Login", "Account");

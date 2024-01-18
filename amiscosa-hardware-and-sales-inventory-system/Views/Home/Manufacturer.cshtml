@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Customer";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    @* @model amiscosa_hardware_and_sales_inventory_system.Domain.Models.ManufacturerModel; *@
+    @model amiscosa_hardware_and_sales_inventory_system.Domain.Models.ManufacturerModel;
 
 }
 
@@ -84,16 +84,16 @@
                 </tr>
             </thead>
             <tbody>
-                @* @if (Model.ManufacturerList != null)
+                @if (Model.ManufacturerList != null)
                 {
-                    foreach (amiscosa_hardware_and_sales_inventory_system.Domain.Entities.Customer customer in Model.CustomerList!)
+                    foreach (amiscosa_hardware_and_sales_inventory_system.Domain.Entities.Manufacturer manufacturer in Model.ManufacturerList!)
                     {
 
                         <tr>
-                            <td>ManufacturerID</td>
-                            <td>ManufacturerName</td>
-                            <td>ManufacturerContact</td>
-                            <td>ManufacturerAddress</td>
+                            <td>@manufacturer.ManufacturerID</td>
+                            <td>@manufacturer.ManufacturerName</td>
+                            <td>@manufacturer.ManufacturerContact</td>
+                            <td>@manufacturer.ManufacturerAddress</td>
                             <td>
                                 <button class="edit-manufacturer">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -132,10 +132,10 @@
                     <tr>
                         <td colspan="5">There are currently no manufacturers</td>
                     </tr>
-                } *@
+                }
 
 
-                <tr>
+                @* <tr>
                     <td>ManufacturerID</td>
                     <td>ManufacturerName</td>
                     <td>ManufacturerContact</td>
@@ -170,7 +170,7 @@
                             </svg>
                         </button>
                     </td>
-                </tr>
+                </tr> *@
 
             </tbody>
         </table>

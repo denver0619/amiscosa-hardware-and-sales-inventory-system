@@ -38,7 +38,7 @@ function setupAddManufacturerForm() {
                  
                 
                     <div class="form-row">
-                        <button id="submitAdd" class="orange-btn medium">Add Customer</button>
+                        <button id="submitAdd" class="orange-btn medium">Add Manufacturer</button>
                     </div>
                     
                 </form> 
@@ -215,6 +215,7 @@ function setupEditManufacturerForm() {
                 // If no error submit data to server
                 // TO BE CHANGED
                 if (isError == false) {
+                    editManufacturerFormSendData(updatedManufacturerData);
                     editManufacturerPopupOverlay.remove();
                 }
 
@@ -240,6 +241,25 @@ function addManufacturerFormSendData(addedManufacturerData) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(addedManufacturerData)
+    })
+        .then(data => {
+            location.reload();
+            console.log('Product added successfully:', data);
+
+            // Optionally, perform actions after successful product addition
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}
+
+function editManufacturerFormSendData(updatedManufacturerData) {
+    fetch('/Home/EditManufacturer', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedManufacturerData)
     })
         .then(data => {
             location.reload();
