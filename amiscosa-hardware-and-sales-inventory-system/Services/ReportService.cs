@@ -69,7 +69,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
                 productSolds.Add(productsold);//append ung mga product into list
             }
 
-            Model.ProductList = productSolds;
+            Model.ProductList = productSolds.OrderByDescending(product => product.ProductSold).ToList();
             return Model;           
         }
 
