@@ -143,6 +143,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return Ok();*/
         }
 
+        public IActionResult Manufacturer()
+        {
+            return View();
+        }
+
         public IActionResult TransactionHistory()
         {
             return View();
@@ -165,6 +170,16 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
             return Ok("Success");
         }
+
+        public IActionResult EditCustomer([FromBody] Customer customerData) {
+            Debug.WriteLine(1);
+            CustomerService customerService = new CustomerService();
+            customerService.UpdateCustomer(customerData);
+            customerService.Dispose();
+
+            return Ok("Success");
+        }
+ 
 
         public IActionResult AlertHistory()
         {
