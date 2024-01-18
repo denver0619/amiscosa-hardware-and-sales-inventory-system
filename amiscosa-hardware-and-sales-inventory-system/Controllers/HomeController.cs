@@ -180,10 +180,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult TransactionHistory()
         {
-            /*TransactionService transactionService = new TransactionService();
-            transactionService.Model.*/
+            TransactionHistoryService transactionHistoryService = new TransactionHistoryService();
+            TransactionHistoryModel transactionHistoryModel = transactionHistoryService.Model;
+            transactionHistoryService.Dispose();
 
-            return Ok();
+            return View(transactionHistoryModel);
         }
 
         public IActionResult Customer()
@@ -222,14 +223,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
             return View(notificationModel);
         }
-        public IActionResult ReportPreLoad()
-        {
-            // asdasda
-
-
-            return RedirectToAction("Home", "Report", new {});
-        }
-
+        
         public IActionResult Report()
         {
             DateTime dateTime = DateTime.Now;
