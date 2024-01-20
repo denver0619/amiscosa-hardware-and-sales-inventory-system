@@ -5,6 +5,8 @@
     
 })
 
+// Target add-customer button then add event listener
+// Show pop up form on click then send it to controller
 function setupAddCustomerForm() {
     var addCustomerButton = document.querySelector('.add-customer');
     addCustomerButton.addEventListener('click', function (e) {
@@ -133,6 +135,8 @@ function setupAddCustomerForm() {
     })
 }
 
+// Target edit-customer button then add event listener
+// Show pop up form on click then send it to controller
 function setupEditCustomerForm() {
     var editButtons = document.querySelectorAll('.edit-customer')
 
@@ -277,6 +281,7 @@ function setupEditCustomerForm() {
 
 }
 
+// Send customer data to controller
 function addCustomerFormSendData(addedCustomerData) {
     fetch('/Home/AddCustomer', {
         method: 'POST',
@@ -296,6 +301,7 @@ function addCustomerFormSendData(addedCustomerData) {
         });
 }
 
+// Send updated customer data to controller
 function editCustomerFormSendData(updatedCustomerData) {
     fetch('/Home/EditCustomer', {
         method: 'POST',
@@ -314,6 +320,8 @@ function editCustomerFormSendData(updatedCustomerData) {
             console.error('There was a problem with the fetch operation:', error);
         });
 }
+
+// Function to apply error styles to input fields
 function applyErrorStyles(elementId) {
     var element = document.getElementById(elementId);
     element.style.border = '1px solid red';

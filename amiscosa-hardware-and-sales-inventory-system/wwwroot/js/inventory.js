@@ -7,59 +7,10 @@
 
 })
 
-/*var productInfo = [
-    {
-        "productID": "1",
-        "productName": "Hammer",
-        "quantity": 10,
-        "unitCost": 150.75,
-        "unitPrice": 199.99,
-        "measurement": "Each",
-        "manufacturerID": "ABC Hardware",
-        "isAvailable": true
-    },
-    {
-        "productID": "2",
-        "productName": "Screwdriver Set",
-        "quantity": 20,
-        "unitCost": 75.25,
-        "unitPrice": 99.99,
-        "measurement": "Set",
-        "manufacturerID": "XYZ Tools",
-        "isAvailable": true
-    },
-    {
-        "productID": "3",
-        "productName": "Plywood Sheet",
-        "quantity": 5,
-        "unitCost": 300.50,
-        "unitPrice": 399.99,
-        "measurement": "Sheet",
-        "manufacturerID": "DEF Lumber",
-        "isAvailable": false
-    },
-    {
-        "productID": "4",
-        "productName": "Paint Roller Kit",
-        "quantity": 15,
-        "unitCost": 50.90,
-        "unitPrice": 69.99,
-        "measurement": "Kit",
-        "manufacturerID": "LMN Supplies",
-        "isAvailable": true
-    },
-    {
-        "productID": "5",
-        "productName": "Cordless Drill",
-        "quantity": 8,
-        "unitCost": 200.25,
-        "unitPrice": 259.99,
-        "measurement": "Each",
-        "manufacturerID": "GHI Tools",
-        "isAvailable": true
-    }
-]
-*/
+// Target restock-product button and add a click event listener
+// Upon clicking show a pop up form 
+// Get all manufacturer to show as a selection list
+// Can be closed be either clicking the x button or submit button
 function setupRestockForm() {
     var restockItemButton = document.querySelector('.restock-product')
     restockItemButton.addEventListener('click', function (e) {
@@ -123,24 +74,13 @@ function setupRestockForm() {
         `
 
         getManufacturerList();
-
         document.body.append(restockItemPopupOverlay);
-
         setupProductRestockSearchSuggestion();
+
         document.querySelector('#submitRestock').addEventListener('click', function (e) {
-
             e.preventDefault();
-
-
-            // ADD VALIDATION CHECKS
-
-            // If no error submit data to server
-            // TO BE CHANGED
-
             restockItemPopupOverlay.remove();
 
-
-            // Handle exit from edit
         });
 
         document.getElementById('exitPopupCard').addEventListener('click', function () {
@@ -149,6 +89,7 @@ function setupRestockForm() {
     })
 }
 
+// Shows search suggestion based on what is typed on the search box
 function setupProductRestockSearchSuggestion() {
     var searchProductInput = document.querySelector("#search-restock");
     var searchSuggestionContainer = document.querySelector(".search-restock-suggestion-container");
@@ -158,8 +99,6 @@ function setupProductRestockSearchSuggestion() {
     });
 
     searchProductInput.addEventListener("input", function () {
-        // Clear the existing timeout if any
-        /*clearTimeout(hideSuggestionTimeout);*/
         showProductRestockSuggestion();
     });
 
@@ -173,9 +112,9 @@ function setupProductRestockSearchSuggestion() {
     });
 
     searchProductInput.addEventListener("blur", function () {
-        /*hideSuggestionTimeout = setTimeout(function () {
+        hideSuggestionTimeout = setTimeout(function () {
             hideProductRestockSuggestion();
-        }, 200);*/
+        }, 200);
     });
 }
 
@@ -222,6 +161,7 @@ function fillWithProductDetails(clickedCard) {
     hideProductRestockSuggestion();
 }
 
+// Upon Selecting a product, show product info
 function selectProductRestock(productID) {
 
     // Find the selected product in the productInfo array
@@ -243,7 +183,10 @@ function selectProductRestock(productID) {
     }
 }
 
-
+// Target add-product button and add a click event listener
+// Upon clicking show a pop up form
+// Get all manufacturer to show as a selection list
+// Can be closed by either clicking the x button or submit button
 function setupAddItemForm() {
     var addItemButton = document.querySelector('.add-product')
 
@@ -399,6 +342,10 @@ function setupAddItemForm() {
     });
 }
 
+// Target all edit-product button and add a click event listener
+// Upon clicking show a pop up form
+// Get all manufacturer to show as a selection list
+// Can be closed be either clicking the x button or submit button
 function setupEditItemForm() {
 
     var editButtons = document.querySelectorAll('.edit-product');
@@ -571,6 +518,8 @@ function setupEditItemForm() {
     })
 }
 
+// Target all del-product button and add a click event listener
+// Upon Clicking get all the information of product then set IsAvailable to false then send data to controller
 function setupDelButton() {
     var delButtons = document.querySelectorAll('.del-product');
     delButtons.forEach(function (delButton) {
@@ -605,6 +554,7 @@ function setupDelButton() {
     })
 }
 
+// send addedProductData to Controller
 function addItemFormSendData(addedProductData) {
     fetch('/Home/AddInventoryProduct', {
         method: 'POST',
@@ -623,6 +573,7 @@ function addItemFormSendData(addedProductData) {
         });
 }
 
+// send editProductData to Controller
 function editItemFormSendData(editProductData) {
     fetch('/Home/EditInventoryProduct', {
         method: 'POST',
@@ -641,6 +592,7 @@ function editItemFormSendData(editProductData) {
         });
 }
 
+// send productData to Controller
 function delProductSendData(productData) {
     fetch('/Home/DeleteProduct', {
         method: 'POST',
@@ -659,7 +611,7 @@ function delProductSendData(productData) {
         });
 }
 
-
+// Get the manufacturerList from the controller
 function getManufacturerList() {
     // Fetch manufacturers from the server
     fetch('/Home/GetManufacturerList')
@@ -673,11 +625,11 @@ function getManufacturerList() {
         });
 }
 
+// insert values from list into the dropdown
 function populateManufacturerDropdown(manufacturerList) {
     // Get the select element
     var manufacturerDropdown = document.getElementById('productManufacturer');
 
-    // Clear existing options
     manufacturerDropdown.innerHTML = `<option value="" disabled selected hidden>Manufacturer</option>`;
 
 
@@ -690,6 +642,7 @@ function populateManufacturerDropdown(manufacturerList) {
     });
 }
 
+// Get the manufacturerList from the controller
 function getEditManufacturerList(productManufacturer) {
     // Fetch manufacturers from the server
     fetch('/Home/GetManufacturerList')
@@ -706,6 +659,7 @@ function getEditManufacturerList(productManufacturer) {
         });
 }
 
+// insert values from list into the dropdown set initial value based on the selectedManufacturer
 function populateEditManufacturerDropdown(manufacturerList, selectedManufacturer) {
     var manufacturerDropdown = document.getElementById('productManufacturer');
     manufacturerDropdown.innerHTML = ''; // Clear existing options

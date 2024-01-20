@@ -5,6 +5,8 @@
 
 })
 
+// Popup form once add-manufacturer button was clicked
+// Once submit is clicked send data to controller
 function setupAddManufacturerForm() {
     var addCustomerButton = document.querySelector('.add-manufacturer');
     addCustomerButton.addEventListener('click', function (e) {
@@ -110,6 +112,8 @@ function setupAddManufacturerForm() {
     })
 }
 
+// Popup form once edit-manufacturer button was clicked
+// Once submit is clicked send data to controller
 function setupEditManufacturerForm() {
     var editButtons = document.querySelectorAll('.edit-manufacturer')
 
@@ -233,6 +237,7 @@ function setupEditManufacturerForm() {
 
 }
 
+// Send the data to the controller
 function addManufacturerFormSendData(addedManufacturerData) {
     fetch('/Home/AddManufacturer', {
         method: 'POST',
@@ -252,6 +257,7 @@ function addManufacturerFormSendData(addedManufacturerData) {
         });
 }
 
+// Send the data to the controller
 function editManufacturerFormSendData(updatedManufacturerData) {
     fetch('/Home/EditManufacturer', {
         method: 'POST',
@@ -271,6 +277,7 @@ function editManufacturerFormSendData(updatedManufacturerData) {
         });
 }
 
+// Function to apply error styles to input fields
 function applyErrorStyles(elementId) {
     var element = document.getElementById(elementId);
     element.style.border = '1px solid red';

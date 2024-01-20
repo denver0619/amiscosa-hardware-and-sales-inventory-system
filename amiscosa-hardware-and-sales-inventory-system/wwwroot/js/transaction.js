@@ -1,16 +1,13 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
-    console.log(1)
-
+﻿
+// Get the customerList and productList from controller
+document.addEventListener('DOMContentLoaded', function () {
 
     fetch('/Home/GetTransactionDataList')
         .then(response => response.json())
         .then(data => {
-            // Update customerInfo and productInfo with the fetched data
+
             customerInfo = data.customers;
             productInfo = data.products;
-            /*console.log(data)
-            console.log(customerInfo)
-            console.log(customerInfo)*/
 
             setupCustomerSearchSuggestion();
             setupProductSearchSuggestion();
@@ -25,106 +22,7 @@
     setupTransactionConfirmation();
 });
 
-/*var customerInfo = [
-    {
-        customerID: 1,
-        customerFName: "Hazee Marie Joy Batumbakal",
-        customerMName: "Daileg",
-        customerLName: "Ilao",
-        customerAddress: "Mariveles, Bataan",
-        customerContact: "09453571568"
-    },
-    {
-        customerID: 2,
-        customerFName: "John Drexler",
-        customerMName: "Gueco",
-        customerLName: "Cubebe",
-        customerAddress: "Limay, Bataan",
-        customerContact: "09764659815"
-    },
-    {
-        customerID: 3,
-        customerFName: "Anna",
-        customerMName: "Marie",
-        customerLName: "Smith",
-        customerAddress: "Manila, Philippines",
-        customerContact: "09123456789"
-    },
-    {
-        customerID: 4,
-        customerFName: "Michael",
-        customerMName: "James",
-        customerLName: "Johnson",
-        customerAddress: "Quezon City, Philippines",
-        customerContact: "09234567890"
-    },
-    {
-        customerID: 5,
-        customerFName: "Elena",
-        customerMName: "Grace",
-        customerLName: "Garcia",
-        customerAddress: "Makati, Philippines",
-        customerContact: "09345678901"
-    }
-
-]*/
-
-/*var productInfo = [
-    {
-        "productID": 1,
-        "productName": "Hammer",
-        "quantity": 10,
-        "unitCost": 150.75,
-        "unitPrice": 199.99,
-        "measurement": "Each",
-        "manufacturerID": "ABC Hardware",
-        "isAvailable": true
-    },
-    {
-        "productID": 2,
-        "productName": "Screwdriver Set",
-        "quantity": 20,
-        "unitCost": 75.25,
-        "unitPrice": 99.99,
-        "measurement": "Set",
-        "manufacturerID": "XYZ Tools",
-        "isAvailable": true
-    },
-    {
-        "productID": 3,
-        "productName": "Plywood Sheet",
-        "quantity": 5,
-        "unitCost": 300.50,
-        "unitPrice": 399.99,
-        "measurement": "Sheet",
-        "manufacturerID": "DEF Lumber",
-        "isAvailable": false
-    },
-    {
-        "productID": 4,
-        "productName": "Paint Roller Kit",
-        "quantity": 15,
-        "unitCost": 50.90,
-        "unitPrice": 69.99,
-        "measurement": "Kit",
-        "manufacturerID": "LMN Supplies",
-        "isAvailable": true
-    },
-    {
-        "productID": 5,
-        "productName": "Cordless Drill",
-        "quantity": 8,
-        "unitCost": 200.25,
-        "unitPrice": 259.99,
-        "measurement": "Each",
-        "manufacturerID": "GHI Tools",
-        "isAvailable": true
-    }
-]*/
-
-/*var customerInfo = []*/
-/*var productInfo = []*/
-
+// Setup suggestions for customer 
 function setupCustomerSearchSuggestion() {
     var searchCustomerInput = document.querySelector("#search-customer")
     var searchSuggestionContainer = document.querySelector(".search-customer-form .search-suggestion-container");
@@ -150,12 +48,9 @@ function setupCustomerSearchSuggestion() {
         }, 200);
     });
 
-
-
-
-
 }
 
+// Show list of suggestion
 function showCustomerSuggestion() {
     var searchSuggestionContainer = document.querySelector(".search-customer-form .search-suggestion-container");
     var inputValue = document.getElementById("search-customer").value.toLowerCase();
@@ -186,6 +81,7 @@ function showCustomerSuggestion() {
     });
 }
 
+// Hide list of suggestoin
 function hideCustomerSuggestion() {
     var searchSuggestionContainer = document.querySelector(".search-customer-form .search-suggestion-container");
     var searchSuggestionCards = document.querySelectorAll(".search-suggestion-card");
@@ -197,6 +93,7 @@ function hideCustomerSuggestion() {
     searchSuggestionContainer.style.display = "none";
 }
 
+// Once clicked autofill the input field
 function fillInputWithCustomerName(clickedCard) {
     var customerName = clickedCard.querySelector(".name").textContent;
     document.getElementById("search-customer").value = customerName;
@@ -205,7 +102,7 @@ function fillInputWithCustomerName(clickedCard) {
 
 
 
-
+// Setup suggestions for products 
 
 function setupProductSearchSuggestion() {
     var searchProductInput = document.querySelector("#select-product");
@@ -237,6 +134,7 @@ function setupProductSearchSuggestion() {
     });
 }
 
+// Show list of suggestion
 function showProductSuggestion() {
     var searchSuggestionContainer = document.querySelector(".select-product-form .search-suggestion-container");
     var inputValue = document.getElementById("select-product").value.toLowerCase();
@@ -269,11 +167,13 @@ function showProductSuggestion() {
     });
 }
 
+// Hide list of suggestoin
 function hideProductSuggestion() {
     var searchSuggestionContainer = document.querySelector(".select-product-form .search-suggestion-container");
     searchSuggestionContainer.style.display = "none";
 }
 
+// Once clicked autofill the input field
 function fillInputWithproductName(clickedCard) {
 
     var productName = clickedCard.querySelector(".name").textContent;
@@ -284,7 +184,7 @@ function fillInputWithproductName(clickedCard) {
 
 
 
-
+// Finalize selection by showing it
 function selectCustomer() {
     document.getElementById('select-customer').addEventListener('click', function (event) {
         event.preventDefault(); // Prevent form submission (if the form has an action attribute)
@@ -297,12 +197,11 @@ function selectCustomer() {
     });
 }
 
+// Add the selected product to table
 function selectProduct(productID) {
     // Find the selected product in the productInfo array
     var selectedProduct = productInfo.find(product => product.productID === productID);
 
-/*    console.log(productID)
-    console.log(selectedProduct)*/
     // Check if the product is found
     if (selectedProduct) {
         // Get the table body element
@@ -338,7 +237,7 @@ function selectProduct(productID) {
     }
 }
 
-
+// Remove product from table
 function removeProduct() {
     var tableBody = document.querySelector("#product-listing tbody");
 
@@ -346,7 +245,6 @@ function removeProduct() {
         var deleteButton = event.target.closest(".del-listing");
 
         if (deleteButton) {
-            console.log("Remove button clicked");
 
             var row = deleteButton.closest("tr");
             if (row) {
@@ -357,7 +255,7 @@ function removeProduct() {
     });
 }
 
-
+// Customize the input type number field
 function setupCustomNumberInput() {
     var tableBody = document.querySelector("#product-listing tbody");
 
@@ -385,8 +283,8 @@ function setupCustomNumberInput() {
 
     document.querySelectorAll('.custom-number-input').forEach(function (inputGroup) {
         const inputField = inputGroup.querySelector('input[type="number"]');
-        const decrementButton = inputGroup.querySelector('.decrement');
-        const incrementButton = inputGroup.querySelector('.increment');
+        /*const decrementButton = inputGroup.querySelector('.decrement');
+        const incrementButton = inputGroup.querySelector('.increment');*/
 
         inputField.addEventListener("input", function (e) {
             e.preventDefault();
@@ -410,6 +308,7 @@ function setupCustomNumberInput() {
     });
 }
 
+// Do calculatin every time quantity was changed
 function updateTotalPrice(input) {
     const row = input.closest('tr');
     const quantity = parseFloat(input.value);
@@ -426,7 +325,7 @@ function updateTotalPrice(input) {
     totalPriceElement.textContent = totalPrice.toFixed(2);
 }
 
-
+// Add event lsitener to confirm transaction button
 function setupTransactionConfirmation() {
     // Add an event listener for the Confirm button
     document.querySelector('.confirm-btn').addEventListener('click', function () {
@@ -437,7 +336,7 @@ function setupTransactionConfirmation() {
 
 }
 
-
+// Send data to controller
 function gatherAndProcessData() {
 
     var selectedCustomerName = document.getElementById('search-customer').value;

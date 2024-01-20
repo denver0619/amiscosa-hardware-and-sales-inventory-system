@@ -113,46 +113,7 @@
                     <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                @* <tr>
-                    <td>0001</td>
-                    <td>BDCD8K - Power Drill</td>
-                    <td>5</td>
-                    <td>3600</td>
-                    <td>4500</td>
-                    <td></td>
-                    <td>Black & Decker</td>
-                    <td>
-                        <button class="edit-product">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <g clip-path="url(#clip0_11_172)">
-                                    <path d="M5 12.24L0.5 13.5L1.76 9.00002L10 0.80002C10.0931 0.704774 10.2044 0.629095 10.3271 0.577428C10.4499 0.52576 10.5818 0.499146 10.715 0.499146C10.8482 0.499146 10.9801 0.52576 11.1029 0.577428C11.2256 0.629095 11.3369 0.704774 11.43 0.80002L13.2 2.58002C13.2937 2.67298 13.3681 2.78359 13.4189 2.90544C13.4697 3.0273 13.4958 3.15801 13.4958 3.29002C13.4958 3.42203 13.4697 3.55274 13.4189 3.6746C13.3681 3.79646 13.2937 3.90706 13.2 4.00002L5 12.24Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_11_172">
-                                        <rect width="14" height="14" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </button>
-                        <button class="del-product">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                                <g clip-path="url(#clip0_11_184)">
-                                    <path d="M1 3.5H13" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M2.5 3.5H11.5V12.5C11.5 12.7652 11.3946 13.0196 11.2071 13.2071C11.0196 13.3946 10.7652 13.5 10.5 13.5H3.5C3.23478 13.5 2.98043 13.3946 2.79289 13.2071C2.60536 13.0196 2.5 12.7652 2.5 12.5V3.5Z" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M4.5 3.5V3C4.5 2.33696 4.76339 1.70107 5.23223 1.23223C5.70107 0.763392 6.33696 0.5 7 0.5C7.66304 0.5 8.29893 0.763392 8.76777 1.23223C9.23661 1.70107 9.5 2.33696 9.5 3V3.5" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M5.5 6.50146V10.503" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M8.5 6.50146V10.503" stroke="white" stroke-linecap="round" stroke-linejoin="round" />
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_11_184">
-                                        <rect width="14" height="14" fill="white" />
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                        </button>
-                    </td>
-                </tr> *@
+            <tbody>               
                 @foreach(amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects.ProductDataTransferObject product in Model.ProductList!)
                 {
                     <tr>

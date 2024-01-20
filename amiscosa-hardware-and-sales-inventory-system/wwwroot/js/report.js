@@ -1,4 +1,6 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿// Get current date upon load
+// Update content every time a dfferent month is selected
+document.addEventListener("DOMContentLoaded", function () {
     // Get current date
     var currentDate = new Date();
     currentDate.setDate(1);
@@ -15,6 +17,8 @@
 
 });
 
+// Update content based on the month selected
+// Send month to controller then update UI content based on that month
 function updateContent() {
     // Clear the table initially
     clearTable();
@@ -62,13 +66,14 @@ function updateContent() {
         });
 }
 
-
+// Clear table content
 function clearTable() {
     // Clear existing rows
     var tableBody = document.getElementById("sales-table-body");
     tableBody.innerHTML = '';
 }
 
+// Update the sales table based on list and calculate how many type of that item was sold
 function updateSalesTable(productList, productTally) {
     // Update the sales table
     var tableBody = document.getElementById("sales-table-body");
