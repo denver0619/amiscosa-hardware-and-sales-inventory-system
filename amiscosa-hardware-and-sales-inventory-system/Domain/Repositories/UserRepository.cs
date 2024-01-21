@@ -3,12 +3,13 @@ using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
 using System.Data;
 using System.Xml.Linq;
 
-/// <summary>
-/// Represents a repository for managing user data in a database.
-/// Implements the <see cref="IUserRepository"/> interface.
-/// </summary>
+
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
+    /// <summary>
+    /// Represents a repository for managing user data in a database.
+    /// Implements the <see cref="IUserRepository"/> interface.
+    /// </summary>
     public class UserRepository : IUserRepository, IDisposable
     {
         private DatabaseHelper<User> databaseHelper;

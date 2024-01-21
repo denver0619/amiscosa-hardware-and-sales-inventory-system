@@ -5,6 +5,10 @@ using amiscosa_hardware_and_sales_inventory_system.Domain.Repositories;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Services
 {
+    /// <summary>
+    /// A service class responsible for managing transactions.
+    /// Implements the <see cref="IDisposable"/> interface to handle resource cleanup.
+    /// </summary>
     public class TransactionService : IDisposable
     {
         private CustomerRepository customerRepository;
@@ -13,6 +17,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
         private TransactionDetailRepository transactionDetailRepository;
         private ManufacturerRepository manufacturerRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TransactionService"/> class.
+        /// Creates instances of repositories and initializes the transaction model.
+        /// </summary>
         public TransactionService()
         {
             customerRepository = new CustomerRepository();
@@ -25,14 +33,25 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             Model = GetAllProductList();
         }
 
+        /// <summary>
+        /// Gets or sets the transaction model associated with the service.
+        /// </summary>
         public TransactionModel Model { get; set; }
 
+        /// <summary>
+        /// Retrieves a transaction model containing all customers.
+        /// </summary>
+        /// <returns>The transaction model with customer information.</returns>
         public TransactionModel GetAllCustomerList()
         {
             Model.CustomerList = customerRepository.GetAllCustomers();
             return Model;
         }
 
+        /// <summary>
+        /// Retrieves a transaction model containing all products with additional information.
+        /// </summary>
+        /// <returns>The transaction model with product information.</returns>
         public TransactionModel GetAllProductList()
         {
             List<Product> products = productRepository.GetAllProducts();
@@ -49,6 +68,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             return Model;
         }
 
+        /// <summary>
+        /// Adds a transaction to the system, updating product quantities and related details.
+        /// </summary>
+        /// <param name="model">The transaction model containing transaction and details information.</param>
         public void AddTransaction(TransactionModel model)
         {
             Model.Transaction = model.Transaction;
@@ -67,6 +90,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             }
         }
 
+        /// <summary>
+        /// Disposes of the resources used by the transaction service, including associated repositories.
+        /// </summary>
         public void Dispose()
         {
             customerRepository.Dispose();

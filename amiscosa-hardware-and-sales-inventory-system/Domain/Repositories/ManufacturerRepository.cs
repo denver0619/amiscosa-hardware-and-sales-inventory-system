@@ -2,12 +2,13 @@
 using amiscosa_hardware_and_sales_inventory_system.Infrastructures;
 using System.Data;
 
-/// <summary>
-/// Represents a repository for managing manufacturer data in a database.
-/// Implements the <see cref="IManufacturerRepository"/> interface.
-/// </summary>
+
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Repositories
 {
+    /// <summary>
+    /// Represents a repository for managing manufacturer data in a database.
+    /// Implements the <see cref="IManufacturerRepository"/> interface.
+    /// </summary>
     public class ManufacturerRepository : IManufacturerRepository, IDisposable
     {
         private DatabaseHelper<Manufacturer> databaseHelper;

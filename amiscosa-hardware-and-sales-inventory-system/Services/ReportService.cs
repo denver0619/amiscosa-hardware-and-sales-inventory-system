@@ -6,13 +6,22 @@ using System;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Services
 {
+    /// <summary>
+    /// A service class responsible for generating reports based on transactions and products.
+    /// Implements the <see cref="IDisposable"/> interface to handle resource cleanup.
+    /// </summary>
     public class ReportService : IDisposable
     {
-        //Declaration of all the repositories needed
+        
         private TransactionRepository transactionRepository;
         private TransactionDetailRepository transactionDetailRepository;
         private ProductRepository productRepository;
-        
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReportService"/> class.
+        /// Creates instances of repositories and initializes the report model with product-related data.
+        /// </summary>
+        /// <param name="dateTime">The date and time for which the report is generated.</param
         public ReportService (DateTime dateTime)
         {
             transactionRepository = new TransactionRepository ();
@@ -24,8 +33,14 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
  
         }
 
-        public ReportModel Model { get; set; } //required; Data na makikita sa UI. Pinapasa sa controller papuntang views.
+        /// <summary>
+        /// Gets or sets the report model associated with the service.
+        /// </summary>
+        public ReportModel Model { get; set; }
 
+        /// <summary>
+        /// Disposes of the resources used by the report service, including associated repositories.
+        /// </summary>
         public void Dispose()
         {
             transactionDetailRepository.Dispose ();
@@ -33,10 +48,15 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
             transactionRepository.Dispose ();
         }
 
+        /// <summary>
+        /// Retrieves a report model containing product-related data for the specified date and time.
+        /// </summary>
+        /// <param name="dateTime">The date and time for which the report is generated.</param>
+        /// <returns>The report model with product-related data.</returns>
         public ReportModel GetAllProductList(DateTime datetime)
         {
-            List<Transaction> transactions = transactionRepository.GetAllTransactionByYearMonth(datetime);// get the list of transaction in the specified date
-            List<ProductSoldDataTransferObject> productSolds = new List<ProductSoldDataTransferObject>();//
+            List<Transaction> transactions = transactionRepository.GetAllTransactionByYearMonth(datetime);
+            List<ProductSoldDataTransferObject> productSolds = new List<ProductSoldDataTransferObject>();
             Model.ProductTally = new Dictionary<string, int> ();
 
             for (int i = 0; i < transactions.Count; i++)
@@ -44,13 +64,13 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
                 List<TransactionDetail> transactiondetails = transactionDetailRepository.GetAllTransactionDetailByTransactionID(transactions[i].TransactionID!);
                 if (transactiondetails != null)
                 {
-                    for (int j = 0; j < transactiondetails.Count; j++)//list of product and quantity bought
+                    for (int j = 0; j < transactiondetails.Count; j++)
                     {
-                        if ( Model.ProductTally!.ContainsKey(transactiondetails[j].ProductID!))//if the product id is in the tally, iaadd lang
+                        if ( Model.ProductTally!.ContainsKey(transactiondetails[j].ProductID!))
                         {
                             Model.ProductTally[transactiondetails[j].ProductID!] = Model.ProductTally[transactiondetails[j].ProductID!] + transactiondetails[j].Quantity;
                         }
-                        else// if not, append the product the id and the quantity
+                        else
                         {
                             Model.ProductTally.Add(transactiondetails[j].ProductID!, transactiondetails[j].Quantity);
                         }
@@ -61,32 +81,37 @@ namespace amiscosa_hardware_and_sales_inventory_system.Services
 
             List<string> productIDs = Model.ProductTally!.Keys.ToList();
 
-            for (int i = 0; i < Model.ProductTally!.Count; i++)// loop sa keys(productID within the Tally). To compute the sales for each product
+            for (int i = 0; i < Model.ProductTally!.Count; i++)
             {
                 ProductSoldDataTransferObject productsold = new ProductSoldDataTransferObject(productRepository.GetProductByID(productIDs[i]));
                 productsold.ProductSold = Model.ProductTally[productIDs[i]];
                 productsold.ProductSales = productsold.ProductSold * productsold.UnitPrice;
-                productSolds.Add(productsold);//append ung mga product into list
+                productSolds.Add(productsold);
             }
 
             Model.ProductList = productSolds.OrderByDescending(product => product.ProductSold).ToList();
             return Model;           
         }
 
+        /// <summary>
+        /// Retrieves a report model containing statistics for the specified date and time.
+        /// </summary>
+        /// <param name="dateTime">The date and time for which the report is generated.</param>
+        /// <returns>The report model with statistics.</returns>
         public ReportModel GetAllStats(DateTime dateTime)
         {
 
             double totalCost = 0;
-            //get the cost and revenue and total of all products sold
+            
             foreach (ProductSoldDataTransferObject product in Model.ProductList!)
             {
                 Model.TotalRevenue += product.ProductSales;
                 Model.NumberOfProductsSold += product.ProductSold;
                 totalCost +=  Model.ProductTally![product.ProductID!]*product.UnitCost;
             }
-            //get the profit
+            
             Model.TotalProfit = Model.TotalRevenue - totalCost;
-            //get the total number of transaction
+            
             List<Transaction> transactions = transactionRepository.GetAllTransactionByYearMonth(dateTime);
             Model.NumberOfTransactionsDone = transactions.Count;
             return Model;

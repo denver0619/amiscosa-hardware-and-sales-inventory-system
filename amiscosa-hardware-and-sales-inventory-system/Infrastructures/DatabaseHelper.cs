@@ -6,11 +6,20 @@ using System.Diagnostics;
 
 namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
 {
+    /// <summary>
+    /// A utility class for interacting with the database, providing methods for CRUD operations.
+    /// Implements the <see cref="IDisposable"/> interface to manage resources.
+    /// </summary>
+    /// <typeparam name="Entity">The type of entity used for database operations.</typeparam>
     public class DatabaseHelper<Entity> : IDisposable
     {
         private IDatabaseConnectionManager _connectionManager;
         private MySqlConnection _connection;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DatabaseHelper{Entity}"/> class.
+        /// Configures the MySQL connection string and initializes the database connection.
+        /// </summary>
         public DatabaseHelper()
         {
             Configuration.MySQL.ConnectionString = "server=26.223.107.167;port=3306;user=root;database=amiscosadatabase;password=;Convert Zero Datetime=True;"; //Temporary
@@ -18,7 +27,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             _connection = _connectionManager.Connection;
         }
 
-        /*public void InsertRecord(string tableName, string fields, List<string> values)*/
+        /// <summary>
+        /// Inserts a record into the specified table with the provided entity data.
+        /// </summary>
+        /// <param name="tableName">The name of the table to insert the record into.</param>
+        /// <param name="entity">The entity representing the data to be inserted.</param>
         public void InsertRecord(string tableName, Entity entity)
         {
             _connection.Open();
@@ -38,6 +51,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             _connection.Close();
         }
 
+        /// <summary>
+        /// Retrieves a DataTable containing records from the specified table based on the provided constraints.
+        /// </summary>
+        /// <param name="tableName">The name of the table to select records from.</param>
+        /// <param name="constraints">The conditions to filter the records.</param>
+        /// <returns>A DataTable containing the selected records.</returns>
         public DataTable SelectRecord(string tableName, string constraints)
         {
             _connection.Open();
@@ -53,6 +72,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             _connection.Close();
             return dataTable;
         }
+
+        /// <summary>
+        /// Retrieves a DataTable containing all records from the specified table.
+        /// </summary>
+        /// <param name="tableName">The name of the table to select all records from.</param>
+        /// <returns>A DataTable containing all records from the specified table.</returns>
         public DataTable SelectAllRecord(string tableName)
         {
             _connection.Open();
@@ -67,6 +92,13 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             _connection.Close();
             return dataTable;
         }
+
+        /// <summary>
+        /// Retrieves a DataTable containing all records from the specified table based on the provided constraints.
+        /// </summary>
+        /// <param name="tableName">The name of the table to select records from.</param>
+        /// <param name="constraints">The conditions to filter the records.</param>
+        /// <returns>A DataTable containing the selected records.</returns>
         public DataTable SelectAllRecordWith(string tableName, string constraints)
         {
             _connection.Open();
@@ -82,7 +114,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return dataTable;
         }
 
-        /*public void UpdateRecord(string tableName, string values, string constraints)*/
+        /// <summary>
+        /// Updates a record in the specified table with the provided entity data.
+        /// </summary>
+        /// <param name="tableName">The name of the table to update the record in.</param>
+        /// <param name="entity">The entity representing the data to be updated.</param>
         public void UpdateRecord(string tableName, Entity entity)
         {
             _connection.Open();
@@ -99,6 +135,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             _connection.Close();
         }
 
+        /// <summary>
+        /// Converts the values of an entity into a string format suitable for an UPDATE SQL query.
+        /// </summary>
+        /// <param name="entity">The entity whose values are to be converted.</param>
+        /// <returns>A string representation of the entity's values for an UPDATE query.</returns>
         public string ConvertUpdateValuesToString(Entity entity)
         {
             Type type = entity!.GetType();
@@ -118,6 +159,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return String.Join(",", output);
         }
 
+        /// <summary>
+        /// Gets the ID-based constraint for an entity in the specified table.
+        /// </summary>
+        /// <param name="tableName">The name of the table to get the constraint for.</param>
+        /// <param name="entity">The entity for which the ID-based constraint is needed.</param>
+        /// <returns>The ID-based constraint for the entity.</returns>
         public string GetIDConstraint (string tableName, Entity entity)
         {
             string output = "";
@@ -133,6 +180,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return output;
         }
 
+        /// <summary>
+        /// Gets the fields for an INSERT SQL query based on the entity and table name.
+        /// </summary>
+        /// <param name="tableName">The name of the table for which to get the fields.</param>
+        /// <param name="entity">The entity for which to get the fields.</param>
+        /// <returns>A string representing the fields for an INSERT query.</returns>
         public string GetInsertFields(string tableName, Entity entity)
         {
             Type type = entity!.GetType();
@@ -146,6 +199,12 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return "(" + String.Join(",", fields) + ")";
         }
 
+        /// <summary>
+        /// Gets the values for an INSERT SQL query based on the provided entities and table name.
+        /// </summary>
+        /// <param name="tableName">The name of the table for which to get the values.</param>
+        /// <param name="entities">The list of entities for which to get the values.</param>
+        /// <returns>A list of strings representing the values for an INSERT query.</returns>
         public List<string> GetInsertValues(String tableName, List<Entity> entities)
         {
             List<string> values = new List<string>();
@@ -187,6 +246,9 @@ namespace amiscosa_hardware_and_sales_inventory_system.Infrastructures
             return values;
         }
 
+        /// <summary>
+        /// Disposes of the resources used by the database helper and closes the database connection.
+        /// </summary>
         public void Dispose()
         {
             if (_connection != null)
