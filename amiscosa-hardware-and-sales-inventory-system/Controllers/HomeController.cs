@@ -5,6 +5,7 @@ using amiscosa_hardware_and_sales_inventory_system.Domain.Models;
 using System.Text.Json;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
+using amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects;
 
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
@@ -72,6 +73,113 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult GetTransactionDataList()
+        {
+            TransactionService transactionService = new TransactionService();
+            List<Product> productList = new List<Product>();
+            foreach (ProductDataTransferObject product in transactionService.Model.ProductList!)
+            {
+                productList.Add(new Product(product));
+            }
+            List<Customer> customerList = transactionService.Model.CustomerList!;         
+
+            var result = new
+            {
+                Products = productList,
+                Customers = customerList
+            };
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public IActionResult SendTransaction([FromBody] TransactionDataTransferObject transactionDataTransferObject)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                Debug.WriteLine("Model state errors: " + string.Join(", ", errors));
+                return BadRequest(ModelState);
+            }
+
+            Debug.WriteLine(1);
+            Debug.WriteLine(JsonSerializer.Serialize(transactionDataTransferObject));
+            Debug.WriteLine(2);
+            TransactionDataTransferObject transaction = transactionDataTransferObject;
+            transaction.TransactionData!.TransactionDate = DateTime.Now;
+
+            TransactionService transactionService = new TransactionService();
+            TransactionModel transactionModel = new TransactionModel();
+            transactionModel.Transaction = transactionDataTransferObject.TransactionData;
+            transactionModel.TransactionDetails = transactionDataTransferObject.TransactionDetails;
+
+            transactionService.AddTransaction(transactionModel);
+            transactionService.Dispose();
+
+            return Ok();
+
+            /*if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
+                Debug.WriteLine("Model state errors: " + string.Join(", ", errors));
+                return BadRequest(ModelState);
+            }
+            TransactionDataTransferObject transactionDTO = JsonSerializer.Deserialize<TransactionDataTransferObject>(transactionDataTransferObject)!;
+            transactionDTO.TransactionData.TransactionDate = DateTime.Now;
+
+            Debug.WriteLine(1);
+            Debug.WriteLine(transactionDataTransferObject);
+            Debug.WriteLine(2);
+
+            TransactionService transactionService = new TransactionService();
+            TransactionModel transactionModel = new TransactionModel();
+            transactionModel.Transaction = transactionDTO.TransactionData;
+            transactionModel.TransactionDetails = transactionDTO.TransactionDetails;
+
+            transactionService.AddTransaction(transactionModel);
+            transactionService.Dispose();
+
+            return Ok();*/
+        }
+
+        public IActionResult Manufacturer()
+        {
+            ManufacturerService manufacturerService = new ManufacturerService();
+            ManufacturerModel manufacturerModel = manufacturerService.Model;
+            manufacturerService.Dispose();
+
+            return View(manufacturerModel);
+        }
+
+        public IActionResult AddManufacturer([FromBody] Manufacturer manufacturerData)
+        {
+            ManufacturerService manufacturerService = new ManufacturerService();
+            manufacturerService.AddManufacturer(manufacturerData);
+            manufacturerService.Dispose();
+
+            return Ok("Success");
+        }
+
+        public IActionResult EditManufacturer([FromBody] Manufacturer manufacturerData)
+        {
+            ManufacturerService manufacturerService = new ManufacturerService();
+            manufacturerService.EditManufacturer(manufacturerData);
+            manufacturerService.Dispose();
+
+            return Ok("Success");
+        }
+
+        public IActionResult GetManufacturerList()
+        {
+            ManufacturerService manufacturerService = new ManufacturerService();
+            List<Manufacturer> manufacturers = manufacturerService.Model.ManufacturerList!;
+
+            manufacturerService.Dispose();
+
+            return Ok(manufacturers);
+        }
+
         public IActionResult TransactionHistory()
         {
             return View();
@@ -95,6 +203,16 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return Ok("Success");
         }
 
+        public IActionResult EditCustomer([FromBody] Customer customerData) {
+            Debug.WriteLine(1);
+            CustomerService customerService = new CustomerService();
+            customerService.UpdateCustomer(customerData);
+            customerService.Dispose();
+
+            return Ok("Success");
+        }
+ 
+
         public IActionResult AlertHistory()
         {
             NotificationService notificationService = new NotificationService();
@@ -104,10 +222,17 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
             return View(notificationModel);
         }
+
         public IActionResult Report()
         {
-            return View();
+            DateTime dateTime = DateTime.Now;
+            ReportService reportService = new ReportService(dateTime);
+            ReportModel reportModel = reportService.Model;
+            reportService.Dispose();
+
+            return View(reportModel);
         }
+
         public IActionResult Logout()
         {
             return RedirectToAction("Login", "Account");

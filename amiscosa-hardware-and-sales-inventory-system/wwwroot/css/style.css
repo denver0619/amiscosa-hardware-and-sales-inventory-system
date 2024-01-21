@@ -210,11 +210,10 @@ nav {
 .utility-buttons {
     display: flex;
     justify-content: flex-end;
-    
 }
 
 .restock-item,
-.add-item{
+.add-item {
     margin-top: -60px;
     margin-left: 10px
 }
@@ -250,89 +249,89 @@ nav {
         background: #888;
     }
 
-    .content-search-and-filter {
+.content-search-and-filter {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #fff;
+    padding-top: 30px;
+}
+
+.search-and-filter {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
+}
+
+    .search-and-filter form {
+        justify-content: flex-end;
+    }
+
+    .search-and-filter .search-bar {
+        display: flex;
+        align-items: center;
+        padding: 5px 15px;
+        width: 320px;
+        margin-right: 20px;
+    }
+
+        .search-and-filter .search-bar input[type='text'] {
+            padding-left: 10px;
+            width: 100%;
+        }
+
+    .search-and-filter .filter .filter-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 1px solid var(--border-gray);
+        color: var(--text-gray);
+        background: #FFF;
+        cursor: pointer;
+    }
+
+        .search-and-filter .filter .filter-btn p {
+            padding-left: 5px;
+        }
+
+    .search-and-filter #search-icon {
+        width: fit-content;
+    }
+
+
+.content-container .bottom-blocker {
+    position: sticky;
+    bottom: 0;
+    height: 30px;
+    background-color: white;
+}
+
+.content-container table {
+    width: 100%;
+    position: relative;
+}
+
+    .content-container table thead {
+        height: 60px;
         position: sticky;
-        top: 0;
-        z-index: 2;
-        background-color: #fff;
-        padding-top: 30px;
+        top: 65px;
+        z-index: 1;
+        background-color: var(--bg-white);
     }
 
-        .search-and-filter {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            padding-right: 20px;
+        .content-container table thead th {
+            text-align: left;
+            padding: 20px 10px;
         }
 
-            .search-and-filter form {
-                justify-content: flex-end;
-            }
-
-            .search-and-filter .search-bar {
-                display: flex;
-                align-items: center;
-                padding: 5px 15px;
-                width: 320px;
-                margin-right: 20px;
-            }
-
-                 .search-and-filter .search-bar input[type='text'] {
-                    padding-left: 10px;
-                    width: 100%;
-                }
-
-            .search-and-filter .filter .filter-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100px;
-                padding: 5px 10px;
-                border-radius: 5px;
-                border: 1px solid var(--border-gray);
-                color: var(--text-gray);
-                background: #FFF;
-                cursor: pointer;
-            }
-
-                .search-and-filter .filter .filter-btn p {
-                    padding-left: 5px;
-                }
-
-            .search-and-filter #search-icon {
-                width: fit-content;
-            }
-
-
-    .content-container .bottom-blocker {
-        position: sticky;
-        bottom: 0;
-        height: 30px;
-        background-color: white;
+    .content-container table tr {
+        height: 60px;
+        border-bottom: 0.5px solid var(--border-gray);
     }
-
-    .content-container table {
-        width: 100%;
-        position: relative;
-    }
-
-        .content-container table thead {
-            height: 60px;
-            position: sticky;
-            top: 65px;
-            z-index: 1;
-            background-color: var(--bg-white);
-        }
-
-            .content-container table thead th {
-                text-align: left;
-                padding: 20px 10px;
-            }
-
-        .content-container table tr {
-            height: 60px;
-            border-bottom: 0.5px solid var(--border-gray);
-        }
 
 /* Dashboard */
 .dashboard-container {
@@ -499,6 +498,12 @@ nav {
     margin-bottom: 10px;
 }
 
+.restock-search div fieldset{
+    position: relative;
+}
+
+
+
 .content-container #inventory-table {
     width: 100%;
     position: relative;
@@ -558,7 +563,7 @@ nav {
             cursor: pointer;
         }
 
-            
+
 
 /* Pop Up Logout */
 .logoutCard {
@@ -614,6 +619,10 @@ nav {
     margin-bottom: 20px;
 }
 
+#restockPopup span {
+    font-weight: 700;
+}
+
 #submitRestock {
     margin-top: 30px;
     padding: 5px 20px;
@@ -650,6 +659,7 @@ nav {
 /* Transaction */
 .search-customer-container {
     margin-top: 30px;
+    position: relative;
 }
 
     .search-customer-container .search-customer-form fieldset {
@@ -686,6 +696,10 @@ nav {
         background-color: var(--bg-gray);
     }
 
+    .select-product-container .select-product-form fieldset.product-field {
+        width: 100%;
+    }
+
     .select-product-container .select-product-form svg {
         margin-right: 10px;
     }
@@ -702,6 +716,14 @@ nav {
     height: 30px;
 }
 
+.customer-name-container {
+    margin-top: 30px;
+}
+
+    .customer-name-container #selected-customer-name{
+        font-weight: 700;
+    }
+
 .product-listing-wrapper {
     border-radius: 20px;
     border: 0.5px solid var(--border-gray);
@@ -711,7 +733,7 @@ nav {
 
 .product-listing-content-container {
     border-radius: 20px;
-    height: 50vh;
+    height: 46vh;
     width: 100%;
     padding: 0 20px;
     overflow: auto;
@@ -748,9 +770,9 @@ nav {
             padding: 20px 10px;
         }
 
-        #product-listing tr th:nth-child(3) {
-            text-align: center;
-        }
+    #product-listing tr th:nth-child(3) {
+        text-align: center;
+    }
 
     #product-listing tr {
         height: 60px;
@@ -762,28 +784,34 @@ nav {
         }
 
         #product-listing tr td:nth-child(3) {
-            
         }
 
-        #product-listing tr td:nth-child(3) form input[type="number"] {
-            display: block;
-            width: 100px;
-            height: 36px;
-            background-color: var(--bg-gray);
-            border: 0.5px solid var(--border-gray);
-            border-radius: 2px;
-            padding-left: 10px;
-        }
+            #product-listing tr td:nth-child(3) form input[type="number"] {
+                display: block;
+                width: 100px;
+                height: 36px;
+                background-color: var(--bg-gray);
+                border: 0.5px solid var(--border-gray);
+                border-radius: 2px;
+                padding-left: 10px;
+            }
 
         #product-listing tr td button.del-listing {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            /*height: 24px;
+            height: 24px;
             width: 24px;
-            border-radius: 5px;
-            background: #E60B2F;*/
+            border-radius: 50%;
+            background: white;
+            color: #E60B2F;
+            border: 0.5px solid #E60B2F;
             cursor: pointer;
+            outline: none;
+        }
+
+        #product-listing tr td button.del-listing svg{
+            pointer-events: none;
         }
 
 .confirm-transaction {
@@ -869,6 +897,60 @@ nav {
             cursor: pointer;
         }
 
+/* Manufacturer */
+.add-manufacturer {
+    margin-top: -60px;
+}
+
+.content-container #manufacturer-table {
+    width: 100%;
+    position: relative;
+}
+
+    .content-container #manufacturer-table thead {
+        height: 60px;
+        position: sticky;
+        top: 65px;
+        z-index: 1;
+        background-color: var(--bg-white);
+    }
+
+        .content-container #manufacturer-table thead th {
+            text-align: left;
+            padding: 20px 10px;
+        }
+
+            .content-container #manufacturer-table thead th:last-child {
+                text-align: left;
+            }
+
+    .content-container #manufacturer-table tr {
+        height: 60px;
+        border-bottom: 0.5px solid var(--border-gray);
+    }
+        .content-container #manufacturer-table tr td button.edit-manufacturer {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #1885F2;
+            border: none;
+            cursor: pointer;
+        }
+
+        .content-container #manufacturer-table tr td button.del-manufacturer {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 24px;
+            border-radius: 5px;
+            background: #E60B2F;
+            cursor: pointer;
+        }
+
 /* Transaction History */
 
 #transaction-history-table thead tr th:nth-child(1) {
@@ -913,6 +995,7 @@ nav {
     display: flex;
     /*margin-bottom: 10px;*/
 }
+
     .revenue-and-profit p {
         font-weight: 500;
     }
@@ -992,10 +1075,10 @@ nav {
         padding: 20px;
     }
 
-    .report-statistic div:nth-child(1),
-    .report-statistic div:nth-child(2) {
-        margin-right: 20px;
-    }
+        .report-statistic div:nth-child(1),
+        .report-statistic div:nth-child(2) {
+            margin-right: 20px;
+        }
 
         .report-statistic div p {
             display: flex;
@@ -1082,7 +1165,6 @@ nav {
 
         #alert-history-table tr td {
             display: flex;
-            
         }
 
             #alert-history-table tr td .red-text {
@@ -1196,33 +1278,34 @@ nav {
             justify-content: flex-end;
         }
 
-        .popupCardFormContainer label {
-            font-size: 18px;
-            font-weight: 500;
-            width: 100%;
-        }
+    .popupCardFormContainer label {
+        font-size: 18px;
+        font-weight: 500;
+        width: 100%;
+    }
 
-        .popupCardFormContainer .form-row input[type='text'] {
-            width: 100%;
-            height: 30px;
-            border-radius: 5px;
-            border: 1px solid var(--border-gray);
-            font-size: 16px;
-            font-weight: 400;
-            padding: 0 10px;
-            margin-bottom: 10px;
-        }
+    .popupCardFormContainer .form-row input[type='text'],
+    .popupCardFormContainer .form-row select {
+        width: 100%;
+        height: 30px;
+        border-radius: 5px;
+        border: 1px solid var(--border-gray);
+        font-size: 16px;
+        font-weight: 400;
+        padding: 0 10px;
+        margin-bottom: 10px;
+    }
 
-        .popupCardFormContainer input[type="number"] {
-            display: block;
-            width: 100px;
-            height: 36px;
-            background-color: var(--bg-gray);
-            border: 0.5px solid var(--border-gray);
-            border-radius: 2px;
-            padding-left: 10px;
-        }
-        
+    .popupCardFormContainer input[type="number"] {
+        display: block;
+        width: 100px;
+        height: 36px;
+        background-color: var(--bg-gray);
+        border: 0.5px solid var(--border-gray);
+        border-radius: 2px;
+        padding-left: 10px;
+    }
+
 
 .shake {
     animation: shake 0.3s;
@@ -1257,7 +1340,53 @@ input {
     border-radius: 5px;
     border: 1px solid var(--border-gray);
     background: #FFF;
+    position: relative;
 }
+
+/* Search Box */
+.search-suggestion-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: solid 0.5px var(--border-gray);
+    z-index: 500;
+    max-height: 300px;
+    overflow: auto;
+    background: #FFF;
+    padding: 0 20px;
+    display: none;
+}
+
+    .search-suggestion-container::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .search-suggestion-container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .search-suggestion-container::-webkit-scrollbar-thumb {
+        background: #888;
+    }
+
+.search-suggestion-card {
+    border-bottom: solid 0.5px var(--border-gray);
+    min-height: 80px;
+    width: 100%;
+    background: #FFF;
+    padding: 10px;
+    cursor: pointer;
+}
+
+    .search-suggestion-card p.name {
+        font-weight: 500;
+    }
+
+    .search-suggestion-card p.other-info {
+        font-size: 14px;
+        color: var(--text-gray);
+    }
 
 /* Components */
 .custom-number-input {
@@ -1265,11 +1394,13 @@ input {
     align-items: center;
     justify-content: center;
 }
-.custom-number-input form {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
+
+    .custom-number-input form {
+        display: flex;
+        align-items: center;
+        position: relative;
+        border: 0.5px solid var(--border-gray)
+    }
 
     .custom-number-input input[type="number"] {
         -webkit-appearance: textfield;
@@ -1297,16 +1428,21 @@ input {
         font-size: 20px;
     }
 
-        .custom-number-input .decrement {
-            display: inline-block;
-            color: var(--warning);
+    .custom-number-input .decrement {
+        display: inline-block;
+        color: var(--warning);
+        height: 36px;
+        width: 36px;
+        cursor: pointer;
+    }
 
-        } 
-
-        .custom-number-input .increment{
-            display: inline-block;
-            color: var(--success);
-        }
+    .custom-number-input .increment {
+        display: inline-block;
+        color: var(--success);
+        height: 36px;
+        width: 36px;
+        cursor: pointer;
+    }
 
 .number-input input[type=number] {
     font-family: sans-serif;
@@ -1376,5 +1512,4 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-
 }

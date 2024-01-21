@@ -3,13 +3,13 @@
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.Models
 {
     /// <summary>
-    /// Represents a model containing a list of notifications.
+    /// Represents a model for managing transaction history.
     /// </summary>
-    public class NotificationModel
+    public class TransactionHistoryModel
     {
         /// <summary>
-        /// Gets or sets the list of notifications.
+        /// Gets or sets the list of transactions.
         /// </summary>
-        public List<Notification>? NotificationList { get; set; }
+        public List<Transaction>? TransactionList { get; set; }
     }
 }

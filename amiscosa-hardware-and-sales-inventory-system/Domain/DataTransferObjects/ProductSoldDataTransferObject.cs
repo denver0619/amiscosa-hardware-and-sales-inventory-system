@@ -4,18 +4,18 @@ using System.ComponentModel.DataAnnotations;
 namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects
 {
     /// <summary>
-    /// Data transfer object for product information.
-    /// Implements the <see cref="amiscosa_hardware_and_sales_inventory_system.Domain.Entities.IProduct" /> interface.
+    /// Data transfer object for product information with additional properties related to sales.
+    /// Implements the <see cref="IProduct" /> interface.
     /// </summary>
-    public class ProductDataTransferObject : amiscosa_hardware_and_sales_inventory_system.Domain.Entities.IProduct
+    public class ProductSoldDataTransferObject: IProduct
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductDataTransferObject"/> class.
+        /// Initializes a new instance of the <see cref="ProductSoldDataTransferObject"/> class.
         /// </summary>
-        public ProductDataTransferObject() { }
+        public ProductSoldDataTransferObject() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductDataTransferObject"/> class with specified parameters.
+        /// Initializes a new instance of the <see cref="ProductSoldDataTransferObject"/> class with specified parameters.
         /// </summary>
         /// <param name="productID">The product ID.</param>
         /// <param name="productName">The product name.</param>
@@ -26,7 +26,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObject
         /// <param name="measurement">The measurement unit of the product.</param>
         /// <param name="isAvailable">A flag indicating product availability.</param>
         /// <param name="unitCost">The unit cost of the product.</param>
-        public ProductDataTransferObject(string productID, string productName, string productDescription, double unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, double unitCost)
+        public ProductSoldDataTransferObject(string productID, string productName, string productDescription, double unitPrice, int quantity, string manufacturerID, string measurement, bool isAvailable, double unitCost)
         {
             ProductID = productID;
             ProductName = productName;
@@ -40,10 +40,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObject
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProductDataTransferObject"/> class based on an existing product.
+        /// Initializes a new instance of the <see cref="ProductSoldDataTransferObject"/> class based on an existing product.
         /// </summary>
         /// <param name="product">The product from which to create the data transfer object.</param>
-        public ProductDataTransferObject(IProduct product)
+        public ProductSoldDataTransferObject(IProduct product)
         {
             ProductID = product.ProductID;
             ProductName = product.ProductName;
@@ -55,6 +55,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObject
             IsAvailable = product.IsAvailable;
             UnitCost = product.UnitCost;
         }
+
         [Required]
         public string? ProductID { get; set; }
         [Required]
@@ -71,6 +72,17 @@ namespace amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObject
         public bool IsAvailable { get; set; }
         [Required]
         public double UnitCost { get; set; }
-        public Manufacturer? Manufacturer { get; set; }
+
+        /// <summary>
+        /// Gets or sets the quantity of the product sold.
+        /// </summary>
+        public int ProductSold { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total sales value of the product.
+        /// </summary>
+        public double ProductSales { get; set; }
+
     }
 }
+
