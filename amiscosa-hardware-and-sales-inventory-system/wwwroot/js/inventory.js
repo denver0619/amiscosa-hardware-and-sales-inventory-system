@@ -1,10 +1,21 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
    
-    setupRestockForm();
+     fetch('/Home/GetProductList')
+        .then(response => response.json())
+        .then(data => {         
+            productInfo = data
+
+            setupRestockForm();
+
+
+        })
+        .catch(error => console.error('Error fetching data:', error));
+
     setupAddItemForm();
     setupEditItemForm();
     setupDelButton();  
 
+   
 })
 
 // Target restock-product button and add a click event listener
@@ -72,10 +83,11 @@ function setupRestockForm() {
                 </form>
             </div>
         `
-
-        getManufacturerList();
         document.body.append(restockItemPopupOverlay);
+
+        
         setupProductRestockSearchSuggestion();
+        
 
         document.querySelector('#submitRestock').addEventListener('click', function (e) {
             e.preventDefault();

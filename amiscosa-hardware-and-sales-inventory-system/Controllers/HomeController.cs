@@ -27,13 +27,28 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult Inventory()
         {
-            // Access service and then store model info in a variable
+            // Access service and then get model info
             // Terminate connection then pass model to view
             InventoryService inventoryService = new InventoryService();
             InventoryModel inventoryModel = inventoryService.Model;
             inventoryService.Dispose();
 
             return View(inventoryModel);
+        }
+
+        public IActionResult GetProductList()
+        {
+            // Access service and then get model info
+            // Terminate connection then pass model to view
+            InventoryService inventoryService = new InventoryService();
+            List<Product> productList = new List<Product>();
+            foreach (ProductDataTransferObject product in inventoryService.Model.ProductList!)
+            {
+                productList.Add(new Product(product));
+            }
+            inventoryService.Dispose();
+
+            return Ok(productList);
         }
 
         [HttpPost]
@@ -85,7 +100,7 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         {
             // Access service 
             // Create a list of Product
-            // Get ProductDataTransferObject ProductList and then store it in the created List of Products
+            // Get ProductDataTransferObject ProductList and then store it in productList
             // Get CustomerList and store it in a List
             // store both list into a variable and return it
             TransactionService transactionService = new TransactionService();
