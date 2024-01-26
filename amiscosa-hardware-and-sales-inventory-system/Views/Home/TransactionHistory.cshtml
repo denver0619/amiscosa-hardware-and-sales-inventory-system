@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Transaction History";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    @model amiscosa_hardware_and_sales_inventory_system.Domain.Models.TransactionHistoryModel;
 }
 
 <div class="content-title">
@@ -56,25 +57,24 @@
         <table id="transaction-history-table">
             <thead>
                 <tr>
-                    <th>Transaction Detail ID</th>
                     <th>Transaction ID</th>
                     <th>Staff ID</th>
-                    <th>Customer Name</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
+                    <th>Customer ID</th>
+                    <th>Transaction Date</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>0001</td>
-                    <td>0001</td>
-                    <td>0001</td>
-                    <td>John Drexler Cubebe</td>
-                    <td>Power Drill</td>
-                    <td>1</td>
-                    <td>2000.00</td>
-                </tr>
+               
+
+                @foreach(amiscosa_hardware_and_sales_inventory_system.Domain.Entities.Transaction transactionHistory in Model.TransactionList!)
+                {
+                    <tr>
+                        <td>@transactionHistory.TransactionID</td>
+                        <td>@transactionHistory.StaffID</td>
+                        <td>@transactionHistory.CustomerID</td>
+                        <td>@(((DateTime)transactionHistory.TransactionDate!).ToString("yyyy-MM-dd"))</td>
+                    </tr>
+                }
 
             </tbody>
         </table>

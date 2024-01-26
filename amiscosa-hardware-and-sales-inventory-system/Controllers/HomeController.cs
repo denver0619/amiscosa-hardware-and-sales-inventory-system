@@ -6,6 +6,7 @@ using System.Text.Json;
 using amiscosa_hardware_and_sales_inventory_system.Domain.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using amiscosa_hardware_and_sales_inventory_system.Domain.DataTransferObjects;
+using System;
 
 
 namespace amiscosa_hardware_and_sales_inventory_system.Controllers
@@ -26,6 +27,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult Inventory()
         {
+            // Access service and then get model info
+            // Terminate connection then pass model to view
             InventoryService inventoryService = new InventoryService();
             InventoryModel inventoryModel = inventoryService.Model;
             inventoryService.Dispose();
@@ -33,9 +36,26 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return View(inventoryModel);
         }
 
+        public IActionResult GetProductList()
+        {
+            // Access service and then get model info
+            // Terminate connection then pass model to view
+            InventoryService inventoryService = new InventoryService();
+            List<Product> productList = new List<Product>();
+            foreach (ProductDataTransferObject product in inventoryService.Model.ProductList!)
+            {
+                productList.Add(new Product(product));
+            }
+            inventoryService.Dispose();
+
+            return Ok(productList);
+        }
+
         [HttpPost]
         public IActionResult AddInventoryProduct([FromBody] Product productData)
         {
+            // Access service and then send the productData into the AddProduct function
+            // Terminate connection
 
             InventoryService inventoryService = new InventoryService();
             inventoryService.AddProduct(productData);
@@ -47,7 +67,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         [HttpPost]
         public IActionResult EditInventoryProduct([FromBody] Product productData)
         {
-
+            // Access service and then send the productData into the EditProduct function
+            // Terminate connection
             InventoryService inventoryService = new InventoryService();
             inventoryService.EditProduct(productData);
             inventoryService.Dispose();
@@ -59,7 +80,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         [HttpPost]
         public IActionResult DeleteProduct([FromBody] Product productData)
         {
-
+            // Access service and get the then then send the productData into the RemoveProduct function
+            // Terminate connection
             InventoryService inventoryService = new InventoryService();
             inventoryService.RemoveProduct(productData);
             inventoryService.Dispose();
@@ -76,6 +98,11 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         [HttpGet]
         public IActionResult GetTransactionDataList()
         {
+            // Access service 
+            // Create a list of Product
+            // Get ProductDataTransferObject ProductList and then store it in productList
+            // Get CustomerList and store it in a List
+            // store both list into a variable and return it
             TransactionService transactionService = new TransactionService();
             List<Product> productList = new List<Product>();
             foreach (ProductDataTransferObject product in transactionService.Model.ProductList!)
@@ -96,55 +123,30 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
         [HttpPost]
         public IActionResult SendTransaction([FromBody] TransactionDataTransferObject transactionDataTransferObject)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                Debug.WriteLine("Model state errors: " + string.Join(", ", errors));
-                return BadRequest(ModelState);
-            }
-
-            Debug.WriteLine(1);
-            Debug.WriteLine(JsonSerializer.Serialize(transactionDataTransferObject));
-            Debug.WriteLine(2);
+            // Create a transaction with data type of TransactionDataTransferObject
+            // Store the current date in one of its attribute
             TransactionDataTransferObject transaction = transactionDataTransferObject;
             transaction.TransactionData!.TransactionDate = DateTime.Now;
 
+            // Set the Model of transaction to the TransactionData
+            // Set the Model of transactionDetails to the TransactionDetails
             TransactionService transactionService = new TransactionService();
             TransactionModel transactionModel = new TransactionModel();
             transactionModel.Transaction = transactionDataTransferObject.TransactionData;
             transactionModel.TransactionDetails = transactionDataTransferObject.TransactionDetails;
 
+            // Add Transaction by sending the transactionModel
             transactionService.AddTransaction(transactionModel);
             transactionService.Dispose();
 
             return Ok();
 
-            /*if (!ModelState.IsValid)
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage);
-                Debug.WriteLine("Model state errors: " + string.Join(", ", errors));
-                return BadRequest(ModelState);
-            }
-            TransactionDataTransferObject transactionDTO = JsonSerializer.Deserialize<TransactionDataTransferObject>(transactionDataTransferObject)!;
-            transactionDTO.TransactionData.TransactionDate = DateTime.Now;
-
-            Debug.WriteLine(1);
-            Debug.WriteLine(transactionDataTransferObject);
-            Debug.WriteLine(2);
-
-            TransactionService transactionService = new TransactionService();
-            TransactionModel transactionModel = new TransactionModel();
-            transactionModel.Transaction = transactionDTO.TransactionData;
-            transactionModel.TransactionDetails = transactionDTO.TransactionDetails;
-
-            transactionService.AddTransaction(transactionModel);
-            transactionService.Dispose();
-
-            return Ok();*/
         }
 
         public IActionResult Manufacturer()
         {
+            // Access service and then store the model to a variable
+            // Terminate connection then pass model into view
             ManufacturerService manufacturerService = new ManufacturerService();
             ManufacturerModel manufacturerModel = manufacturerService.Model;
             manufacturerService.Dispose();
@@ -154,6 +156,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult AddManufacturer([FromBody] Manufacturer manufacturerData)
         {
+            // Access service and then send the manufacturerData into the AddManufacturer function
+            // Terminate connection
             ManufacturerService manufacturerService = new ManufacturerService();
             manufacturerService.AddManufacturer(manufacturerData);
             manufacturerService.Dispose();
@@ -163,6 +167,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult EditManufacturer([FromBody] Manufacturer manufacturerData)
         {
+            // Access service and then send the manufacturerData into the EditManufacturer function
+            // Terminate connection
             ManufacturerService manufacturerService = new ManufacturerService();
             manufacturerService.EditManufacturer(manufacturerData);
             manufacturerService.Dispose();
@@ -172,6 +178,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult GetManufacturerList()
         {
+            // Access service and then get the ManufacturerList
+            // Terminate connection and then return the list of manufacturer
             ManufacturerService manufacturerService = new ManufacturerService();
             List<Manufacturer> manufacturers = manufacturerService.Model.ManufacturerList!;
 
@@ -182,12 +190,19 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult TransactionHistory()
         {
-            return View();
+            // Access service and then store the model to a variable
+            // Terminate connection then pass model into view
+            TransactionHistoryService transactionHistoryService = new TransactionHistoryService();
+            TransactionHistoryModel transactionHistoryModel = transactionHistoryService.Model;
+            transactionHistoryService.Dispose();
+
+            return View(transactionHistoryModel);
         }
 
         public IActionResult Customer()
         {
-
+            // Access service and then store the model to a variable
+            // Terminate connection then pass model into view
             CustomerService customerService = new CustomerService();
             CustomerModel customerModel = customerService.Model;
             customerService.Dispose();
@@ -195,7 +210,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return View(customerModel);
         }
 
-        public IActionResult AddCustomer([FromBody] Customer customerData) {
+        public IActionResult AddCustomer([FromBody] Customer customerData) 
+        {
+            // Access service and then send the customerData into the AddCustomer function
+            // Terminate connection
             CustomerService customerService = new CustomerService();
             customerService.AddCustomer(customerData);
             customerService.Dispose();
@@ -203,8 +221,10 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
             return Ok("Success");
         }
 
-        public IActionResult EditCustomer([FromBody] Customer customerData) {
-            Debug.WriteLine(1);
+        public IActionResult EditCustomer([FromBody] Customer customerData) 
+        {
+            // Access service and then send the customerData into the UpdateCustomer function
+            // Terminate connection
             CustomerService customerService = new CustomerService();
             customerService.UpdateCustomer(customerData);
             customerService.Dispose();
@@ -215,6 +235,8 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
         public IActionResult AlertHistory()
         {
+            // Access service and then store the model to a variable
+            // Terminate connection then pass model into view
             NotificationService notificationService = new NotificationService();
             NotificationModel notificationModel = notificationService.Model;
             notificationService.Dispose();
@@ -222,9 +244,13 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
             return View(notificationModel);
         }
-
+        
         public IActionResult Report()
         {
+            // Get the current date then pass it into service
+            // Get the model from the service
+            // Terminate connection
+            // Pass model into view
             DateTime dateTime = DateTime.Now;
             ReportService reportService = new ReportService(dateTime);
             ReportModel reportModel = reportService.Model;
@@ -232,6 +258,23 @@ namespace amiscosa_hardware_and_sales_inventory_system.Controllers
 
             return View(reportModel);
         }
+
+        [HttpPost]
+        public IActionResult GetReportData([FromBody]string selectedMonth) {
+            // Parse the selected month
+            // Pass it into report service
+            // Get the Model
+            // Terminate connection
+            // Return report model
+
+            DateTime dateTime = DateTime.Parse(selectedMonth);
+            ReportService reportService = new ReportService(dateTime);
+            ReportModel reportModel = reportService.Model;
+            reportService.Dispose();
+
+            return Json(reportModel);
+        }
+
 
         public IActionResult Logout()
         {
