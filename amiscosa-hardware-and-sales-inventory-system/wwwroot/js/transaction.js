@@ -400,7 +400,7 @@ function gatherAndProcessData() {
     })
         .then(data => {
             //console.log('Product added successfully:', data);
-            //location.reload();
+            location.reload();
             // Optionally, perform actions after successful product addition
         })
         .catch(error => {
